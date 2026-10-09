@@ -4,6 +4,56 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Estado de Cuenta</title>
+<meta name="theme-color" content="#065f46">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Eventos VM">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+<script>
+/* App Android (APK): dentro de la app no existe el menú de compartir del navegador; se usa el puente EventosApp */
+(function(){
+  var A=window.EventosApp; if(!A) return;
+  document.documentElement.classList.add('en-app');
+  var b64=function(blob){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(String(r.result).split(',')[1]||'')};r.onerror=function(){no(new Error('No se pudo leer el archivo'))};r.readAsDataURL(blob);});};
+  var aviso=function(m){try{toast(m,3500)}catch(e){}};
+  navigator.canShare=function(){return true};
+  navigator.share=async function(d){
+    var f=d&&d.files&&d.files[0]; if(!f) throw new Error('Nada para compartir');
+    var r=A.compartir(await b64(f),f.name||'archivo',f.type||'application/octet-stream',(d&&d.text)||'');
+    if(r!=='ok') throw new Error(r);
+  };
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[download]'):null; if(!a) return;
+    e.preventDefault();e.stopPropagation();
+    var nombre=a.getAttribute('download')||'archivo';
+    fetch(a.href).then(function(r){return r.blob()}).then(async function(blob){
+      var tipo=(blob.type||'application/octet-stream').split(';')[0];
+      var r=A.guardar(await b64(blob),nombre,tipo);
+      if(r==='galeria') aviso('Imagen guardada en la galería');
+      else if(r==='descargas') aviso('Guardado en Descargas › Eventos VM');
+      else if(r!=='compartido') aviso('No se pudo guardar: '+r);
+    }).catch(function(){aviso('No se pudo guardar el archivo')});
+  },true);
+  window.print=function(){A.imprimir()};
+  var barra=function(){var m=document.querySelector('meta[name=theme-color]');if(m&&m.content)A.barra(m.content)};
+  var m=document.querySelector('meta[name=theme-color]');
+  if(m) new MutationObserver(barra).observe(m,{attributes:true,attributeFilter:['content']});
+  addEventListener('load',barra);
+})();
+/* Botón «atrás» del teléfono: cierra la ventana abierta, vuelve atrás dentro de la app y solo al final sale */
+function atrasApp(){
+  try{
+    var d=document.getElementById('dlg'); if(d&&d.open){d.close();return 'ok';}
+    if(typeof S==='undefined'||!document.querySelector('.hbtn')) return 'salir';
+    if(S.tab==='doc'){docBack();return 'ok';}
+    if(S.sel){go(S.tab);return 'ok';}
+    if(S.tab!=='resumen'){go('resumen');return 'ok';}
+  }catch(e){}
+  return 'salir';
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
