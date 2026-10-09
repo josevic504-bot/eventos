@@ -96,7 +96,7 @@ dialog h3{font-size:18px}
 .empty{text-align:center;color:var(--mut);padding:28px 8px}
 .note{color:var(--mut);font-size:13px}
 .ponly{display:none}
-.credit{max-width:1100px;margin:8px auto 0;padding:14px 16px 22px;text-align:center;font-size:11.5px;color:var(--mut);opacity:.75}
+.credit{max-width:1100px;margin:4px auto 0;padding:8px 16px 14px;text-align:center;font-size:9.5px;letter-spacing:.02em;color:var(--mut);opacity:.55}
 .credit a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor}
 .conc{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
 @media(max-width:600px){main{padding:14px 12px}.card .v{font-size:18px}.aging{grid-template-columns:repeat(2,1fr)}.conc{grid-template-columns:1fr}}
@@ -264,7 +264,7 @@ body.locked{overflow:hidden}body.locked .bnav,body.locked .licbar{display:none}
 .lk-card .fld{text-align:left}
 .lk-card .spin{animation:spin 2.4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 .hbtn.cl.sync .ic{animation:pulse 1s ease-in-out infinite}.hbtn.cl.off,.hbtn.cl.err{color:#f0b3a8}.hbtn.cl.ok{color:#e6c995}@keyframes pulse{50%{opacity:.35}}
-.lk-id{margin-top:16px;font-size:12px;color:var(--mut);letter-spacing:.06em}
+.lk-id{margin-top:14px;font-size:10px;color:var(--mut);letter-spacing:.04em;opacity:.8}
 .lk-err{color:var(--bad);font-size:13px;min-height:18px}
 .pl{padding:10px 0;border-bottom:1px solid var(--line)}.pl-n{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.pl-n b{font-weight:500}
 .pl-r{display:flex;align-items:center;gap:10px;margin-top:7px}.pl-r input[inputmode]{width:76px;padding:6px 8px;text-align:right}.pl-r label{display:flex;gap:6px;align-items:center;font-size:13px;white-space:nowrap;color:var(--mut)}.pl-t{margin-left:auto;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -292,6 +292,15 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 .hask .ic{color:var(--gold)}.hask small{display:block;color:var(--mut);font-size:12.5px}
 .hl-pulse{animation:hlp 1.1s ease-in-out 3;border-radius:12px}
 @keyframes hlp{0%,100%{box-shadow:0 0 0 0 rgba(214,180,124,0)}50%{box-shadow:0 0 0 6px rgba(214,180,124,.7)}}
+/* tema Esmeralda bosque */
+html.t-esm{--pri:#08573f;--pri2:#dcebe4;--h1:#032b21;--h2:#0b5e46;--ev1:#063f31;--ev2:#0f6e53;--bg:#f1f5f2;--line:#d4e1da;--mut:#66786f;--ink:#18241f;--gold2:#f3efe2}
+@media (prefers-color-scheme:dark){html.t-esm{--pri:#66c9a6;--onpri:#04221a;--pri2:#11281f;--h1:#021812;--h2:#073d2f;--ev1:#063f31;--ev2:#0f6e53;--bg:#0b1310;--card:#141e1a;--line:#22302a;--ink:#e6f2ec;--mut:#8ea79c;--gold2:#2a2a22}}
+html.t-esm .t-plum{--t1:#063f31;--t2:#0f6e53}html.t-esm .t-rose{--t1:#2b5f63;--t2:#4f8d90}html.t-esm .t-sage{--t1:#365447;--t2:#638a77}
+html.t-esm .licbar,html.t-esm .pop{background:linear-gradient(120deg,#032b21,#0b5e46)}html.t-esm .bnav{box-shadow:0 10px 30px rgba(4,40,30,.4)}
+html.t-esm .liclock{background:radial-gradient(120% 90% at 20% 0%,#0b5e46 0%,#032b21 60%,#01140f 100%)}
+html.t-esm .cd.has.past{background:#9fc2b5}html.t-esm dialog::backdrop{background:rgba(2,24,18,.55)}
+.sm-only{display:none}@media(max-width:600px){.hm{display:none}.sm-only{display:block}}
+.t-copper{--t1:#6e4630;--t2:#a8714f}html.t-esm .t-copper{--t1:#6e4630;--t2:#a8714f}
 .tbtn{margin-left:12px;background:#d6b47c;border:0;color:#2a1424;border-radius:9px;padding:6px 12px;font:inherit;font-weight:600;cursor:pointer}
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1d2421;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:60;box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:90vw;text-align:center}
 @media(max-width:600px){td{white-space:normal}td.n,th.n{white-space:nowrap}.ql span{display:block!important;font-size:11px;color:var(--mut);margin-bottom:2px}input,select,textarea{font-size:16px}.btn{padding:9px 12px}h2{font-size:18px}}
@@ -411,7 +420,11 @@ function estado(all,desde,hasta,signo,init=0){
 
 /* ===== Navegación ===== */
 function go(t,sel=null){save();S.tab=t;S.qMode='edit';S.sel=sel;S.desde='';S.hasta='';S.buscar='';render();scrollTo(0,0);}
+const TEMAS={ciruela:'Ciruela y dorado',esmeralda:'Esmeralda bosque y dorado'};
+function applyTema(t){t=t||(D.cfg&&D.cfg.tema)||'ciruela';document.documentElement.classList.toggle('t-esm',t==='esmeralda');try{localStorage.setItem('estadoCuenta_tema',t);}catch(e){}}
+try{applyTema(localStorage.getItem('estadoCuenta_tema')||'ciruela');}catch(e){}
 function render(){
+  applyTema((D.cfg&&D.cfg.tema)||'ciruela');
   document.title=D.negocio+' · Control de eventos';
   document.querySelectorAll('.tnav button').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tab));
   hdr();bnav();closePop();
@@ -568,6 +581,7 @@ function vResumen(){
   let out=`<div class="hg">`+calHtml()+`<div class="tiles">
     ${tile('t-plum','cal','Próximos eventos',prox.length,prox[0]?'El siguiente: '+esc(fDia(prox[0].fecha)):'Agendá tu primer evento',"go('ev')")}
     ${tile('t-gold','coin','Por cobrar',fmt(cxc),D.clientes.filter(c=>saldoEnt(MOD.cli,c.id)>0).length+' clientes con saldo',"go('cli')")}
+    ${tile('t-copper','truck','Por pagar a proveedores',fmt(totEnt(MOD.prov)),D.proveedores.filter(c=>saldoEnt(MOD.prov,c.id)>0).length+' proveedores con saldo',"go('prov')")}
     ${tile('t-ink','wallet','Disponible',fmt(disp),D.cuentas.length+' cuentas',"go('bco')")}
     ${tile('t-rose','receipt','Gastos del mes',fmt(gas),nomMes(mes),`S.mes='${mes}';S.igTipo='G';go('ig')`)}
     ${tile('t-sage','trend','Resultado del mes',fmt(ing-gas),'Ingresos '+fmt(ing),`S.mes='${mes}';S.igTipo='';go('ig')`)}
@@ -619,7 +633,7 @@ function waInfo(k,a,b){
 async function waShare(...args){
   const sp=spec(...args);if(!sp)return;save();toast('Preparando imagen…',0);
   try{
-    const cv=await docCanvas(sp),blob=await new Promise(r=>cv.toBlob(r,'image/png')),f=new File([blob],sp.file+'.png',{type:'image/png'}),w=waInfo(...args);
+    const cv=await docCanvas(sp,1.75),blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.8)),f=new File([blob],sp.file+'.jpg',{type:'image/jpeg'}),w=waInfo(...args);
     if(navigator.canShare&&navigator.canShare({files:[f]})&&matchMedia('(pointer:coarse)').matches){
       hideToast();
       try{await navigator.share({files:[f],text:w.text});}
@@ -639,7 +653,7 @@ function vEnt(k){
   return`<div class="row sp hd"><div class="note">${m.sub}</div>
     <div class="row noprint"><button class="btn" onclick="entForm('${k}')">+ Nuevo ${m.sing}</button><button class="btn pri" onclick="movForm('${k}')" ${ents.length?'':'disabled'}>+ Movimiento</button></div></div>
   ${ents.length?`<div class="panel"><input class="noprint" placeholder="Buscar ${m.sing}…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEnt('${k}')" style="margin-bottom:10px">
-    <div class="tw"><table><thead><tr><th>Nombre</th><th>Teléfono</th><th class="n">Movs.</th><th>Último mov.</th><th class="n">${m.saldoL}</th></tr></thead><tbody id="lb"></tbody><tfoot id="lf"></tfoot></table></div></div>`
+    <div class="tw"><table><thead><tr><th>Nombre</th><th class="hm">Teléfono</th><th class="n hm">Movs.</th><th class="hm">Último mov.</th><th class="n">${m.saldoL}</th></tr></thead><tbody id="lb"></tbody><tfoot id="lf"></tfoot></table></div></div>`
   :`<div class="panel empty">Todavía no hay ${m.titulo.toLowerCase()}.<br><br><button class="btn pri" onclick="entForm('${k}')">+ Agregar ${m.sing}</button></div>`}`;
 }
 function listaEnt(k){
@@ -647,8 +661,8 @@ function listaEnt(k){
   const rows=D[m.ent].filter(e=>!q||e.nombre.toLowerCase().includes(q)||(e.tel||'').includes(q)||(e.rtn||'').includes(q))
     .map(e=>{const mv=D[m.mov].filter(x=>x.eid===e.id);return{e,s:saldoEnt(m,e.id),n:mv.length,ult:mv.reduce((a,x)=>x.fecha>a?x.fecha:a,'')};})
     .sort((a,b)=>b.s-a.s||a.e.nombre.localeCompare(b.e.nombre));
-  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}</td><td>${esc(r.e.tel)}</td><td class="n">${r.n}</td><td>${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
-  $('lf').innerHTML=`<tr><td colspan="4">Total (${rows.length})</td><td class="n">${fmt(rows.reduce((s,r)=>s+r.s,0))}</td></tr>`;
+  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}<div class="note sm-only">${[r.e.tel&&'Tel. '+esc(r.e.tel),r.ult&&'Últ. mov. '+fFecha(r.ult)].filter(Boolean).join(' · ')}</div></td><td class="hm">${esc(r.e.tel)}</td><td class="n hm">${r.n}</td><td class="hm">${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
+  $('lf').innerHTML=`<tr><td>Total (${rows.length})</td><td class="hm"></td><td class="hm"></td><td class="hm"></td><td class="n">${fmt(rows.reduce((s,r)=>s+r.s,0))}</td></tr>`;
 }
 function vEntDet(k,id){
   const m=MOD[k],e=D[m.ent].find(x=>x.id===id);if(!e){S.sel=null;return vEnt(k);}
@@ -806,7 +820,7 @@ function delEv(id){
 /* ===== Cotizaciones ===== */
 const TIPOS=['Boda','Cumpleaños','XV años','Graduación','Bautizo','Primera comunión','Baby shower','Aniversario','Evento corporativo','Otro'];
 const QCATS=['Decoración','Mobiliario','Alimentos y bebidas','Pastelería y postres','Entretenimiento','Fotografía y video','Personal','Montaje y logística','Otros'];
-const PAL={champagne:{n:'Champagne dorado',a:'#a8864f',s:'#f6f1e7',i:'#2b2622'},rosa:{n:'Rosa palo',a:'#b07473',s:'#f8eeec',i:'#3a2b2b'},salvia:{n:'Verde salvia',a:'#73866b',s:'#eff2ec',i:'#26302a'},noche:{n:'Azul noche',a:'#9c8352',s:'#eef0f5',i:'#1f2a44'}};
+const PAL={esmeralda:{n:'Esmeralda bosque',a:'#0b5e46',s:'#e7f0eb',i:'#1a2620'},champagne:{n:'Champagne dorado',a:'#a8864f',s:'#f6f1e7',i:'#2b2622'},rosa:{n:'Rosa palo',a:'#b07473',s:'#f8eeec',i:'#3a2b2b'},salvia:{n:'Verde salvia',a:'#73866b',s:'#eff2ec',i:'#26302a'},noche:{n:'Azul noche',a:'#9c8352',s:'#eef0f5',i:'#1f2a44'}};
 const PLANT={
   'Boda':[['Decoración','Arco floral para la ceremonia',1],['Decoración','Centros de mesa con flores naturales','m'],['Mobiliario','Mesas y sillas tiffany con mantelería','i'],['Alimentos y bebidas','Banquete a tres tiempos (por persona)','i'],['Pastelería y postres','Pastel de bodas',1],['Entretenimiento','DJ, sonido e iluminación',1],['Fotografía y video','Cobertura fotográfica',1],['Personal','Coordinación del evento',1],['Personal','Meseros','w']],
   'Cumpleaños':[['Decoración','Decoración temática',1],['Decoración','Arco de globos orgánico',1],['Pastelería y postres','Mesa de postres',1],['Pastelería y postres','Pastel personalizado',1],['Mobiliario','Mesas y sillas','i'],['Entretenimiento','Animación y show',1],['Otros','Piñata',1]],
@@ -966,17 +980,17 @@ const LIBS={h2c:['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2
 function loadLib(k){const[u,g]=LIBS[k];if(window[g])return Promise.resolve(true);
   return new Promise(r=>{const sc=document.createElement('script');sc.src=u;sc.onload=()=>r(!!window[g]);sc.onerror=()=>r(false);document.head.appendChild(sc);setTimeout(()=>r(!!window[g]),15000);});}
 async function foCanvas(page,H){
-  const W=816,k=2,html=new XMLSerializer().serializeToString(page);
+  const W=816,k=window._docK||2,html=new XMLSerializer().serializeToString(page);
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${W*k}" height="${H*k}"><foreignObject x="0" y="0" width="${W*k}" height="${H*k}"><div xmlns="http://www.w3.org/1999/xhtml" style="transform:scale(${k});transform-origin:0 0;width:${W}px;height:${H}px"><style>${qcss()}</style>${html}</div></foreignObject></svg>`;
   const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);await img.decode();
   const cv=document.createElement('canvas');cv.width=W*k;cv.height=H*k;const ctx=cv.getContext('2d');ctx.fillStyle='#fffdf9';ctx.fillRect(0,0,cv.width,cv.height);ctx.drawImage(img,0,0);cv.toDataURL();return cv;
 }
-async function docCanvas(sp){
+async function docCanvas(sp,k){k=k||2;window._docK=k;
   const H=sp.h||1056,host=document.createElement('div');host.style.cssText='position:fixed;left:-10000px;top:0;width:816px;pointer-events:none';
   host.innerHTML=pageOf(sp.inner,true,false,H);document.body.appendChild(host);
   try{try{await document.fonts.ready;}catch(e){}
     const page=host.firstElementChild;fitSheet(page.querySelector('.q-sheet'),H);
-    if(await loadLib('h2c'))return await html2canvas(page,{scale:2,backgroundColor:'#fffdf9',logging:false,width:816,height:H,windowWidth:816,useCORS:true});
+    if(await loadLib('h2c'))return await html2canvas(page,{scale:k,backgroundColor:'#fffdf9',logging:false,width:816,height:H,windowWidth:816,useCORS:true});
     return await foCanvas(page,H);
   }finally{host.remove();}
 }
@@ -1009,15 +1023,15 @@ async function dPDF(...args){
   const sp=spec(...args);save();toast('Generando PDF…',0);
   try{
     if(!(await loadLib('pdf'))){hideToast();alert('Para descargar el PDF directo se necesita internet la primera vez. Se abrirá la ventana de impresión: elegí "Guardar como PDF".');if(args[0]==='cot')printCot();else dPrint();return;}
-    const H=sp.h||1056,cv=await docCanvas(sp),hp=792*H/1056;
+    const H=sp.h||1056,cv=await docCanvas(sp,1.75),hp=792*H/1056;
     const pdf=new window.jspdf.jsPDF({unit:'pt',format:H===1056?'letter':[612,hp],orientation:'portrait',compress:true});
-    pdf.addImage(cv.toDataURL('image/jpeg',0.93),'JPEG',0,0,612,hp);pdf.setProperties({title:sp.title+' · '+D.negocio});
+    pdf.addImage(cv.toDataURL('image/jpeg',0.72),'JPEG',0,0,612,hp,undefined,'FAST');pdf.setProperties({title:sp.title+' · '+D.negocio});
     hideToast();await shareOrDl(pdf.output('blob'),sp.file+'.pdf');
   }catch(e){console.error(e);toast('No se pudo generar el PDF. Usá "Imprimir" y elegí Guardar como PDF.',5000);}
 }
 async function dIMG(...args){
   const sp=spec(...args);save();toast('Generando imagen…',0);
-  try{const cv=await docCanvas(sp);const blob=await new Promise(r=>cv.toBlob(r,'image/png'));hideToast();await shareOrDl(blob,sp.file+'.png');}
+  try{const cv=await docCanvas(sp,1.75);const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.8));hideToast();await shareOrDl(blob,sp.file+'.jpg');}
   catch(e){console.error(e);toast('No se pudo generar la imagen en este navegador. Conectate a internet e intentá de nuevo.',5000);}
 }
 function docHtml(sp){
@@ -1122,13 +1136,15 @@ function recSheet(k,id){
     after:`<div class="q-sign"><div>${cli?'Recibido por':'Entregado por'}<small>${esc(D.negocio)}</small></div><div>${cli?'Entregado por':'Recibido por'}<small>${esc(e.nombre||'')}</small></div></div>`});
 }
 function cfgSet(f,v){D.cfg=CF();D.cfg[f]=v;saveLater();}
+function setTema(t){D.cfg=CF();D.cfg.tema=t;D.cfg.estilo=t==='esmeralda'?'esmeralda':(D.cfg.estilo==='esmeralda'?'champagne':D.cfg.estilo);save();render();toast('✓ Color aplicado',2000);}
 function cfgPanel(){const c=CF();const inp=(f,l)=>`<label class="fld"><span>${l}</span><input value="${esc(c[f])}" oninput="cfgSet('${f}',this.value)"></label>`;
   return`<div class="panel"><h3>Datos para las cotizaciones</h3><div class="g2">${inp('eslogan','Eslogan (ej. Eventos & Celebraciones)')}${inp('tel','Teléfono')}${inp('correo','Correo')}${inp('dir','Dirección')}${inp('rtn','RTN')}
-    <label class="fld"><span>Estilo de color</span><select onchange="cfgSet('estilo',this.value)">${Object.entries(PAL).map(([k,p])=>`<option value="${k}"${c.estilo===k?' selected':''}>${p.n}</option>`).join('')}</select></label></div>
+    <label class="fld"><span>Color de la app</span><select onchange="setTema(this.value)">${Object.entries(TEMAS).map(([k,n])=>`<option value="${k}"${(c.tema||'ciruela')===k?' selected':''}>${n}</option>`).join('')}</select></label>
+    <label class="fld"><span>Color de cotizaciones y recibos</span><select onchange="cfgSet('estilo',this.value)">${Object.entries(PAL).map(([k,p])=>`<option value="${k}"${c.estilo===k?' selected':''}>${p.n}</option>`).join('')}</select></label></div>
     ${inp('gracias','Mensaje de cierre')}
     <label class="fld"><span>Condiciones por defecto para cotizaciones nuevas</span><textarea rows="5" oninput="cfgSet('cond',this.value)">${esc(c.cond)}</textarea></label>
     <div class="row">${c.logo?`<img src="${c.logo}" alt="" style="max-height:48px;max-width:120px;object-fit:contain;background:#fff;border-radius:6px;padding:4px">`:''}<button class="btn" onclick="$('fileLogo').click()">${c.logo?'Cambiar logo':'Subir logo'}</button>${c.logo?`<button class="btn bad" onclick="cfgSet('logo','');save();render()">Quitar logo</button>`:''}</div></div>`;}
-function loadLogo(file){if(!file)return;const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,480/Math.max(img.width,img.height));const cv=document.createElement('canvas');cv.width=Math.round(img.width*k);cv.height=Math.round(img.height*k);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);cfgSet('logo',cv.toDataURL('image/png'));save();render();};img.onerror=()=>alert('No se pudo leer la imagen.');img.src=r.result;};r.readAsDataURL(file);}
+function loadLogo(file){if(!file)return;const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,320/Math.max(img.width,img.height));const cv=document.createElement('canvas');cv.width=Math.round(img.width*k);cv.height=Math.round(img.height*k);const cx=cv.getContext('2d');cx.drawImage(img,0,0,cv.width,cv.height);let op=true;try{const d=cx.getImageData(0,0,cv.width,cv.height).data;for(let i=3;i<d.length;i+=16)if(d[i]<250){op=false;break;}}catch(e){op=false;}cfgSet('logo',op?cv.toDataURL('image/jpeg',0.85):cv.toDataURL('image/png'));save();render();};img.onerror=()=>alert('No se pudo leer la imagen.');img.src=r.result;};r.readAsDataURL(file);}
 
 /* ===== Servicios: catálogo + paquetes ===== */
 const UNI={u:'unidad',p:'por persona',s:'servicio'};
