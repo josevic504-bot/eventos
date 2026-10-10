@@ -291,8 +291,8 @@ dialog h3{font-size:18px}
 .q-page.q-mob:not(.fx) .q-amt{font-size:42px!important}.q-page.q-mob:not(.fx) .q-sum b{font-size:17px}.q-page.q-mob:not(.fx) .q-sum div{padding:10px 6px}
 .q-page.q-mob:not(.fx) .q-sign{gap:24px;margin-top:48px}
 .q-refs{margin-top:22px}.q-refs h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin:0 0 8px;font-weight:600}
-.q-refs div{display:flex;gap:12px}.q-refs img{flex:1 1 0;min-width:0;height:170px;object-fit:cover;border-radius:6px;display:block;background:var(--qs)}
-.q-mob .q-refs img{height:120px}
+.q-refs div{display:flex;gap:10px}.q-refs img{flex:1 1 0;min-width:0;height:130px;object-fit:cover;border-radius:6px;display:block;background:var(--qs)}
+.q-mob .q-refs div{flex-wrap:wrap}.q-mob .q-refs img{flex:1 1 calc(50% - 5px);height:120px}
 /*/Q*/
 /* filtros, acciones, fotos y maestro de ceremonia */
 .filt label.srch{position:relative;flex:1 1 230px;display:block}
@@ -787,7 +787,7 @@ function vEnt(k){
   return`<div class="row sp hd"><div class="note">${m.sub}</div>
     <div class="row noprint"><button class="btn" onclick="entForm('${k}')">+ Nuevo ${m.sing}</button><button class="btn pri" onclick="movForm('${k}')" ${ents.length?'':'disabled'}>+ Movimiento</button></div></div>
   ${ents.length?`<div class="panel"><div class="filt noprint"><label class="srch">${ic('search',18)}<input placeholder="Buscar ${m.sing}, teléfono o RTN…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEnt('${k}')"></label>
-    <label>Saldo<select onchange="fset('${k}','sal',this.value);listaEnt('${k}')">${[['','Todos'],['pend',k==='cli'?'Con saldo por cobrar':'Con saldo por pagar'],['cero','Al día (sin saldo)'],['favor','Saldo a favor'],...(k==='prov'?[['fot','Con fotos']]:[])].map(([v,l])=>`<option value="${v}"${ff(k).sal===v?' selected':''}>${l}</option>`).join('')}</select></label></div>
+    <label>Saldo<select onchange="fset('${k}','sal',this.value);listaEnt('${k}')">${[['','Todos'],['pend',k==='cli'?'Con saldo por cobrar':'Con saldo por pagar'],['cero','Al día (sin saldo)'],['favor','Saldo a favor']].map(([v,l])=>`<option value="${v}"${ff(k).sal===v?' selected':''}>${l}</option>`).join('')}</select></label></div>
     <div class="tw"><table><thead><tr><th>Nombre</th><th class="hm">Teléfono</th><th class="n hm">Movs.</th><th class="hm">Último mov.</th><th class="n">${m.saldoL}</th></tr></thead><tbody id="lb"></tbody><tfoot id="lf"></tfoot></table></div></div>`
   :`<div class="panel empty">Todavía no hay ${m.titulo.toLowerCase()}.<br><br><button class="btn pri" onclick="entForm('${k}')">+ Agregar ${m.sing}</button></div>`}`;
 }
@@ -798,7 +798,7 @@ function listaEnt(k){
     .map(e=>{const mv=D[m.mov].filter(x=>x.eid===e.id);return{e,s:saldoEnt(m,e.id),n:mv.length,ult:mv.reduce((a,x)=>x.fecha>a?x.fecha:a,'')};})
     .filter(r=>!fs||(fs==='pend'?r.s>0:fs==='cero'?r.s===0:fs==='favor'?r.s<0:(r.e.imgs||[]).length>0))
     .sort((a,b)=>b.s-a.s||a.e.nombre.localeCompare(b.e.nombre));
-  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}${(r.e.imgs||[]).length?` <span class="note">${ic('cam',14)}</span>`:''}<div class="note sm-only">${[r.e.tel&&'Tel. '+esc(r.e.tel),r.ult&&'Últ. mov. '+fFecha(r.ult)].filter(Boolean).join(' · ')}</div></td><td class="hm">${esc(r.e.tel)}</td><td class="n hm">${r.n}</td><td class="hm">${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
+  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}<div class="note sm-only">${[r.e.tel&&'Tel. '+esc(r.e.tel),r.ult&&'Últ. mov. '+fFecha(r.ult)].filter(Boolean).join(' · ')}</div></td><td class="hm">${esc(r.e.tel)}</td><td class="n hm">${r.n}</td><td class="hm">${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
   $('lf').innerHTML=`<tr><td>Total (${rows.length})</td><td class="hm"></td><td class="hm"></td><td class="hm"></td><td class="n">${fmt(rows.reduce((s,r)=>s+r.s,0))}</td></tr>`;
 }
 function vEntDet(k,id){
@@ -816,7 +816,6 @@ function vEntDet(k,id){
     <div class="card"><div class="k">Total ${m.debL.toLowerCase()}s</div><div class="v">${fmt(tD)}</div></div>
     <div class="card"><div class="k">Total ${m.credL.toLowerCase()}s</div><div class="v">${fmt(tC)}</div></div>
   </div>
-  ${k==='prov'?`<div class="panel noprint"><h3>Fotos de referencia</h3><p class="note">Trabajos, catálogos o arreglos de este proveedor. Máximo ${MAXIMG} fotos.</p>${imgsHtml(e.imgs,'prov',id)}</div>`:''}
   <div class="panel"><h3>Antigüedad del saldo</h3><div class="aging">${['0–30 días','31–60 días','61–90 días','Más de 90'].map((l,i)=>`<div><small>${l}</small><b class="${i>=2&&ag.b[i]>0?'neg':''}">${fmt(ag.b[i])}</b></div>`).join('')}</div></div>
   <div class="panel">
     <div class="filt noprint"><label>Desde<input type="date" value="${S.desde}" onchange="S.desde=this.value;render()"></label><label>Hasta<input type="date" value="${S.hasta}" onchange="S.hasta=this.value;render()"></label>
@@ -1483,8 +1482,8 @@ function chipSet(b,k,f,v){fset(k,f,v);b.parentNode.querySelectorAll('.chip').for
 function chips(k,f,opts,fn){const cur=ff(k)[f]||'';return`<div class="chips noprint">${opts.map(([v,l])=>`<button class="chip${cur===v?' on':''}" onclick="chipSet(this,'${k}','${f}','${v}');${fn}">${esc(l)}</button>`).join('')}</div>`;}
 function srchRender(){clearTimeout(window._sb);window._sb=setTimeout(()=>{render();const i=$('srch');if(i){i.focus();const n=i.value.length;try{i.setSelectionRange(n,n);}catch(e){}}},280);}
 
-/* ===== Fotos de referencia (máximo 2 por cotización y por proveedor) ===== */
-const MAXIMG=2,IMGC={},IMGW={};
+/* ===== Fotos de referencia (máximo 4 por cotización) ===== */
+const MAXIMG=4,IMGC={},IMGW={};
 const BLANK='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const isDrv=r=>typeof r==='string'&&r.startsWith('drv:');
 const imgSrc=r=>!r?BLANK:!isDrv(r)?r:(IMGC[r]||BLANK);
@@ -1735,7 +1734,7 @@ const AYUDA=[
  ['Maestro de ceremonia','Armar el programa del maestro de ceremonia','maestro ceremonia mc programa guion animador protocolo plus',['Entrá a Más → Maestro de ceremonia.','Tocá "+ Nuevo programa" y elegí el tipo de evento: se crean las secciones sugeridas.','Tocá cada sección para escribir su guion, duración y responsable.'],"go('mc')",''],
  ['Maestro de ceremonia','Usar el teleprompter durante el evento','teleprompter en vivo leer guion cronometro tiempo mc',['Abrí el programa y tocá "En vivo".','Pasá de sección con las flechas; el cronómetro avisa si te pasás del tiempo.','Usá "Frases" si hay un imprevisto.'],"go('mc')",''],
  ['Cotizaciones','Elegir el cliente de la cotización','cliente cotizacion lista elegir nuevo',['Abrí la cotización.','En "Cliente" elegí uno de tu lista o tocá "+ Cliente nuevo…".','El teléfono y el correo se llenan solos.'],"go('cot')",''],
- ['Cotizaciones','Agregar fotos de referencia a una cotización','foto imagen referencia decoracion idea cotizacion',['Abrí la cotización.','En "Imágenes de referencia" tocá el recuadro con la cámara.','Podés agregar hasta 2 fotos y elegir si se muestran al cliente.'],"go('cot')",''],
+ ['Cotizaciones','Agregar fotos de referencia a una cotización','foto imagen referencia decoracion idea cotizacion',['Abrí la cotización.','En "Imágenes de referencia" tocá el recuadro con la cámara.','Podés agregar hasta 4 fotos y elegir si se muestran al cliente.'],"go('cot')",''],
  ['Mi cuenta','Descargar una copia de mis datos','copia respaldo descargar exportar datos',['Entrá a Ajustes.','Tocá "Exportar respaldo".'],"go('aj')",'']
 ];
 const sinAc=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -2170,7 +2169,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.10-2';
+const APP_VER='2026.10.10-3';
 let _verT=0;
 async function verCheck(){
   if(Date.now()-_verT<60000)return;_verT=Date.now();
