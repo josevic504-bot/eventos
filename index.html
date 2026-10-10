@@ -294,6 +294,7 @@ dialog h3{font-size:18px}
 .q-refs div{display:flex;gap:10px}.q-refs img{flex:1 1 0;min-width:0;height:130px;object-fit:cover;border-radius:6px;display:block;background:var(--qs)}
 .q-mob .q-refs div{flex-wrap:wrap}.q-mob .q-refs img{flex:1 1 calc(50% - 5px);height:120px}
 /*/Q*/
+.evpen{position:absolute;top:10px;right:10px;padding:4px 7px;border-color:var(--gold);color:var(--gold)}.evpen .ic{margin:0}
 /* filtros, acciones, fotos y maestro de ceremonia */
 .filt label.srch{position:relative;flex:1 1 230px;display:block}
 .srch .ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none}
@@ -910,7 +911,7 @@ function vEvDet(id){
   <div class="row sp hd"><div><h2>${esc(evLabel(e))}</h2><div class="note">${estBadge(e.estado)} ${info}</div></div>
     <div class="row noprint"><button class="btn pri" onclick="movForm('cli','${e.eid}','D',null,'${id}')">+ Valor / cargo</button><button class="btn pri" onclick="movForm('cli','${e.eid}','C',null,'${id}')">+ Abono</button><button class="btn pri" onclick="igForm('G',null,'${id}')">+ Gasto</button></div></div>
   <div class="cards">
-    <div class="card"><div class="k">Valor del evento</div><div class="v">${fmt(st.valor)}</div></div>
+    <div class="card" style="position:relative"><button class="btn sm noprint evpen" onclick="evValor('${id}')" aria-label="Cambiar el valor del evento">${ic('edit',15)}</button><div class="k" style="padding-right:34px">Valor del evento</div><div class="v">${fmt(st.valor)}</div></div>
     <div class="card"><div class="k">Abonado</div><div class="v pos">${fmt(st.abon)}</div></div>
     <div class="card"><div class="k">Saldo pendiente</div><div class="v ${st.saldo>0?'neg':''}">${fmt(st.saldo)}</div>${st.saldo<0?'<div class="s">Saldo a favor del cliente</div>':''}</div>
     <div class="card"><div class="k">Gastos</div><div class="v">${fmt(st.gas)}</div></div>
@@ -936,19 +937,34 @@ function evForm(id,fdef){
     {n:'cliSel',l:'Cliente',t:'select',o:[...cl.map(c=>[c.id,c.nombre]),['__new','+ Cliente nuevo…']],def:ev?ev.eid:(cl.length?cl[0].id:'__new')},
     {n:'cliente',l:'Nombre del cliente nuevo',req:1,dep:['cliSel','__new']},
     {n:'fecha',l:'Fecha del evento',t:'date',def:fdef||''},{n:'hora',l:'Hora',t:'time'},{n:'invitados',l:'Invitados'},{n:'lugar',l:'Lugar'},{n:'estado',l:'Estado',t:'select',o:['Por realizar','Realizado','Cancelado']},{n:'nota',l:'Notas',t:'area'}];
-  if(!ev)f.push({n:'valor',l:'Valor del evento (L) — opcional',t:'money',z:1});
-  form(ev?'Editar evento':'Nuevo evento',f,ev?{...ev,cliSel:ev.eid,cliente:''}:null,v=>{
+  f.push({n:'valor',l:ev?'Valor del evento (L)':'Valor del evento (L) — opcional',t:'money',z:1});
+  const st0=ev?evStats(ev.id):null;
+  form(ev?'Editar evento':'Nuevo evento',f,ev?{...ev,cliSel:ev.eid,cliente:'',valor:st0.valor||''}:null,v=>{
     let c;
     if(v.cliSel==='__new'){c=D.clientes.find(x=>x.nombre.toLowerCase()===v.cliente.toLowerCase());
       if(!c){c={id:uid(),nombre:v.cliente,rtn:'',tel:'',nota:''};D.clientes.push(c);}}
     else c=D.clientes.find(x=>x.id===v.cliSel);
     const valor=v.valor;delete v.valor;delete v.cliente;delete v.cliSel;v.eid=c.id;
-    if(ev){if(ev.eid!==c.id)D.movCli.forEach(m=>{if(m.evId===ev.id)m.eid=c.id;});Object.assign(ev,v);}
+    if(ev){if(!evSetValor(ev,valor,c.id))return false;if(ev.eid!==c.id)D.movCli.forEach(m=>{if(m.evId===ev.id)m.eid=c.id;});Object.assign(ev,v);}
     else{const n={id:uid(),creado:Date.now(),...v};D.eventos.push(n);
       if(valor>0)D.movCli.push({id:uid(),creado:Date.now(),eid:c.id,evId:n.id,tipo:'D',fecha:v.fecha||hoy(),doc:'',concepto:'Valor del evento '+v.nombre,monto:valor});
       S.tab='ev';S.sel=n.id;}
   });
+  if(ev){const i=$('f_valor');if(i){i.closest('label').insertAdjacentHTML('beforeend','<div class="note" id="valHint" style="margin-top:4px"></div>');
+    const upd=()=>{const nv=i.value.trim()===''?0:toC(i.value);$('valHint').innerHTML=isNaN(nv)?'':nv===st0.valor?`Abonado: ${fmt(st0.abon)} · Saldo pendiente: <b>${fmt(st0.saldo)}</b>`:`Antes: ${fmt(st0.valor)} → el saldo pendiente pasa a <b>${fmt(nv-st0.abon)}</b>. Los abonos no cambian.`;};
+    i.addEventListener('input',upd);upd();}}
 }
+/* Cambia el valor del evento ajustando su cargo principal; los demás cargos y los abonos no se tocan */
+function evSetValor(ev,nv,eid){
+  nv=+nv||0;const cs=D.movCli.filter(m=>m.evId===ev.id&&m.tipo==='D').sort(byFecha),tot=sum(cs);
+  if(nv===tot)return true;
+  if(!cs.length){if(nv>0)D.movCli.push({id:uid(),creado:Date.now(),eid:eid||ev.eid,evId:ev.id,tipo:'D',fecha:hoy(),doc:'',concepto:'Valor del evento '+ev.nombre,monto:nv,cid:''});return true;}
+  const main=cs.find(m=>/^(Valor del evento|Cotización)/.test(m.concepto||''))||cs[0],otros=tot-main.monto,m=nv-otros;
+  if(nv===0&&otros===0){D.movCli=D.movCli.filter(x=>x!==main);return true;}
+  if(m<=0){$('ferr').textContent=`Este evento tiene otros cargos por ${fmt(otros)}. El valor debe ser mayor; si querés bajarlo más, editá esos cargos en "Cobro al cliente".`;$('f_valor').focus();return false;}
+  main.monto=m;return true;
+}
+function evValor(id){evForm(id);setTimeout(()=>{const i=$('f_valor');if(i){i.scrollIntoView({block:'center'});i.focus();i.select();}},120);}
 function delEv(id){
   const e=D.eventos.find(x=>x.id===id);
   if(!confirm(`¿Eliminar el evento "${evLabel(e)}"?\nSus abonos y gastos NO se borran: quedan en la cuenta del cliente y en Ingresos y gastos, solo sin evento.`))return;
@@ -2169,7 +2185,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.10-3';
+const APP_VER='2026.10.10-4';
 let _verT=0;
 async function verCheck(){
   if(Date.now()-_verT<60000)return;_verT=Date.now();
