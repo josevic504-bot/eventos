@@ -46,6 +46,7 @@
 function atrasApp(){
   try{
     var d=document.getElementById('dlg'); if(d&&d.open){d.close();return 'ok';}
+    if(document.getElementById('mcLive')){mcLiveClose();return 'ok';}
     if(typeof S==='undefined'||!document.querySelector('.hbtn')) return 'salir';
     if(S.tab==='doc'){docBack();return 'ok';}
     if(S.sel){go(S.tab);return 'ok';}
@@ -289,7 +290,66 @@ dialog h3{font-size:18px}
 .q-edc .qm{display:none}.q-page.q-mob:not(.fx) .q-edc .qm{display:table-cell}.q-page.q-mob:not(.fx) .q-edc .qd{display:none}.q-page.q-mob:not(.fx) .q-edc{font-size:12.5px}.q-page.q-mob:not(.fx) .q-sheet .q-edc td:first-child,.q-page.q-mob:not(.fx) .q-sheet .q-edc th:first-child{padding-right:10px;white-space:nowrap}.q-page.q-mob:not(.fx) .q-sheet .q-edc .n{padding-left:8px}
 .q-page.q-mob:not(.fx) .q-amt{font-size:42px!important}.q-page.q-mob:not(.fx) .q-sum b{font-size:17px}.q-page.q-mob:not(.fx) .q-sum div{padding:10px 6px}
 .q-page.q-mob:not(.fx) .q-sign{gap:24px;margin-top:48px}
+.q-refs{margin-top:22px}.q-refs h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin:0 0 8px;font-weight:600}
+.q-refs div{display:flex;gap:12px}.q-refs img{flex:1 1 0;min-width:0;height:170px;object-fit:cover;border-radius:6px;display:block;background:var(--qs)}
+.q-mob .q-refs img{height:120px}
 /*/Q*/
+/* filtros, acciones, fotos y maestro de ceremonia */
+.filt label.srch{position:relative;flex:1 1 230px;display:block}
+.srch .ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none}
+.filt .srch input,.srch input{width:100%;min-width:0;padding-left:36px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 13px;font:inherit;font-size:13px;font-weight:500;cursor:pointer}
+.chip.on{background:var(--pri);border-color:var(--pri);color:var(--onpri)}
+.qa-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.qa-g .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 12px}.qa-g .btn .ic{margin-right:0}
+.qacts{border-color:var(--gold)}
+.imgs{display:flex;gap:10px;flex-wrap:wrap}
+.imgt{position:relative;width:118px;height:118px;border-radius:16px;overflow:hidden;border:1px solid var(--line);padding:0;background:var(--bg);cursor:pointer;flex:none}
+.imgt img{width:100%;height:100%;object-fit:cover;display:block}
+.imgt.add{border:1.5px dashed var(--gold);color:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:inherit}
+.imgt.add small{font-size:12px;font-weight:500}
+.imgx{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
+.imgv img{width:100%;max-height:68vh;object-fit:contain;border-radius:14px;background:#111;display:block;margin-bottom:14px}
+.mclock{text-align:center;padding:30px 20px}
+.mk-ic{width:70px;height:70px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:var(--gold2);color:var(--gold)}
+.mk-l{list-style:none;padding:0;margin:0 auto 20px;max-width:390px;text-align:left}
+.mk-l li{padding:6px 0;display:flex;gap:10px;align-items:flex-start}.mk-l .ic{color:var(--gold);flex:none;margin-top:3px}
+.mk-b{display:flex;flex-direction:column;gap:10px;max-width:340px;margin:0 auto}
+.mk-b .btn{display:flex;justify-content:center;align-items:center;gap:6px;padding:12px;text-decoration:none;font-size:15px}
+.mcs-r{display:flex;gap:12px;align-items:flex-start;padding:12px 2px;border-bottom:1px solid var(--line);cursor:pointer}.mcs-r:last-child{border-bottom:0}
+.mcs-r:hover{background:var(--bg)}
+.mcs-n{width:36px;flex:none;color:var(--gold);font-size:20px;font-weight:600;text-align:center;line-height:1.3}
+.mcs-b{flex:1;min-width:0}.mcs-b b{font-weight:600}
+.mcs-g{font-size:13px;color:var(--mut);margin-top:4px;font-style:italic}
+.mcs-a{display:flex;gap:0;flex:none}.mcs-a .btn{padding:6px 7px}.mcs-a .btn .ic{margin:0}
+body.mclive{overflow:hidden}
+.mcl{position:fixed;inset:0;z-index:90;background:#0b100e;color:#f3efe6;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:'Jost',system-ui,sans-serif}
+.mcl-top{display:flex;align-items:center;gap:12px;padding:12px 16px 10px}
+.mcl-x{width:44px;height:44px;border-radius:50%;border:0;background:#18211d;color:#f3efe6;display:grid;place-items:center;cursor:pointer;flex:none}
+.mcl-h{flex:1;min-width:0}.mcl-h small{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.mcl-h b{display:block;font-size:25px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mcl-tm{text-align:right;flex:none}.mcl-tm b{display:block;font-size:32px;font-variant-numeric:tabular-nums;font-weight:600;line-height:1.1}.mcl-tm small{color:#a9b3ad;font-size:12px}
+.mcl-tm.warn b{color:#f2c46b}.mcl-tm.over b{color:#ff7b6b;animation:mcblink 1s steps(2) infinite}
+@keyframes mcblink{50%{opacity:.35}}
+.mcl-bar{height:4px;background:#1f2a25;margin:0 16px;border-radius:4px;overflow:hidden;flex:none}.mcl-bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s linear}.mcl-bar.over i{background:#ff7b6b}
+.mcl-body{flex:1;overflow-y:auto;padding:24px 22px 0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.42;max-width:920px;width:100%;margin:0 auto;box-sizing:border-box;-webkit-overflow-scrolling:touch}
+.mcl-body p{margin:0 0 .8em}
+.mcl-nt{font-family:'Jost',sans-serif;font-size:15px;line-height:1.5;color:#f2c46b;border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin-bottom:20px}
+.mcl-prot{margin:0 0 .8em;padding-left:1.3em}.mcl-prot li{margin-bottom:.35em}.mcl-prot li::marker{color:var(--gold)}
+.mcl-prot span{display:block;font-size:.58em;color:#a9b3ad;font-family:'Jost',sans-serif;line-height:1.3}
+.mcl-empty{color:#7d8984;font-style:italic}
+.mcl-next{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;border-top:1px solid #1f2a25;font-size:14px;color:#c9d1cc;flex:none}.mcl-next b{color:#fff;font-weight:600}#mcTot{color:#8d9a94;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mcl-ctl{display:flex;gap:6px;padding:6px 12px 14px;flex:none;max-width:920px;width:100%;margin:0 auto;box-sizing:border-box}
+.mcl-ctl button{flex:1;height:56px;border:0;border-radius:16px;background:#18211d;color:#f3efe6;display:grid;place-items:center;font:600 16px 'Jost',sans-serif;cursor:pointer;padding:0}
+.mcl-ctl button.on,.mcl-ctl button.pri{background:var(--gold);color:#1a1408}
+.mcl-fr{position:absolute;inset:0;background:rgba(0,0,0,.84);display:flex;align-items:center;justify-content:center;padding:20px;z-index:2}
+.mcl-fr>div{background:#18211d;border-radius:22px;padding:22px;max-width:660px;width:100%;max-height:82vh;overflow:auto}
+.mcl-fr h3{color:var(--gold);font-size:22px;margin:0 0 12px}
+.mcl-fr p{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;line-height:1.35;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid #2a3631}
+.mcl-fr small{color:#a9b3ad}
+@media print{.mcs-a{display:none!important}}
+
 .q-wrap{padding:4px 0 16px}
 .q-stage{overflow:hidden;margin-bottom:16px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -362,6 +422,7 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
     <button data-t="prov" onclick="go('prov')">Proveedores</button>
     <button data-t="ig" onclick="go('ig')">Ingresos y gastos</button>
     <button data-t="bco" onclick="go('bco')">Banco y caja</button>
+    <button data-t="mc" onclick="go('mc')">Maestro de ceremonia</button>
     <button data-t="aj" onclick="go('aj')">Ajustes</button>
   </nav>
 </header>
@@ -380,16 +441,17 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 <datalist id="dlCli"></datalist>
 <datalist id="dlQCat"></datalist>
 <datalist id="dlTipo"></datalist>
+<input type="file" id="fileImg" accept="image/*" multiple style="display:none">
 <input type="file" id="fileLogo" accept="image/*" style="display:none" onchange="loadLogo(this.files[0]);this.value=''">
 
 <script>
 /* ===== Datos y utilidades ===== */
 const KEY='estadoCuenta_v1';
-const blank=()=>({v:1,negocio:'Mi Negocio',clientes:[],movCli:[],proveedores:[],movProv:[],ig:[],cuentas:[],movBco:[],eventos:[],cotizaciones:[],catalogo:[],paquetes:[],cotSeq:0,cfg:{},lastCid:null,ultimoRespaldo:null,base:'efectivo'});
+const blank=()=>({v:1,negocio:'Mi Negocio',clientes:[],movCli:[],proveedores:[],movProv:[],ig:[],cuentas:[],movBco:[],eventos:[],cotizaciones:[],catalogo:[],paquetes:[],mc:[],cotSeq:0,cfg:{},lastCid:null,ultimoRespaldo:null,base:'efectivo'});
 const LIC_URL='https://script.google.com/macros/s/AKfycbzMyWo8Zhcm87ha6JT1dpdvwaW7mgQ3DnBhKnNmdCOQPh9PqTSBEuGN5oAKa0ymroq3/exec';            // ← PEGÁ AQUÍ la URL de tu Apps Script (termina en /exec). Vacío = modo local sin nube.
 const CLOUD=!!LIC_URL;       // con URL: los datos viven solo en la nube y la app funciona solo en línea
 let D=CLOUD?blank():load();
-let S={calM:'',calDay:'',tab:'resumen',sel:null,desde:'',hasta:'',mes:'',igTipo:'',buscar:'',evEst:'',evPend:false};
+let S={calM:'',calDay:'',tab:'resumen',sel:null,desde:'',hasta:'',mes:'',igTipo:'',buscar:'',evEst:'',evPend:false,f:{}};
 const DL=document.getElementById('dlg');
 
 function load(){try{const r=localStorage.getItem(KEY);if(r)return Object.assign(blank(),JSON.parse(r));}catch(e){}return blank();}
@@ -493,7 +555,7 @@ function render(){
   document.querySelectorAll('.tnav button').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tab));
   hdr();bnav();closePop();
   banner();
-  const v={resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
+  const v={resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,mc:vMC,cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
   $('main').innerHTML=v();
   const qp=(S.tab==='cot'&&!!S.sel&&S.qMode==='prev')||S.tab==='doc';
   document.body.classList.toggle('qprint',qp);
@@ -501,6 +563,8 @@ function render(){
   $('pHead').textContent=D.negocio+' · impreso el '+fFecha(hoy());
   if((S.tab==='cli'||S.tab==='prov')&&!S.sel&&$('lb'))listaEnt(S.tab);
   if(S.tab==='ev'&&!S.sel&&$('eb'))listaEv();
+  if(S.tab==='cot'&&!S.sel&&$('cb'))listaCot();
+  loadImgsIn($('main'));
   if(qp){fitQuotes();if(document.fonts)document.fonts.ready.then(fitQuotes);}
 }
 function hayDatos(){return D.cotizaciones.length||D.eventos.length||D.clientes.length||D.proveedores.length||D.ig.length||D.cuentas.length;}
@@ -517,7 +581,7 @@ function fieldHtml(f,val){
   if(f.t==='money'&&val!=='')val=num(val);
   let inp;
   if(f.t==='select')inp=`<select id="${id}" name="${f.n}">${f.o.map(o=>{const[k,l]=Array.isArray(o)?o:[o,o];return`<option value="${esc(k)}"${String(k)===String(val)?' selected':''}>${esc(l)}</option>`;}).join('')}</select>`;
-  else if(f.t==='area')inp=`<textarea id="${id}" name="${f.n}" rows="2">${esc(val)}</textarea>`;
+  else if(f.t==='area')inp=`<textarea id="${id}" name="${f.n}" rows="${f.rows||2}"${f.ph?` placeholder="${esc(f.ph)}"`:''}>${esc(val)}</textarea>`;
   else inp=`<input id="${id}" name="${f.n}" type="${f.t==='money'?'text':(f.t||'text')}" ${f.t==='money'?'inputmode="decimal" placeholder="0.00"':''} ${f.list?`list="${f.list}"`:''}${f.ph?` placeholder="${esc(f.ph)}"`:''} value="${esc(val)}" autocomplete="off">`;
   return`<label class="fld" for="${id}"${f.dep?` data-dep="${f.dep[0]}" data-depv="${esc(f.dep[1])}"`:''}><span>${esc(f.l)}${f.req?' *':''}</span>${inp}</label>`;
 }
@@ -586,10 +650,15 @@ cloudok:'<path d="M7 18.5h10.2a4.3 4.3 0 0 0 .5-8.6A6 6 0 0 0 6.2 9.6 4.5 4.5 0 
 cloudoff:'<path d="M7 18.5h10.2a4.3 4.3 0 0 0 .5-8.6A6 6 0 0 0 6.2 9.6 4.5 4.5 0 0 0 7 18.5z"/><path d="M4 4l16 16"/>',
 logout:'<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l-4-4 4-4M6 12h10"/>',
 trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',save:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'};
+Object.assign(ICP,{mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/>',
+cam:'<path d="M4 8h3l2-2.5h6L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
+up:'<path d="M6 15l6-6 6 6"/>',down:'<path d="M6 9l6 6 6-6"/>',play:'<path d="M7 5l12 7-12 7z"/>',pause:'<path d="M8 5v14M16 5v14"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',
+lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',bubble:'<path d="M4 5h16v11H9l-5 4z"/>',scroll:'<path d="M12 4v14M7 13l5 5 5-5"/>',
+filter:'<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>'});
 const ic=(n,sz=22)=>`<svg class="ic" width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICP[n]||''}</svg>`;
 
 /* ===== Encabezado y navegación ===== */
-const TITLES={help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
+const TITLES={mc:'Maestro de ceremonia',help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
 function hdr(){
   const c=CF();
   if(S.tab==='resumen'){
@@ -603,7 +672,8 @@ function hdr(){
       else if(S.tab==='cot'){const q=getQ(S.sel);if(q)t=q.num;}
       else if(S.tab==='cli'||S.tab==='prov'){const e=D[MOD[S.tab].ent].find(x=>x.id===S.sel);if(e)t=e.nombre;}
       else if(S.tab==='bco'){const e=D.cuentas.find(x=>x.id===S.sel);if(e)t=e.nombre;}
-      else if(S.tab==='srv'){const e=D.paquetes.find(x=>x.id===S.sel);if(e)t=e.nombre;}}
+      else if(S.tab==='srv'){const e=D.paquetes.find(x=>x.id===S.sel);if(e)t=e.nombre;}
+      else if(S.tab==='mc'){const e=D.mc.find(x=>x.id===S.sel);if(e)t=e.nombre;}}
     if(S.tab==='doc'){const sp=S.docK&&spec(...S.docK);if(sp)t=sp.title;}
     $('hbox').innerHTML=`<div class="bar"><div class="bar-in"><button class="hbtn" onclick="${S.tab==='doc'?'docBack()':S.sel?`go('${S.tab}')`:`go('resumen')`}" aria-label="Volver">${ic('left',22)}</button><div class="bar-t">${esc(t)}</div>${cloudBtn()}<button class="hbtn" onclick="menuMas()" aria-label="Menú">${ic('grid',20)}</button></div></div>`;
   }
@@ -617,7 +687,7 @@ function actSheet(title,items){
   DL.innerHTML=`<div class="sh"><h3>${esc(title)}</h3><div class="sh-g">${items.map(([i,l,f])=>`<button onclick="DL.close();${f}">${ic(i,26)}<span>${l}</span></button>`).join('')}</div></div>`;
   DL.showModal();
 }
-function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['box','Servicios y paquetes',"go('srv')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
+function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['box','Servicios y paquetes',"go('srv')"],['mic','Maestro de ceremonia'+(isPlus()?'':' <span class="badge au">Plus</span>'),"go('mc')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
 function needEnt(k,fn){if(!D[MOD[k].ent].length){toast(k==='cli'?'Primero agregá un cliente':'Primero agregá un proveedor');go(k);return;}fn();}
 function menuNuevo(){actSheet('¿Qué querés registrar?',[['cal','Evento',`evForm(null,S.calDay||'')`],['doc','Cotización','newCot()'],['coin','Abono de cliente',"needEnt('cli',()=>movForm('cli',null,'C'))"],['receipt','Gasto',"igForm('G')"],['cash','Ingreso',"igForm('I')"],['truck','Pago a proveedor',"needEnt('prov',()=>movForm('prov',null,'C'))"]]);}
 DL.addEventListener('click',e=>{if(e.target===DL)DL.close();});
@@ -680,7 +750,7 @@ function evMenu(btn,id){
 function cotFromEv(id){
   const e=D.eventos.find(x=>x.id===id),c=D.clientes.find(x=>x.id===e.eid)||{};
   D.cotSeq=(D.cotSeq||0)+1;
-  const q={id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),validez:15,estado:'Borrador',cliente:c.nombre||'',tel:c.tel||'',correo:'',tipo:TIPOS.includes(e.nombre)?e.nombre:'Otro',titulo:TIPOS.includes(e.nombre)?'':e.nombre,fechaEv:e.fecha||'',hora:e.hora||'',lugar:e.lugar||'',invitados:e.invitados||'',tema:'',items:[],descPct:0,isv:false,anticipo:50,notas:'',cond:CF().cond,eventoId:id};
+  const q={id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),validez:15,estado:'Borrador',cid:c.id||'',imgs:[],imgShow:true,cliente:c.nombre||'',tel:c.tel||'',correo:c.correo||'',tipo:TIPOS.includes(e.nombre)?e.nombre:'Otro',titulo:TIPOS.includes(e.nombre)?'':e.nombre,fechaEv:e.fecha||'',hora:e.hora||'',lugar:e.lugar||'',invitados:e.invitados||'',tema:'',items:[],descPct:0,isv:false,anticipo:50,notas:'',cond:CF().cond,eventoId:id};
   D.cotizaciones.push(q);save();go('cot',q.id);
 }
 function waInfo(k,a,b){
@@ -695,7 +765,7 @@ function waInfo(k,a,b){
   return{tel:'',text:''};
 }
 async function waShare(...args){
-  const sp=spec(...args);if(!sp)return;save();toast('Preparando imagen…',0);
+  await prepDoc(args);const sp=spec(...args);if(!sp)return;save();toast('Preparando imagen…',0);
   try{
     const cv=await docCanvas(sp,1.75),blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.8)),f=new File([blob],sp.file+'.jpg',{type:'image/jpeg'}),w=waInfo(...args);
     if(navigator.canShare&&navigator.canShare({files:[f]})&&matchMedia('(pointer:coarse)').matches){
@@ -716,16 +786,19 @@ function vEnt(k){
   const ents=D[m.ent];
   return`<div class="row sp hd"><div class="note">${m.sub}</div>
     <div class="row noprint"><button class="btn" onclick="entForm('${k}')">+ Nuevo ${m.sing}</button><button class="btn pri" onclick="movForm('${k}')" ${ents.length?'':'disabled'}>+ Movimiento</button></div></div>
-  ${ents.length?`<div class="panel"><input class="noprint" placeholder="Buscar ${m.sing}…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEnt('${k}')" style="margin-bottom:10px">
+  ${ents.length?`<div class="panel"><div class="filt noprint"><label class="srch">${ic('search',18)}<input placeholder="Buscar ${m.sing}, teléfono o RTN…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEnt('${k}')"></label>
+    <label>Saldo<select onchange="fset('${k}','sal',this.value);listaEnt('${k}')">${[['','Todos'],['pend',k==='cli'?'Con saldo por cobrar':'Con saldo por pagar'],['cero','Al día (sin saldo)'],['favor','Saldo a favor'],...(k==='prov'?[['fot','Con fotos']]:[])].map(([v,l])=>`<option value="${v}"${ff(k).sal===v?' selected':''}>${l}</option>`).join('')}</select></label></div>
     <div class="tw"><table><thead><tr><th>Nombre</th><th class="hm">Teléfono</th><th class="n hm">Movs.</th><th class="hm">Último mov.</th><th class="n">${m.saldoL}</th></tr></thead><tbody id="lb"></tbody><tfoot id="lf"></tfoot></table></div></div>`
   :`<div class="panel empty">Todavía no hay ${m.titulo.toLowerCase()}.<br><br><button class="btn pri" onclick="entForm('${k}')">+ Agregar ${m.sing}</button></div>`}`;
 }
 function listaEnt(k){
   const m=MOD[k],q=S.buscar.toLowerCase().trim();
-  const rows=D[m.ent].filter(e=>!q||e.nombre.toLowerCase().includes(q)||(e.tel||'').includes(q)||(e.rtn||'').includes(q))
+  const fs=ff(k).sal||'';
+  const rows=D[m.ent].filter(e=>!q||e.nombre.toLowerCase().includes(q)||(e.tel||'').includes(q)||(e.rtn||'').includes(q)||(e.correo||'').toLowerCase().includes(q)||(e.nota||'').toLowerCase().includes(q))
     .map(e=>{const mv=D[m.mov].filter(x=>x.eid===e.id);return{e,s:saldoEnt(m,e.id),n:mv.length,ult:mv.reduce((a,x)=>x.fecha>a?x.fecha:a,'')};})
+    .filter(r=>!fs||(fs==='pend'?r.s>0:fs==='cero'?r.s===0:fs==='favor'?r.s<0:(r.e.imgs||[]).length>0))
     .sort((a,b)=>b.s-a.s||a.e.nombre.localeCompare(b.e.nombre));
-  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}<div class="note sm-only">${[r.e.tel&&'Tel. '+esc(r.e.tel),r.ult&&'Últ. mov. '+fFecha(r.ult)].filter(Boolean).join(' · ')}</div></td><td class="hm">${esc(r.e.tel)}</td><td class="n hm">${r.n}</td><td class="hm">${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
+  $('lb').innerHTML=rows.map(r=>`<tr class="link" onclick="go('${k}','${r.e.id}')"><td>${esc(r.e.nombre)}${(r.e.imgs||[]).length?` <span class="note">${ic('cam',14)}</span>`:''}<div class="note sm-only">${[r.e.tel&&'Tel. '+esc(r.e.tel),r.ult&&'Últ. mov. '+fFecha(r.ult)].filter(Boolean).join(' · ')}</div></td><td class="hm">${esc(r.e.tel)}</td><td class="n hm">${r.n}</td><td class="hm">${fFecha(r.ult)||'—'}</td><td class="n ${r.s<0?'pos':r.s===0?'mut':''}"><b>${fmt(r.s)}</b></td></tr>`).join('')||`<tr><td colspan="5" class="empty">Sin resultados</td></tr>`;
   $('lf').innerHTML=`<tr><td>Total (${rows.length})</td><td class="hm"></td><td class="hm"></td><td class="hm"></td><td class="n">${fmt(rows.reduce((s,r)=>s+r.s,0))}</td></tr>`;
 }
 function vEntDet(k,id){
@@ -734,7 +807,7 @@ function vEntDet(k,id){
   const tD=sum(all.filter(x=>x.tipo==='D')),tC=sum(all.filter(x=>x.tipo==='C')),saldo=tD-tC;
   const ag=aging(m,id);
   const{ant,rows,fin}=estado(all,S.desde,S.hasta,x=>x.tipo==='D'?x.monto:-x.monto);
-  const info=[e.rtn&&'RTN '+esc(e.rtn),e.tel&&'Tel. '+esc(e.tel),e.nota&&esc(e.nota)].filter(Boolean).join(' · ');
+  const info=[e.rtn&&'RTN '+esc(e.rtn),e.tel&&'Tel. '+esc(e.tel),e.correo&&esc(e.correo),e.nota&&esc(e.nota)].filter(Boolean).join(' · ');
   return`<button class="back noprint" onclick="go('${k}')">← ${m.titulo}</button>
   <div class="row sp hd"><div><h2>${esc(e.nombre)}</h2><div class="note">${m.sub}${info?' · '+info:''}</div></div>
     <div class="row noprint"><button class="btn pri" onclick="movForm('${k}','${id}','D')">+ ${m.debL}</button><button class="btn pri" onclick="movForm('${k}','${id}','C')">+ ${m.credL}</button></div></div>
@@ -743,6 +816,7 @@ function vEntDet(k,id){
     <div class="card"><div class="k">Total ${m.debL.toLowerCase()}s</div><div class="v">${fmt(tD)}</div></div>
     <div class="card"><div class="k">Total ${m.credL.toLowerCase()}s</div><div class="v">${fmt(tC)}</div></div>
   </div>
+  ${k==='prov'?`<div class="panel noprint"><h3>Fotos de referencia</h3><p class="note">Trabajos, catálogos o arreglos de este proveedor. Máximo ${MAXIMG} fotos.</p>${imgsHtml(e.imgs,'prov',id)}</div>`:''}
   <div class="panel"><h3>Antigüedad del saldo</h3><div class="aging">${['0–30 días','31–60 días','61–90 días','Más de 90'].map((l,i)=>`<div><small>${l}</small><b class="${i>=2&&ag.b[i]>0?'neg':''}">${fmt(ag.b[i])}</b></div>`).join('')}</div></div>
   <div class="panel">
     <div class="filt noprint"><label>Desde<input type="date" value="${S.desde}" onchange="S.desde=this.value;render()"></label><label>Hasta<input type="date" value="${S.hasta}" onchange="S.hasta=this.value;render()"></label>
@@ -756,18 +830,18 @@ function vEntDet(k,id){
   </div>
   <div class="row noprint"><button class="btn" onclick="entForm('${k}','${id}')">Editar ${m.sing}</button><button class="btn bad" onclick="delEnt('${k}','${id}')">Eliminar ${m.sing}</button></div>`;
 }
-function entForm(k,id){
+function entForm(k,id,onNew,pre){
   const m=MOD[k],e=id?D[m.ent].find(x=>x.id===id):null;
-  form(e?'Editar '+m.sing:'Nuevo '+m.sing,[{n:'nombre',l:'Nombre',req:1},{n:'rtn',l:'RTN'},{n:'tel',l:'Teléfono',t:'tel'},{n:'nota',l:'Notas',t:'area'}],e,v=>{
+  form(e?'Editar '+m.sing:'Nuevo '+m.sing,[{n:'nombre',l:'Nombre',req:1},{n:'rtn',l:'RTN'},{n:'tel',l:'Teléfono',t:'tel'},{n:'correo',l:'Correo',t:'email'},{n:'nota',l:'Notas',t:'area'}],e||pre,v=>{
     const dup=D[m.ent].find(x=>x.nombre.toLowerCase()===v.nombre.toLowerCase()&&x.id!==id);
     if(dup){$('ferr').textContent='Ya existe un '+m.sing+' con ese nombre.';return false;}
-    if(e)Object.assign(e,v);else D[m.ent].push({id:uid(),...v});
+    if(e)Object.assign(e,v);else{const n={id:uid(),...v};D[m.ent].push(n);if(onNew)onNew(n);}
   });
 }
 function delEnt(k,id){
   const m=MOD[k],e=D[m.ent].find(x=>x.id===id),n=D[m.mov].filter(x=>x.eid===id).length;
   if(!confirm(`¿Eliminar a "${e.nombre}"?${n?`\nTambién se borrarán sus ${n} movimientos.`:''}`))return;
-  D[m.ent]=D[m.ent].filter(x=>x.id!==id);D[m.mov]=D[m.mov].filter(x=>x.eid!==id);save();go(k);
+  imgDelAll(e.imgs);D[m.ent]=D[m.ent].filter(x=>x.id!==id);D[m.mov]=D[m.mov].filter(x=>x.eid!==id);save();go(k);
 }
 function movForm(k,eid,tipo,movId,evDef){
   const m=MOD[k],mv=movId?D[m.mov].find(x=>x.id===movId):null;const f=[];
@@ -812,7 +886,8 @@ function vEv(){
   if(S.sel)return vEvDet(S.sel);
   return`<div class="row sp hd"><h2 class="sec">Eventos</h2><span></span><div class="row noprint"><button class="btn pri" onclick="evForm()">+ Nuevo evento</button></div></div>
   ${D.eventos.length?`<div class="panel"><div class="filt noprint">
-      <label style="flex:1;min-width:180px">Buscar<input placeholder="Evento o cliente…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEv()" style="width:100%"></label>
+      <label class="srch">${ic('search',18)}<input placeholder="Buscar evento, cliente o lugar…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaEv()"></label>
+      <label>Mes del evento<input type="month" value="${ff('ev').mes||''}" onchange="fset('ev','mes',this.value);listaEv()"></label>
       <label>Estado<select onchange="S.evEst=this.value;listaEv()"><option value="">Todos</option>${['Por realizar','Realizado','Cancelado'].map(x=>`<option${S.evEst===x?' selected':''}>${x}</option>`).join('')}</select></label>
       <label style="flex-direction:row;align-items:center;gap:6px;padding-bottom:6px"><input type="checkbox" ${S.evPend?'checked':''} onchange="S.evPend=this.checked;listaEv()"> Solo con saldo pendiente</label></div>
     <div class="row sp note" id="ef"></div></div><div class="evgrid" id="eb"></div>`
@@ -820,7 +895,8 @@ function vEv(){
 }
 function listaEv(){
   const q=S.buscar.toLowerCase().trim();
-  const rows=D.eventos.filter(e=>(!q||evLabel(e).toLowerCase().includes(q))&&(!S.evEst||(e.estado||'Por realizar')===S.evEst))
+  const fm=ff('ev').mes||'';
+  const rows=D.eventos.filter(e=>(!q||(evLabel(e)+' '+(e.lugar||'')).toLowerCase().includes(q))&&(!S.evEst||(e.estado||'Por realizar')===S.evEst)&&(!fm||(e.fecha||'').startsWith(fm)))
     .map(e=>({e,st:evStats(e.id)})).filter(r=>!S.evPend||r.st.saldo>0).sort((a,b)=>(b.e.fecha||'').localeCompare(a.e.fecha||''));
   const T=k=>rows.reduce((s,r)=>s+r.st[k],0);
   $('eb').innerHTML=rows.map(({e,st})=>evCard(e,st)).join('')||`<div class="panel empty">Sin resultados</div>`;
@@ -852,7 +928,7 @@ function vEvDet(id){
     </tbody><tfoot><tr><td colspan="4">Total gastos</td><td class="n">${fmt(st.gas)}</td><td class="noprint"></td></tr></tfoot></table></div>
     <p class="note" style="margin-bottom:0">También podés ligar al evento un pago o factura de un proveedor eligiendo el evento al registrarlo.</p></div>
   ${st.ol.length?`<div class="panel"><h3>Otros ingresos del evento</h3><div class="tw"><table><tbody>${st.ol.map(x=>`<tr><td>${fFecha(x.fecha)}</td><td>${esc(x.categoria)}</td><td class="w">${esc(x.concepto)}</td><td class="n">${fmt(x.monto)}</td><td class="n noprint">${btnMov(x)}</td></tr>`).join('')}</tbody></table></div></div>`:''}
-  <div class="row noprint">${(c=>c?`<button class="btn" onclick="go('cot','${c.id}')">Ver cotización ${esc(c.num)}</button>`:'')(D.cotizaciones.find(q=>q.eventoId===id))}<button class="btn wa" onclick="waEv('${id}')">${ic('send',16)} Enviar por WhatsApp</button><button class="btn" onclick="evForm('${id}')">Editar evento</button><button class="btn pri" onclick="openDoc('edcev','${id}')">Estado de cuenta</button><button class="btn bad" onclick="delEv('${id}')">Eliminar evento</button></div>`;
+  <div class="row noprint">${(c=>c?`<button class="btn" onclick="go('cot','${c.id}')">Ver cotización ${esc(c.num)}</button>`:'')(D.cotizaciones.find(q=>q.eventoId===id))}<button class="btn wa" onclick="waEv('${id}')">${ic('send',16)} Enviar por WhatsApp</button><button class="btn" onclick="mcDeEv('${id}')">${ic('mic',16)} Programa del MC</button><button class="btn" onclick="evForm('${id}')">Editar evento</button><button class="btn pri" onclick="openDoc('edcev','${id}')">Estado de cuenta</button><button class="btn bad" onclick="delEv('${id}')">Eliminar evento</button></div>`;
 }
 function evForm(id,fdef){
   const ev=id?D.eventos.find(x=>x.id===id):null;
@@ -883,14 +959,20 @@ function delEv(id){
 
 /* ===== Cotizaciones ===== */
 const TIPOS=['Boda','Cumpleaños','XV años','Graduación','Bautizo','Primera comunión','Baby shower','Aniversario','Evento corporativo','Otro'];
-const QCATS=['Decoración','Mobiliario','Alimentos y bebidas','Pastelería y postres','Entretenimiento','Fotografía y video','Personal','Montaje y logística','Otros'];
+const QCATS=['Decoración','Mobiliario','Mantelería','Cristalería','Alimentos y bebidas','Pastelería y postres','Entretenimiento','Fotografía y video','Personal','Montaje y logística','Otros'];
 const PAL={oro:{n:'Oro',a:'#9a7418',s:'#f8f1dc',i:'#2a2416'},orosa:{n:'Oro rosa',a:'#a8735f',s:'#f8eeea',i:'#2c2220'},onix:{n:'Ónix y oro',a:'#8a6d3e',s:'#f2efe9',i:'#151412'},esmeralda:{n:'Esmeralda bosque',a:'#0b5e46',s:'#e7f0eb',i:'#1a2620'},champagne:{n:'Champagne dorado',a:'#a8864f',s:'#f6f1e7',i:'#2b2622'},rosa:{n:'Rosa palo',a:'#b07473',s:'#f8eeec',i:'#3a2b2b'},salvia:{n:'Verde salvia',a:'#73866b',s:'#eff2ec',i:'#26302a'},noche:{n:'Azul noche',a:'#9c8352',s:'#eef0f5',i:'#1f2a44'}};
+/* Mobiliario por separado: sillas, mesas de 8 y de 4, mantelería y copas (cantidades según invitados) */
+const MOB=[['Mobiliario','Sillas tiffany','i'],['Mobiliario','Mesas para 8 personas','m8'],['Mobiliario','Mesas para 4 personas','m4'],
+  ['Mantelería','Manteles para mesa','mt'],['Mantelería','Caminos o cubremanteles','mt'],['Mantelería','Servilletas de tela','i'],
+  ['Cristalería','Copas para agua','i'],['Cristalería','Copas para brindis','i']];
+/* Reparte invitados en mesas de 8 y completa con mesas de 4 */
+function mesas(g){g=Math.max(0,g|0);let m8=Math.floor(g/8),r=g-m8*8,m4=0;if(r>4)m8++;else if(r>0)m4=1;return{m8,m4,t:m8+m4};}
 const PLANT={
-  'Boda':[['Decoración','Arco floral para la ceremonia',1],['Decoración','Centros de mesa con flores naturales','m'],['Mobiliario','Mesas y sillas tiffany con mantelería','i'],['Alimentos y bebidas','Banquete a tres tiempos (por persona)','i'],['Pastelería y postres','Pastel de bodas',1],['Entretenimiento','DJ, sonido e iluminación',1],['Fotografía y video','Cobertura fotográfica',1],['Personal','Coordinación del evento',1],['Personal','Meseros','w']],
-  'Cumpleaños':[['Decoración','Decoración temática',1],['Decoración','Arco de globos orgánico',1],['Pastelería y postres','Mesa de postres',1],['Pastelería y postres','Pastel personalizado',1],['Mobiliario','Mesas y sillas','i'],['Entretenimiento','Animación y show',1],['Otros','Piñata',1]],
-  'XV años':[['Decoración','Decoración y ambientación del salón',1],['Entretenimiento','Entrada y vals coreografiado',1],['Entretenimiento','DJ, sonido e iluminación',1],['Alimentos y bebidas','Banquete (por persona)','i'],['Pastelería y postres','Pastel de XV años',1],['Fotografía y video','Fotografía y video',1],['Personal','Coordinación del evento',1]],
-  'Graduación':[['Decoración','Decoración con colores institucionales',1],['Decoración','Photo booth',1],['Alimentos y bebidas','Banquete (por persona)','i'],['Mobiliario','Mesas y sillas','i'],['Entretenimiento','DJ y sonido',1]],
-  '_':[['Decoración','Decoración y ambientación',1],['Mobiliario','Mesas y sillas','i'],['Alimentos y bebidas','Alimentos y bebidas (por persona)','i'],['Entretenimiento','Entretenimiento',1],['Personal','Personal de servicio',1]]
+  'Boda':[['Decoración','Arco floral para la ceremonia',1],['Decoración','Centros de mesa con flores naturales','mt'],...MOB,['Alimentos y bebidas','Banquete a tres tiempos (por persona)','i'],['Pastelería y postres','Pastel de bodas',1],['Entretenimiento','DJ, sonido e iluminación',1],['Fotografía y video','Cobertura fotográfica',1],['Personal','Coordinación del evento',1],['Personal','Meseros','w']],
+  'Cumpleaños':[['Decoración','Decoración temática',1],['Decoración','Arco de globos orgánico',1],['Pastelería y postres','Mesa de postres',1],['Pastelería y postres','Pastel personalizado',1],...MOB,['Entretenimiento','Animación y show',1],['Otros','Piñata',1]],
+  'XV años':[['Decoración','Decoración y ambientación del salón',1],...MOB,['Entretenimiento','Entrada y vals coreografiado',1],['Entretenimiento','DJ, sonido e iluminación',1],['Alimentos y bebidas','Banquete (por persona)','i'],['Pastelería y postres','Pastel de XV años',1],['Fotografía y video','Fotografía y video',1],['Personal','Coordinación del evento',1]],
+  'Graduación':[['Decoración','Decoración con colores institucionales',1],['Decoración','Photo booth',1],['Alimentos y bebidas','Banquete (por persona)','i'],...MOB,['Entretenimiento','DJ y sonido',1]],
+  '_':[['Decoración','Decoración y ambientación',1],...MOB,['Alimentos y bebidas','Alimentos y bebidas (por persona)','i'],['Entretenimiento','Entretenimiento',1],['Personal','Personal de servicio',1]]
 };
 const COND_DEF='• Para reservar la fecha se requiere un anticipo del {anticipo}% del total.\n• El saldo debe cancelarse a más tardar 3 días antes del evento.\n• Los precios incluyen montaje y desmontaje dentro del horario acordado.\n• Cambios en la cantidad de invitados se aceptan hasta 7 días antes del evento.\n• Esta cotización es válida por {validez} días.';
 const CF=()=>Object.assign({eslogan:'Eventos & Celebraciones',tel:'',correo:'',dir:'',rtn:'',logo:'',estilo:'champagne',gracias:'Gracias por permitirnos ser parte de su celebración.',cond:COND_DEF},D.cfg||{});
@@ -906,38 +988,51 @@ function cotTot(q){const sub=q.items.reduce((s,it)=>s+lineT(it),0);const desc=Ma
 
 function vCot(){
   if(S.sel)return vCotDet(S.sel);
-  const L=D.cotizaciones.slice().sort((a,b)=>b.num.localeCompare(a.num));
+  const F=ff('cot');
   return`<div class="row sp hd"><h2 class="sec">Cotizaciones</h2><div class="row noprint"><button class="btn pri" onclick="newCot()">+ Nueva cotización</button></div></div>
-  ${L.length?`<div class="panel"><div class="tw"><table><thead><tr><th>No.</th><th>Fecha</th><th>Cliente</th><th>Evento</th><th>Fecha evento</th><th class="n">Total</th><th>Estado</th></tr></thead><tbody>
-    ${L.map(q=>`<tr class="link" onclick="go('cot','${q.id}')"><td><b>${esc(q.num)}</b></td><td>${fFecha(q.fecha)}</td><td>${esc(q.cliente)||'—'}</td><td>${esc(q.titulo||q.tipo)}</td><td>${fFecha(q.fechaEv)||'—'}</td><td class="n"><b>${fmt(cotTot(q).total)}</b></td><td>${qEst(q.estado)}</td></tr>`).join('')}
-  </tbody></table></div></div>`
+  ${D.cotizaciones.length?`<div class="panel"><div class="filt noprint"><label class="srch">${ic('search',18)}<input placeholder="Buscar número, cliente, evento o lugar…" value="${esc(S.buscar)}" oninput="S.buscar=this.value;listaCot()"></label>
+      <label>Mes del evento<input type="month" value="${F.mes||''}" onchange="fset('cot','mes',this.value);listaCot()"></label></div>
+    ${chips('cot','est',[['','Todas'],['Borrador','Borrador'],['Enviada','Enviada'],['Aceptada','Aceptada'],['Rechazada','Rechazada']],'listaCot()')}
+    <div class="tw"><table><thead><tr><th>No.</th><th class="hm">Fecha</th><th>Cliente</th><th class="hm">Evento</th><th class="hm">Fecha evento</th><th class="n">Total</th><th class="hm">Estado</th></tr></thead><tbody id="cb"></tbody><tfoot id="cf"></tfoot></table></div></div>`
   :`<div class="panel empty">Prepará cotizaciones elegantes para bodas, cumpleaños, XV años, graduaciones y más. Cuando el cliente acepta, se convierten en evento con un clic.<br><br><button class="btn pri" onclick="newCot()">+ Nueva cotización</button></div>`}`;
 }
+function listaCot(){
+  const F=ff('cot'),q=sinAc(S.buscar).trim();
+  const L=D.cotizaciones.filter(c=>(!q||sinAc([c.num,cotCli(c),c.titulo,c.tipo,c.lugar,c.tema].join(' ')).includes(q))&&(!F.est||c.estado===F.est)&&(!F.mes||(c.fechaEv||c.fecha||'').startsWith(F.mes)))
+    .sort((a,b)=>b.num.localeCompare(a.num));
+  $('cb').innerHTML=L.map(q=>`<tr class="link" onclick="go('cot','${q.id}')"><td><b>${esc(q.num)}</b><div class="note sm-only">${esc(q.titulo||q.tipo)}${q.fechaEv?' · '+fFecha(q.fechaEv):''} · ${esc(q.estado)}</div></td><td class="hm">${fFecha(q.fecha)}</td><td>${esc(cotCli(q))||'—'}${(q.imgs||[]).length?` <span class="note">${ic('cam',14)}</span>`:''}</td><td class="hm">${esc(q.titulo||q.tipo)}</td><td class="hm">${fFecha(q.fechaEv)||'—'}</td><td class="n"><b>${fmt(cotTot(q).total)}</b></td><td class="hm">${qEst(q.estado)}</td></tr>`).join('')||`<tr><td colspan="7" class="empty">Sin resultados</td></tr>`;
+  $('cf').innerHTML=`<tr><td>${L.length} ${L.length===1?'cotización':'cotizaciones'}</td><td class="hm"></td><td></td><td class="hm"></td><td class="hm"></td><td class="n">${fmt(L.reduce((s,q)=>s+cotTot(q).total,0))}</td><td class="hm"></td></tr>`;
+}
+const cotCli=q=>{const c=q.cid&&D.clientes.find(x=>x.id===q.cid);return c?c.nombre:(q.cliente||'');};
 function newCot(){
   D.cotSeq=(D.cotSeq||0)+1;
-  const q={id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),validez:15,estado:'Borrador',cliente:'',tel:'',correo:'',tipo:'Cumpleaños',titulo:'',fechaEv:'',hora:'',lugar:'',invitados:'',tema:'',items:[],descPct:0,isv:false,anticipo:50,notas:'',cond:CF().cond,eventoId:''};
+  const q={id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),validez:15,estado:'Borrador',cliente:'',tel:'',correo:'',tipo:'Cumpleaños',titulo:'',fechaEv:'',hora:'',lugar:'',invitados:'',tema:'',items:[],descPct:0,isv:false,anticipo:50,notas:'',cond:CF().cond,eventoId:'',cid:'',imgs:[],imgShow:true};
   D.cotizaciones.push(q);save();go('cot',q.id);
 }
 function vCotDet(id){
   const q=getQ(id);if(!q){S.sel=null;return vCot();}
+  if(q.cid){const c=D.clientes.find(x=>x.id===q.cid);if(!c)q.cid='';else if(c.nombre!==q.cliente)q.cliente=c.nombre;}
   const prev=S.qMode==='prev';
   const ev=q.eventoId&&D.eventos.find(e=>e.id===q.eventoId);
   const head=`<button class="back noprint" onclick="go('cot')">← Cotizaciones</button>
-  <div class="row sp hd noprint"><div><h2>${esc(q.num)} · ${esc(q.titulo||q.tipo)}${q.cliente?' – '+esc(q.cliente):''}</h2></div>
-    <div class="row"><select onchange="qs('${id}','estado',this.value);render()" style="width:auto">${['Borrador','Enviada','Aceptada','Rechazada'].map(x=>`<option${q.estado===x?' selected':''}>${x}</option>`).join('')}</select>
-    ${prev?`<button class="btn" onclick="S.qMode='edit';render()">✎ Editar</button>`:`<button class="btn" onclick="S.qMode='prev';render();scrollTo(0,0)">Vista previa</button>`}
-    <button class="btn pri" onclick="guardarCot('${id}')">Guardar</button></div></div>
-  <div class="row noprint" style="margin:-4px 0 14px;gap:6px"><button class="btn sm wa" onclick="waShare('cot','${id}')">${ic('send',16)} WhatsApp</button><span class="note" style="margin-left:6px">Descargar:</span><button class="btn sm" onclick="savePDF('${id}')">PDF</button><button class="btn sm" onclick="saveIMG('${id}')">Imagen</button><button class="btn sm" onclick="saveHTML('${id}')">HTML</button><button class="btn sm" onclick="printCot()">Imprimir</button></div>`;
+  <div class="row sp hd noprint"><div><h2>${esc(q.num)} · ${esc(q.titulo||q.tipo)}${q.cliente?' – '+esc(q.cliente):''}</h2></div>${qEst(q.estado)}</div>`;
+  const acts=`<div class="panel noprint qacts"><div class="row sp" style="margin-bottom:12px"><h3 style="margin:0">Acciones</h3>
+      <label class="row" style="gap:6px;font-size:13px;color:var(--mut)">Estado<select onchange="qs('${id}','estado',this.value);render()" style="width:auto">${['Borrador','Enviada','Aceptada','Rechazada'].map(x=>`<option${q.estado===x?' selected':''}>${x}</option>`).join('')}</select></label></div>
+    <div class="qa-g"><button class="btn pri" onclick="guardarCot('${id}')">${ic('check',16)} Guardar</button><button class="btn wa" onclick="waShare('cot','${id}')">${ic('send',16)} WhatsApp</button>
+      ${prev?`<button class="btn" onclick="S.qMode='edit';render()">${ic('edit',16)} Editar</button>`:`<button class="btn" onclick="S.qMode='prev';render();scrollTo(0,0)">${ic('eye',16)} Vista previa</button>`}
+      <button class="btn" onclick="savePDF('${id}')">${ic('save',16)} PDF</button><button class="btn" onclick="saveIMG('${id}')">${ic('save',16)} Imagen</button><button class="btn" onclick="saveHTML('${id}')">${ic('save',16)} HTML</button><button class="btn" onclick="printCot()">${ic('doc',16)} Imprimir</button></div>
+    <div class="qa-g" style="margin-top:8px">${ev?`<button class="btn gold" style="grid-column:1/-1" onclick="go('ev','${ev.id}')">Ver evento</button>`:`<button class="btn gold" style="grid-column:1/-1" onclick="convCot('${id}')">✓ Cliente aceptó: convertir en evento</button>`}
+      <button class="btn" onclick="dupCot('${id}')">Duplicar</button><button class="btn bad" onclick="delCot('${id}')">Eliminar</button></div></div>`;
   if(!S.qView)S.qView=innerWidth<700?'tel':'pag';
   if(prev){const tel=S.qView==='tel';
     return head+`<div class="row sp noprint" style="margin-bottom:10px"><div class="seg"><button class="${tel?'':'on'}" onclick="S.qView='pag';render()">Página (PDF)</button><button class="${tel?'on':''}" onclick="S.qView='tel';render()">Teléfono</button></div><span class="note" id="qhint">${tel?'Así se ve el HTML en el teléfono del cliente':''}</span></div>`
-      +(tel?`<div class="q-wrap" style="max-width:430px;margin:0 auto">${pageHtml(q,false,true)}</div>`:`<div class="q-stage">${pageHtml(q,true)}</div>`);}
+      +(tel?`<div class="q-wrap" style="max-width:430px;margin:0 auto">${pageHtml(q,false,true)}</div>`:`<div class="q-stage">${pageHtml(q,true)}</div>`)+`<div style="height:16px"></div>`+acts;}
   $('dlQCat').innerHTML=[...new Set([...QCATS,...D.cotizaciones.flatMap(c=>c.items.map(i=>i.cat))])].filter(Boolean).map(c=>`<option value="${esc(c)}">`).join('');
   $('dlTipo').innerHTML=TIPOS.map(t=>`<option value="${esc(t)}">`).join('');
   const inp=(f,l,type='text',ex='')=>`<label class="fld"><span>${l}</span><input type="${type}" value="${esc(q[f])}" oninput="qs('${id}','${f}',this.value)" ${ex}></label>`;
   return head+`
   <div class="panel"><h3>Cliente y evento</h3><div class="g2">
-    ${inp('cliente','Cliente')}${inp('tel','Teléfono','tel')}${inp('correo','Correo','email')}
+    ${cliSel(q)}${inp('tel','Teléfono','tel')}${inp('correo','Correo','email')}
     ${inp('tipo','Tipo de evento','text','list="dlTipo"')}${inp('titulo','Título (ej. Los XV de Valeria) — opcional')}${inp('tema','Temática o colores')}
     ${inp('fechaEv','Fecha del evento','date')}${inp('hora','Hora','time')}${inp('lugar','Lugar')}${inp('invitados','Invitados','text','inputmode="numeric"')}
   </div></div>
@@ -945,6 +1040,8 @@ function vCotDet(id){
     <div class="qi qih"><span>Categoría</span><span>Descripción</span><span>Cant.</span><span>Precio unit.</span><span style="text-align:right">Importe</span><span></span></div>
     <div id="qitems">${q.items.map(it=>`<div class="qi"><input class="c" list="dlQCat" placeholder="Categoría" value="${esc(it.cat)}" oninput="qit('${id}','${it.id}','cat',this.value)"><input class="d" placeholder="Descripción del servicio" value="${esc(it.desc)}" oninput="qit('${id}','${it.id}','desc',this.value)"><label class="ql"><span>Cant.</span><input inputmode="decimal" placeholder="Cant." value="${esc(it.cant)}" oninput="qit('${id}','${it.id}','cant',this.value)"></label><label class="ql"><span>Precio unit.</span><input inputmode="decimal" placeholder="Precio" value="${it.precio?num(it.precio):''}" oninput="qit('${id}','${it.id}','precio',this.value)"></label><div class="qt" id="qt_${it.id}">${fmt(lineT(it))}</div><button class="btn sm ghost bad" onclick="qdel('${id}','${it.id}')" title="Quitar">✕</button></div>`).join('')||'<p class="note">Agregá los servicios uno por uno, o usá “Sugerir servicios” para empezar con una lista típica. Un servicio con precio en blanco aparece como “Incluido”.</p>'}</div>
     <button class="btn" onclick="qadd('${id}')" style="margin-top:6px">+ Agregar servicio</button></div>
+  <div class="panel"><h3>Imágenes de referencia</h3><p class="note">Fotos de decoración, montajes o ideas para este evento. Máximo ${MAXIMG}.</p>${imgsHtml(q.imgs,'cot',id)}
+    ${(q.imgs||[]).length?`<label class="row" style="gap:8px;margin-top:10px;font-size:14px"><input type="checkbox" style="width:18px" ${q.imgShow!==false?'checked':''} onchange="qs('${id}','imgShow',this.checked)"> Mostrarlas en la cotización que recibe el cliente</label>`:''}</div>
   <div class="panel"><h3>Totales y condiciones de pago</h3><div class="g2">
     ${inp('descPct','Descuento (%)','text','inputmode="decimal"')}${inp('anticipo','Anticipo requerido (%)','text','inputmode="decimal"')}
     ${inp('fecha','Fecha de la cotización','date')}${inp('validez','Válida por (días)','text','inputmode="numeric"')}
@@ -953,8 +1050,24 @@ function vCotDet(id){
   <div class="panel"><h3>Mensaje y condiciones</h3>
     <label class="fld"><span>Nota para el cliente (opcional)</span><textarea rows="3" oninput="qs('${id}','notas',this.value)">${esc(q.notas)}</textarea></label>
     <label class="fld"><span>Condiciones · {anticipo} y {validez} se reemplazan solos</span><textarea rows="6" oninput="qs('${id}','cond',this.value)">${esc(q.cond)}</textarea></label></div>
-  <div class="row noprint">${ev?`<button class="btn pri" onclick="go('ev','${ev.id}')">Ver evento</button>`:`<button class="btn pri" onclick="convCot('${id}')">✓ Cliente aceptó: convertir en evento</button>`}
-    <button class="btn" onclick="dupCot('${id}')">Duplicar</button><button class="btn bad" onclick="delCot('${id}')">Eliminar</button></div>`;
+  ${acts}`;
+}
+function cliSel(q){
+  if(!q.cid&&q.cliente){const m=D.clientes.find(c=>c.nombre.toLowerCase()===q.cliente.trim().toLowerCase());if(m){q.cid=m.id;saveLater();}}
+  const cl=D.clientes.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre)),huerf=!q.cid&&q.cliente;
+  return`<label class="fld"><span>Cliente</span><select onchange="qCli('${q.id}',this.value)">
+    <option value="">${cl.length?'— Elegí un cliente —':'— Todavía no hay clientes —'}</option>
+    ${huerf?`<option value="__old" selected>${esc(q.cliente)} (no está en Clientes)</option>`:''}
+    ${cl.map(c=>`<option value="${c.id}"${c.id===q.cid?' selected':''}>${esc(c.nombre)}${c.tel?' · '+esc(c.tel):''}</option>`).join('')}
+    <option value="__new">+ Cliente nuevo…</option></select>
+    ${huerf?`<button type="button" class="btn sm" style="margin-top:6px" onclick="qCli('${q.id}','__new')">Agregar "${esc(q.cliente)}" a Clientes</button>`:''}</label>`;
+}
+function qPonCli(q,c){q.cid=c.id;q.cliente=c.nombre;if(c.tel)q.tel=c.tel;if(c.correo)q.correo=c.correo;}
+function qCli(qid,v){const q=getQ(qid);
+  if(v==='__old')return;
+  if(v==='__new'){render();entForm('cli',null,c=>qPonCli(q,c),!q.cid&&q.cliente?{nombre:q.cliente,tel:q.tel,correo:q.correo}:null);return;}
+  if(!v){q.cid='';q.cliente='';}else{const c=D.clientes.find(x=>x.id===v);if(c)qPonCli(q,c);}
+  save();render();
 }
 function totEd(q){const t=cotTot(q);const r=(l,v,b)=>`<div class="row sp" style="padding:3px 0"><span class="${b?'':'mut'}">${l}</span>${b?'<b style="font-size:18px">'+fmt(v)+'</b>':'<span>'+fmt(v)+'</span>'}</div>`;
   return r('Subtotal',t.sub)+(t.desc?r(`Descuento (${q.descPct}%)`,-t.desc):'')+(q.isv?r('ISV (15%)',t.isv):'')+'<div style="border-top:1px solid var(--line);margin:4px 0"></div>'+r('Total',t.total,1)+(t.ant?r(`Anticipo (${q.anticipo}%)`,t.ant):'');}
@@ -963,18 +1076,19 @@ function qit(id,itId,f,v){const q=getQ(id),it=q.items.find(x=>x.id===itId);if(f=
 function qadd(id){const q=getQ(id);const last=q.items[q.items.length-1];q.items.push({id:uid(),cat:last?last.cat:'',desc:'',cant:1,precio:0});save();render();const ins=document.querySelectorAll('#qitems .d');ins.length&&ins[ins.length-1].focus();}
 function qdel(id,itId){const q=getQ(id);q.items=q.items.filter(x=>x.id!==itId);save();render();}
 function qtpl(id){const q=getQ(id),g=parseInt(q.invitados)||0;const P=PLANT[q.tipo]||PLANT['_'];
-  P.forEach(([cat,desc,c])=>q.items.push({id:uid(),cat,desc,cant:c==='i'?(g||1):c==='m'?Math.max(1,Math.ceil(g/10)):c==='w'?Math.max(1,Math.ceil(g/15)):c,precio:0}));
+  const M=mesas(g||1);P.forEach(([cat,desc,c])=>q.items.push({id:uid(),cat,desc,cant:c==='i'?(g||1):c==='m8'?M.m8:c==='m4'?M.m4:c==='mt'?M.t:c==='m'?Math.max(1,Math.ceil(g/10)):c==='w'?Math.max(1,Math.ceil(g/15)):c,precio:0}));
   save();render();}
 function dupCot(id){const q=getQ(id);D.cotSeq=(D.cotSeq||0)+1;
-  const n={...JSON.parse(JSON.stringify(q)),id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),estado:'Borrador',eventoId:''};n.items.forEach(i=>i.id=uid());
+  const n={...JSON.parse(JSON.stringify(q)),id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),estado:'Borrador',eventoId:'',imgs:[]};n.items.forEach(i=>i.id=uid());
   D.cotizaciones.push(n);save();go('cot',n.id);}
-function delCot(id){const q=getQ(id);if(!confirm(`¿Eliminar la cotización ${q.num}?`))return;D.cotizaciones=D.cotizaciones.filter(x=>x.id!==id);save();go('cot');}
+function delCot(id){const q=getQ(id);if(!confirm(`¿Eliminar la cotización ${q.num}?`))return;imgDelAll(q.imgs);D.cotizaciones=D.cotizaciones.filter(x=>x.id!==id);save();go('cot');}
 function convCot(id){
   const q=getQ(id);if(!q.cliente.trim()){alert('Escribí el nombre del cliente antes de convertir la cotización.');return;}
   const t=cotTot(q);
   if(!confirm(`Se creará el evento "${q.titulo||q.tipo} – ${q.cliente}" con un valor de ${fmt(t.total)} en la cuenta del cliente. ¿Continuar?`))return;
-  let c=D.clientes.find(x=>x.nombre.toLowerCase()===q.cliente.trim().toLowerCase());
-  if(!c){c={id:uid(),nombre:q.cliente.trim(),rtn:'',tel:q.tel||'',nota:q.correo||''};D.clientes.push(c);}
+  let c=(q.cid&&D.clientes.find(x=>x.id===q.cid))||D.clientes.find(x=>x.nombre.toLowerCase()===q.cliente.trim().toLowerCase());
+  if(!c){c={id:uid(),nombre:q.cliente.trim(),rtn:'',tel:q.tel||'',correo:q.correo||'',nota:''};D.clientes.push(c);}
+  q.cid=c.id;
   const ev={id:uid(),creado:Date.now(),nombre:q.titulo||q.tipo,eid:c.id,fecha:q.fechaEv,hora:q.hora,invitados:q.invitados,lugar:q.lugar,estado:'Por realizar',nota:q.tema||''};
   D.eventos.push(ev);
   if(t.total>0)D.movCli.push({id:uid(),creado:Date.now(),eid:c.id,evId:ev.id,tipo:'D',fecha:hoy(),doc:q.num,concepto:'Cotización '+q.num+' aceptada',monto:t.total,cid:''});
@@ -983,7 +1097,7 @@ function convCot(id){
 function orn(){return'<div class="q-orn"><span></span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0L10 8L8 16L6 8Z" fill="currentColor"/><path d="M0 8L8 6L16 8L8 10Z" fill="currentColor" opacity=".5"/></svg><span></span></div>';}
 function sheet(q){
   const c=CF(),P=PAL[c.estilo]||PAL.champagne,t=cotTot(q);
-  const groups=[];q.items.forEach(it=>{const k=(it.cat||'').trim();let g=groups.find(x=>x.k===k);if(!g)groups.push(g={k,it:[]});g.it.push(it);});
+  const groups=[];q.items.filter(it=>(parseFloat(it.cant)||0)!==0||!String(it.cant).trim()).forEach(it=>{const k=(it.cat||'').trim();let g=groups.find(x=>x.k===k);if(!g)groups.push(g={k,it:[]});g.it.push(it);});
   const anyCat=groups.some(g=>g.k);
   const facts=[['Fecha',fLarga(q.fechaEv)],['Hora',fHora(q.hora)],['Lugar',q.lugar],['Invitados',q.invitados],['Temática',q.tema]].filter(x=>x[1]);
   const cond=(q.cond||'').replace(/\{anticipo\}/g,q.anticipo).replace(/\{validez\}/g,q.validez);
@@ -1000,6 +1114,7 @@ function sheet(q){
   <table class="q-items"><thead><tr><th>Descripción</th><th class="n">Cant.</th><th class="n">Precio unitario</th><th class="n">Importe</th></tr></thead>
   ${groups.map(g=>`<tbody>${anyCat?`<tr class="q-cat"><td colspan="4" class="q-serif">${esc(g.k||'Otros')}</td></tr>`:''}${g.it.map(row).join('')}</tbody>`).join('')||'<tbody><tr><td colspan="4" style="text-align:center;color:#8a8077">Sin servicios todavía</td></tr></tbody>'}
   </table>
+  ${q.imgShow!==false&&(q.imgs||[]).length?`<div class="q-refs"><h4>Referencias</h4><div>${q.imgs.map(r=>imgTag(r)).join('')}</div></div>`:''}
   <div class="q-bottom">
     <div class="q-notes">${q.notas?`<h4>Notas</h4><p>${esc(q.notas)}</p>`:''}${cond?`<h4>Condiciones</h4><p>${esc(cond)}</p>`:''}</div>
     <div class="q-totals">
@@ -1084,7 +1199,7 @@ function vDoc(){
 function dPrint(){S.qView='pag';render();scrollTo(0,0);setTimeout(()=>print(),300);}
 function printCot(){save();S.qMode='prev';S.qView='pag';render();scrollTo(0,0);setTimeout(()=>print(),300);}
 async function dPDF(...args){
-  const sp=spec(...args);save();toast('Generando PDF…',0);
+  await prepDoc(args);const sp=spec(...args);save();toast('Generando PDF…',0);
   try{
     if(!(await loadLib('pdf'))){hideToast();alert('Para descargar el PDF directo se necesita internet la primera vez. Se abrirá la ventana de impresión: elegí "Guardar como PDF".');if(args[0]==='cot')printCot();else dPrint();return;}
     const H=sp.h||1056,cv=await docCanvas(sp,1.75),hp=792*H/1056;
@@ -1094,7 +1209,7 @@ async function dPDF(...args){
   }catch(e){console.error(e);toast('No se pudo generar el PDF. Usá "Imprimir" y elegí Guardar como PDF.',5000);}
 }
 async function dIMG(...args){
-  const sp=spec(...args);save();toast('Generando imagen…',0);
+  await prepDoc(args);const sp=spec(...args);save();toast('Generando imagen…',0);
   try{const cv=await docCanvas(sp,1.75);const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.8));hideToast();await shareOrDl(blob,sp.file+'.jpg');}
   catch(e){console.error(e);toast('No se pudo generar la imagen en este navegador. Conectate a internet e intentá de nuevo.',5000);}
 }
@@ -1115,7 +1230,7 @@ addEventListener('beforeprint',function(){P.classList.remove('q-mob');P.classLis
 addEventListener('afterprint',function(){P.classList.remove('fx');P.style.height='';S.classList.remove('d1','d2');S.style.width='';S.style.transform='';S.style.minHeight='';mob();});
 <\/script></body></html>`;
 }
-async function dHTML(...args){const sp=spec(...args);save();await shareOrDl(new Blob([docHtml(sp)],{type:'text/html'}),sp.file+'.html');}
+async function dHTML(...args){await prepDoc(args);const sp=spec(...args);save();await shareOrDl(new Blob([docHtml(sp)],{type:'text/html'}),sp.file+'.html');}
 const savePDF=id=>dPDF('cot',id),saveIMG=id=>dIMG('cot',id),saveHTML=id=>dHTML('cot',id),quoteDoc=q=>docHtml(spec('cot',q.id));
 
 /* ===== Plantilla común de documentos elegantes ===== */
@@ -1221,16 +1336,19 @@ function vSrv(){
   const seg=`<div class="row sp hd"><div class="seg"><button class="${tab==='cat'?'on':''}" onclick="S.srvTab='cat';render()">Catálogo (${D.catalogo.length})</button><button class="${tab==='paq'?'on':''}" onclick="S.srvTab='paq';render()">Paquetes (${D.paquetes.length})</button></div>
     <button class="btn pri" onclick="${tab==='cat'?'srvForm()':'paqNuevo()'}">+ ${tab==='cat'?'Nuevo servicio':'Nuevo paquete'}</button></div>`;
   if(tab==='paq'){
+    const pq=sinAc(S.buscar||'').trim(),PL=D.paquetes.filter(pk=>!pq||sinAc(pk.nombre+' '+(pk.tipo||'')).includes(pq));
     if(!D.paquetes.length)return seg+`<div class="panel empty">Armá paquetes como <b>Cumpleaños clásico</b> o <b>Boda elegante</b> enlazando servicios del catálogo. Después los agregás a una cotización con un toque.${D.catalogo.length?'':'<br><br>Primero agregá servicios en el Catálogo.'}</div>`;
-    return seg+`<div class="evgrid">${D.paquetes.map(pk=>{const ls=paqLineas(pk),t=ls.reduce((a,x)=>a+x.sub,0);
+    return seg+`<div class="filt noprint"><label class="srch">${ic('search',18)}<input id="srch" placeholder="Buscar paquete…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label></div><div class="evgrid">${PL.map(pk=>{const ls=paqLineas(pk),t=ls.reduce((a,x)=>a+x.sub,0);
       return`<div class="evc" onclick="go('srv','${pk.id}')"><div class="evc-h"><div><div class="evc-k">${esc(pk.tipo||'Paquete')}</div><div class="evc-t">${esc(pk.nombre)}</div></div><span class="kebab">${ic('box',20)}</span></div>
         <div class="note" style="margin:10px 0 12px">${ls.slice(0,5).map(x=>`${fCant(x.q)} ${esc(x.c.nombre)}`).join(' · ')}${ls.length>5?` · y ${ls.length-5} más`:''}</div>
-        <div class="evc-f"><span>${ls.length} servicios · ${pk.inv||0} invitados</span><span>${fmt(t)}</span></div></div>`;}).join('')}</div>`;
+        <div class="evc-f"><span>${ls.length} servicios · ${pk.inv||0} invitados</span><span>${fmt(t)}</span></div></div>`;}).join('')||'<div class="panel empty">Sin resultados</div>'}</div>`;
   }
   const q=(S.buscar||'').toLowerCase();
-  const L=D.catalogo.filter(c=>!q||(c.nombre+' '+c.cat).toLowerCase().includes(q));
+  const fc=ff('srv').cat||'',todas=[...new Set(D.catalogo.map(c=>c.cat||'Otros'))].sort();
+  const L=D.catalogo.filter(c=>(!q||(c.nombre+' '+c.cat+' '+(c.nota||'')).toLowerCase().includes(q))&&(!fc||(c.cat||'Otros')===fc));
   const cats=[...new Set(L.map(c=>c.cat||'Otros'))].sort();
-  return seg+(D.catalogo.length?`<div class="panel"><input placeholder="Buscar servicio…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;clearTimeout(window._sb);window._sb=setTimeout(()=>{render();const i=document.querySelector('#main .panel input');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}},250)" style="margin-bottom:6px">
+  return seg+(D.catalogo.length?`<div class="panel"><div class="filt noprint" style="margin-bottom:6px"><label class="srch">${ic('search',18)}<input id="srch" placeholder="Buscar servicio…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label>
+      <label>Categoría<select onchange="fset('srv','cat',this.value);render()"><option value="">Todas</option>${todas.map(c=>`<option${fc===c?' selected':''}>${esc(c)}</option>`).join('')}</select></label></div>
     ${cats.map(ct=>`<h3 style="margin:16px 0 6px;color:var(--gold);font-size:13px;letter-spacing:.12em;text-transform:uppercase">${esc(ct)}</h3><div class="tw"><table><tbody>
       ${L.filter(c=>(c.cat||'Otros')===ct).sort((a,b)=>a.nombre.localeCompare(b.nombre)).map(c=>`<tr class="link" onclick="srvForm('${c.id}')"><td class="w"><b style="font-weight:500">${esc(c.nombre)}</b>${c.nota?`<div class="note">${esc(c.nota)}</div>`:''}</td><td class="n">${fmt(c.precio)}<div class="note">${UNI[c.unidad||'u']}</div>${c.stock?`<span class="badge au" style="margin-top:3px">Tenés ${fCant(c.stock)}</span>`:''}</td><td class="n noprint"><button class="btn sm ghost bad" onclick="event.stopPropagation();delSrv('${c.id}')">✕</button></td></tr>`).join('')}
     </tbody></table></div>`).join('')||'<p class="empty">Sin resultados</p>'}</div>`
@@ -1358,6 +1476,236 @@ document.addEventListener('keydown',e=>{const el=e.target;if(el&&el.matches&&el.
 function pkLock(root){(root||document).querySelectorAll('input[type=date]:not([readonly]),input[type=time]:not([readonly])').forEach(i=>{i.readOnly=true;i.setAttribute('inputmode','none');});}
 new MutationObserver(()=>pkLock()).observe(document.documentElement,{childList:true,subtree:true});
 
+/* ===== Filtros y búsqueda comunes ===== */
+const ff=k=>S.f[k]||(S.f[k]={});
+function fset(k,f,v){ff(k)[f]=v;}
+function chipSet(b,k,f,v){fset(k,f,v);b.parentNode.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));}
+function chips(k,f,opts,fn){const cur=ff(k)[f]||'';return`<div class="chips noprint">${opts.map(([v,l])=>`<button class="chip${cur===v?' on':''}" onclick="chipSet(this,'${k}','${f}','${v}');${fn}">${esc(l)}</button>`).join('')}</div>`;}
+function srchRender(){clearTimeout(window._sb);window._sb=setTimeout(()=>{render();const i=$('srch');if(i){i.focus();const n=i.value.length;try{i.setSelectionRange(n,n);}catch(e){}}},280);}
+
+/* ===== Fotos de referencia (máximo 2 por cotización y por proveedor) ===== */
+const MAXIMG=2,IMGC={},IMGW={};
+const BLANK='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+const isDrv=r=>typeof r==='string'&&r.startsWith('drv:');
+const imgSrc=r=>!r?BLANK:!isDrv(r)?r:(IMGC[r]||BLANK);
+const imgTag=(r,a)=>`<img${isDrv(r)?` data-ref="${esc(r)}"`:''} src="${imgSrc(r)}" alt=""${a||''}>`;
+function imgLoad(r){
+  if(!isDrv(r)||IMGC[r])return Promise.resolve(IMGC[r]||r);
+  if(!IMGW[r])IMGW[r]=licCall('img',{fid:r.slice(4)}).then(x=>{
+    if(x&&x.ok&&x.data){IMGC[r]='data:'+(x.mime||'image/jpeg')+';base64,'+x.data;document.querySelectorAll('img[data-ref="'+r+'"]').forEach(i=>i.src=IMGC[r]);}
+    else delete IMGW[r];return IMGC[r];}).catch(()=>{delete IMGW[r];});
+  return IMGW[r];
+}
+function loadImgsIn(root){if(root)root.querySelectorAll('img[data-ref]').forEach(i=>imgLoad(i.dataset.ref));}
+async function prepDoc(args){
+  if(args[0]!=='cot')return;const q=getQ(args[1]);
+  if(q&&q.imgShow!==false&&(q.imgs||[]).some(r=>isDrv(r)&&!IMGC[r])){toast('Preparando fotos…',0);await Promise.all(q.imgs.map(imgLoad));hideToast();}
+}
+const imgOwner=(kind,id)=>kind==='cot'?getQ(id):D.proveedores.find(x=>x.id===id);
+function imgComprimir(file){return new Promise((ok,no)=>{const fr=new FileReader();fr.onerror=()=>no(new Error('No se pudo leer la foto'));
+  fr.onload=()=>{const im=new Image();im.onload=()=>{const M=1000,k=Math.min(1,M/Math.max(im.width,im.height)),cv=document.createElement('canvas');
+    cv.width=Math.round(im.width*k);cv.height=Math.round(im.height*k);const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(im,0,0,cv.width,cv.height);ok(cv.toDataURL('image/jpeg',0.7));};
+    im.onerror=()=>no(new Error('Ese archivo no es una foto válida'));im.src=fr.result;};fr.readAsDataURL(file);});}
+function imgAdd(kind,id){
+  const o=imgOwner(kind,id);if(!o)return;if((o.imgs||[]).length>=MAXIMG){toast('Máximo '+MAXIMG+' fotos');return;}
+  const inp=$('fileImg');inp.value='';
+  inp.onchange=async()=>{
+    const o1=imgOwner(kind,id);if(!o1)return;const libres=MAXIMG-(o1.imgs||[]).length,fs=[...inp.files].slice(0,libres);inp.value='';if(!fs.length)return;
+    toast(CLOUD?'Subiendo foto…':'Agregando foto…',0);let n=0;
+    try{for(const f of fs){const du=await imgComprimir(f);let ref=du;
+        if(CLOUD){const r=await licCall('subirImg',{data:du.split(',')[1],mime:'image/jpeg'});
+          if(!r||!r.ok||!r.fid)throw new Error((r&&r.msg)||'Para guardar fotos hay que actualizar el Apps Script.');ref='drv:'+r.fid;IMGC[ref]=du;}
+        const o2=imgOwner(kind,id);if(!o2)break;o2.imgs=o2.imgs||[];if(o2.imgs.length<MAXIMG){o2.imgs.push(ref);n++;}}
+      hideToast();toast(n>1?'✓ Fotos agregadas':'✓ Foto agregada');}
+    catch(e){hideToast();toast(e.message&&!/fetch|http|network/i.test(e.message)?e.message:'No se pudo subir la foto. Revisá tu conexión.',5000);}
+    if(n){save();render();}
+  };
+  inp.click();
+}
+function imgBorrarNube(r){if(CLOUD&&isDrv(r))licCall('borrarImg',{fid:r.slice(4)}).catch(()=>{});}
+function imgDelAll(arr){(arr||[]).forEach(imgBorrarNube);}
+function imgDel(kind,id,i){const o=imgOwner(kind,id);if(!o||!o.imgs||!o.imgs[i])return;if(!confirm('¿Quitar esta foto?'))return;
+  imgBorrarNube(o.imgs.splice(i,1)[0]);save();render();}
+function imgVer(kind,id,i){const o=imgOwner(kind,id);if(!o||!o.imgs||!o.imgs[i])return;
+  DL.innerHTML=`<div class="imgv">${imgTag(o.imgs[i])}<div class="row end"><button class="btn bad" onclick="DL.close();imgDel('${kind}','${id}',${i})">Quitar foto</button><button class="btn pri" onclick="DL.close()">Cerrar</button></div></div>`;
+  DL.showModal();loadImgsIn(DL);}
+function imgsHtml(arr,kind,id){arr=arr||[];
+  return`<div class="imgs">${arr.map((r,i)=>`<div class="imgt" role="button" tabindex="0" onclick="imgVer('${kind}','${id}',${i})" aria-label="Ver foto ${i+1}">${imgTag(r)}<button class="imgx" onclick="event.stopPropagation();imgDel('${kind}','${id}',${i})" aria-label="Quitar foto">${ic('x',14)}</button></div>`).join('')}${arr.length<MAXIMG?`<button class="imgt add" onclick="imgAdd('${kind}','${id}')">${ic('cam',26)}<small>Agregar foto</small></button>`:''}</div>`;}
+
+/* ===== Módulo Plus: Maestro de ceremonia ===== */
+const isPlus=()=>!CLOUD||LIC.plus===true;
+function plusActForm(){form('Activar Plus · Maestro de ceremonia',[{n:'clave',l:'Contraseña de activación Plus',t:'password',req:1}],null,v=>{plusActivar(v.clave);});}
+async function plusActivar(clave){
+  toast('Verificando…',0);
+  try{const r=await licCall('activarPlus',{clave});
+    if(r.ok&&r.plus){licApply(r);LIC.plus=true;licSave();toast('✓ Plus activado. Ya podés usar el Maestro de ceremonia',5000);}
+    else toast(r.msg||'No se pudo activar. Revisá que el Apps Script esté actualizado.',5000);
+  }catch(e){toast('Sin conexión a internet.',5000);}
+  render();
+}
+async function plusCheck(){toast('Verificando…',0);await licInit();hideToast();
+  toast(isPlus()?'✓ Plus activo':'Plus todavía no está activado. Si ya pagaste, escribinos por WhatsApp.',4500);render();}
+
+const MC_TIPOS=['Boda','XV años','Graduación','Cumpleaños','Bautizo','Aniversario','Evento corporativo','Otro'];
+const SEC_T=['Guion','Protocolo','Música','Orador','Brindis','Baile','Comida','Receso','Otro'];
+const G_BIEN='Muy buenas noches, damas y caballeros. Sean todos muy bienvenidos.\n\nEs un honor acompañarles en esta noche tan especial. Les pedimos tomar sus lugares, porque en unos momentos damos inicio a nuestro programa.';
+const G_PROT='Antes de continuar, permítanme saludar con especial cariño a:\n\n{protocolo}\n\nUn fuerte aplauso para ellos.';
+const G_CIERRE='Hemos llegado al final de nuestro programa, pero la celebración continúa.\n\nGracias a cada uno de ustedes por acompañarnos. ¡Que disfruten la noche!';
+const MC_PLANT={
+  'Boda':[['Bienvenida','Guion',5,G_BIEN],['Saludo protocolario','Protocolo',3,G_PROT],['Entrada de los novios','Música',4,'Les pido que se pongan de pie para recibir, con un fuerte aplauso, a los recién casados.'],['Palabras de los padrinos','Orador',6,'Con mucho cariño, invitamos a los padrinos a dirigir unas palabras a los novios.'],['Brindis','Brindis',4,'Les pedimos levantar sus copas. Brindemos por el amor, por la familia y por esta nueva historia que comienza. ¡Salud!'],['Primer baile','Baile',5,'Con ustedes, el primer baile de los esposos.'],['Cena','Comida',40,'Es momento de disfrutar la cena. ¡Buen provecho!'],['Partida del pastel','Otro',10,'Invitamos a los novios a acercarse para la partida del pastel.'],['Cierre','Guion',3,G_CIERRE]],
+  'XV años':[['Bienvenida','Guion',5,G_BIEN],['Saludo protocolario','Protocolo',3,G_PROT],['Entrada de la quinceañera','Música',4,'Pongámonos de pie para recibir, con un fuerte aplauso, a la protagonista de esta noche.'],['Vals','Baile',6,'Con ustedes, el vals de la quinceañera.'],['Palabras de los padres','Orador',6,'Invitamos a sus padres a dirigirle unas palabras.'],['Brindis','Brindis',4,'Levantemos nuestras copas por sus quince años y por todos los sueños que vienen. ¡Salud!'],['Cena','Comida',40,'Es momento de disfrutar la cena. ¡Buen provecho!'],['Baile sorpresa','Baile',6,'Prepárense, porque viene una sorpresa preparada con mucho cariño.'],['Cierre','Guion',3,G_CIERRE]],
+  'Graduación':[['Bienvenida','Guion',5,G_BIEN],['Himno nacional','Música',4,'Les pedimos ponerse de pie para entonar las notas de nuestro Himno Nacional.'],['Saludo protocolario','Protocolo',4,G_PROT],['Palabras de la dirección','Orador',8,'Invitamos a la dirección a dirigir unas palabras a los graduandos.'],['Entrega de títulos','Protocolo',30,'Procedemos con la entrega de títulos. Al escuchar su nombre, les pedimos pasar al frente.'],['Discurso del graduando','Orador',6,'En representación de los graduandos, escuchamos unas palabras.'],['Brindis','Brindis',4,'Brindemos por los nuevos profesionales y por el esfuerzo de sus familias. ¡Salud!'],['Cierre','Guion',3,G_CIERRE]],
+  'Cumpleaños':[['Bienvenida','Guion',4,G_BIEN],['Entrada del cumpleañero','Música',3,'Con un fuerte aplauso, recibamos a quien hoy celebra un año más de vida.'],['Palabras de la familia','Orador',5,'La familia tiene unas palabras muy especiales.'],['Juegos y dinámicas','Otro',20,'Llegó el momento de jugar. Necesito voluntarios.'],['Cantar cumpleaños y pastel','Otro',8,'Todos juntos, cantemos el cumpleaños feliz.'],['Cierre','Guion',3,G_CIERRE]],
+  'Evento corporativo':[['Bienvenida','Guion',5,'Buenos días a todos y bienvenidos.\n\nGracias por acompañarnos. En unos momentos iniciamos.'],['Saludo protocolario','Protocolo',4,G_PROT],['Agenda del día','Guion',3,'Les comparto la agenda que tenemos preparada.'],['Presentación principal','Orador',30,'Con ustedes, nuestro primer expositor.'],['Receso','Receso',15,'Tomaremos un receso de quince minutos. Les esperamos de regreso.'],['Reconocimientos','Protocolo',15,'Es momento de reconocer a quienes hicieron la diferencia este año.'],['Cierre','Guion',4,'Gracias por su atención y participación. Hasta la próxima.']],
+  '_':[['Bienvenida','Guion',5,G_BIEN],['Saludo protocolario','Protocolo',3,G_PROT],['Programa principal','Guion',20,''],['Brindis','Brindis',4,'Levantemos nuestras copas. ¡Salud!'],['Cierre','Guion',3,G_CIERRE]]
+};
+const FRASES_DEF=['Mientras nos preparamos para el siguiente momento, los invito a disfrutar de la música.','Les pedimos un momento de paciencia; en breve continuamos con nuestro programa.','Aprovechemos este momento para brindar por los anfitriones de esta noche.','Los pequeños detalles hacen que la espera valga la pena. Gracias por su comprensión.','Un fuerte aplauso para todas las personas que hicieron posible esta celebración.','Recordemos que lo más importante esta noche es celebrar juntos.'];
+const mcFrases=()=>{const t=(D.cfg||{}).mcFrases;return(t!=null?String(t):FRASES_DEF.join('\n')).split('\n').map(x=>x.trim()).filter(Boolean);};
+const roman=n=>{let r='';[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']].forEach(([v,s])=>{while(n>=v){r+=s;n-=v;}});return r;};
+const mcDur=p=>(p.secciones||[]).reduce((s,x)=>s+(+x.min||0),0);
+const fDur=m=>{m=Math.round(m||0);const h=Math.floor(m/60),r=m%60;return h?h+' h'+(r?' '+r+' min':''):r+' min';};
+const horaMas=(h,m)=>{const[H,M]=h.split(':').map(Number),t=H*60+M+Math.round(m||0);return fHora(pad(Math.floor(t/60)%24)+':'+pad(t%60));};
+const mcGet=id=>D.mc.find(x=>x.id===id);
+
+function vMC(){
+  if(!isPlus())return mcLock();
+  if(S.sel)return vMCDet(S.sel);
+  const top=`<div class="row sp hd"><h2 class="sec">Maestro de ceremonia</h2><div class="row noprint"><button class="btn pri" onclick="mcNuevo()">+ Nuevo programa</button></div></div>`;
+  if(!D.mc.length)return top+`<div class="panel empty">Armá el programa de cada evento por secciones, con su guion, tiempos y protocolo. El día del evento lo leés en modo <b>En vivo</b>, con letra grande y cronómetro.<br><br><button class="btn pri" onclick="mcNuevo()">+ Nuevo programa</button></div>`;
+  const q=sinAc(S.buscar||'').trim(),F=ff('mc'),h=hoy();
+  const L=D.mc.filter(p=>(!q||sinAc([p.nombre,p.tipo,p.lugar,(p.secciones||[]).map(s=>s.titulo+' '+(s.resp||'')).join(' '),(p.protocolo||[]).map(x=>x.nombre).join(' ')].join(' ')).includes(q))
+    &&(!F.tipo||p.tipo===F.tipo)&&(!F.cu||(F.cu==='prox'?(!p.fecha||p.fecha>=h):(p.fecha&&p.fecha<h))))
+    .sort((a,b)=>(a.fecha||'9').localeCompare(b.fecha||'9'));
+  const tipos=MC_TIPOS.filter(t=>D.mc.some(p=>p.tipo===t));
+  return top+`<div class="panel"><div class="filt noprint" style="margin-bottom:${tipos.length>1?10:0}px"><label class="srch">${ic('search',18)}<input id="srch" placeholder="Buscar programa, lugar, responsable o invitado…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label>
+      <label>Cuándo<select onchange="fset('mc','cu',this.value);render()">${[['','Todos'],['prox','Próximos'],['past','Ya realizados']].map(([v,l])=>`<option value="${v}"${(F.cu||'')===v?' selected':''}>${l}</option>`).join('')}</select></label></div>
+    ${tipos.length>1?chips('mc','tipo',[['','Todos'],...tipos.map(t=>[t,t])],'render()'):''}</div>
+  <div class="evgrid">${L.map(p=>`<div class="evc" onclick="go('mc','${p.id}')"><div class="evc-h"><div style="flex:1;min-width:0"><div class="evc-k">${esc(p.tipo)}</div><div class="evc-t">${esc(p.nombre)}</div></div><button class="kebab noprint" onclick="event.stopPropagation();mcLive('${p.id}')" aria-label="En vivo">${ic('play',18)}</button></div>
+    <div class="note" style="margin:10px 0 12px">${(p.secciones||[]).slice(0,4).map(s=>esc(s.titulo)).join(' · ')}${(p.secciones||[]).length>4?' · …':''}</div>
+    <div class="evc-f"><span>${esc(fDia(p.fecha))}${p.hora?' · '+fHora(p.hora):''}</span><span>${(p.secciones||[]).length} secciones · ${fDur(mcDur(p))}</span></div></div>`).join('')||'<div class="panel empty">Sin resultados</div>'}</div>`;
+}
+function mcLock(){
+  const msg=encodeURIComponent(`Hola, quiero activar el módulo Plus (Maestro de ceremonia).\nNegocio: ${LIC.negocio||D.negocio}\nCódigo: ${licCod()}`);
+  return`<div class="panel mclock"><div class="mk-ic">${ic('mic',32)}</div><span class="badge au">${ic('lock',12)} Plus</span>
+    <h2 class="serif" style="font-size:30px;margin:10px 0 6px">Maestro de ceremonia</h2>
+    <p class="note" style="max-width:430px;margin:0 auto 16px">Programa del evento por secciones, guion, protocolo de autoridades y teleprompter en vivo con cronómetro. Es un módulo adicional que se activa aparte de tu licencia.</p>
+    <ul class="mk-l">${['Plantillas para bodas, XV años, graduaciones y más','Guion por sección con tiempos y responsables','Protocolo: nombres y cargos en el orden correcto','Modo en vivo: letra grande, cronómetro y avisos de tiempo','Frases de respaldo para imprevistos'].map(x=>`<li>${ic('check',16)}<span>${x}</span></li>`).join('')}</ul>
+    <div class="mk-b"><button class="btn gold" onclick="plusActForm()">Activar Plus</button><a class="btn wa" href="https://wa.me/${LIC_WA}?text=${msg}" target="_blank" rel="noopener">${ic('send',16)} Solicitar por WhatsApp</a><button class="btn" onclick="plusCheck()">Ya pagué · verificar</button></div>
+    <p class="lk-id">Código de cuenta: <b>${licCod()}</b></p></div>`;
+}
+function mcCampos(){return[{n:'nombre',l:'Nombre (ej. Boda Ana y Carlos)',req:1},{n:'tipo',l:'Tipo de evento',t:'select',o:MC_TIPOS},{n:'fecha',l:'Fecha',t:'date'},{n:'hora',l:'Hora de inicio',t:'time'},{n:'lugar',l:'Lugar'},
+  ...(D.eventos.length?[{n:'evId',l:'Ligar a un evento (opcional)',t:'select',o:evOpts()}]:[])];}
+function mcNuevo(evId){
+  const e=evId&&D.eventos.find(x=>x.id===evId);
+  form('Nuevo programa',[...mcCampos(),{n:'plant',l:'Secciones',t:'select',def:'1',o:[['1','Empezar con las secciones sugeridas'],['0','Empezar en blanco']]}],
+    e?{nombre:e.nombre+' – '+cliName(e.eid),tipo:MC_TIPOS.find(t=>sinAc(e.nombre).includes(sinAc(t)))||'Otro',fecha:e.fecha,hora:e.hora,lugar:e.lugar,evId:e.id,plant:'1'}:null,
+    v=>{const P=v.plant==='1'?(MC_PLANT[v.tipo]||MC_PLANT._):[];delete v.plant;
+      const p={id:uid(),creado:Date.now(),...v,evId:v.evId||'',notas:'',protocolo:[],secciones:P.map(([titulo,tipo,min,guion])=>({id:uid(),titulo,tipo,min,resp:'',guion:guion||'',notas:''}))};
+      D.mc.push(p);S.tab='mc';S.sel=p.id;S.buscar='';});
+}
+function mcDeEv(id){const p=D.mc.find(x=>x.evId===id);if(p&&isPlus())return go('mc',p.id);if(!isPlus())return go('mc');mcNuevo(id);}
+function mcForm(id){const p=mcGet(id);form('Datos del programa',mcCampos(),p,v=>{v.evId=v.evId||'';Object.assign(p,v);});}
+function mcSet(id,f,v){const p=mcGet(id);if(p){p[f]=v;saveLater();}}
+function mcDup(id){const p=mcGet(id),n=JSON.parse(JSON.stringify(p));n.id=uid();n.creado=Date.now();n.nombre=p.nombre+' (copia)';n.evId='';
+  n.secciones.forEach(s=>s.id=uid());(n.protocolo||[]).forEach(x=>x.id=uid());D.mc.push(n);save();go('mc',n.id);}
+function mcDel(id){const p=mcGet(id);if(!confirm(`¿Eliminar el programa "${p.nombre}"?`))return;D.mc=D.mc.filter(x=>x.id!==id);save();go('mc');}
+function arrMove(a,id,d){const i=a.findIndex(x=>x.id===id),j=i+d;if(i<0||j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];save();render();}
+const mcMove=(pid,sid,d)=>arrMove(mcGet(pid).secciones,sid,d);
+const protMove=(pid,xid,d)=>arrMove(mcGet(pid).protocolo,xid,d);
+function delBtn(fn){const r=DL.querySelector('.row.end');if(r)r.insertAdjacentHTML('afterbegin',`<button type="button" class="btn bad" style="margin-right:auto" onclick="${fn}">Eliminar</button>`);}
+function secForm(pid,sid){
+  const p=mcGet(pid),s=sid?p.secciones.find(x=>x.id===sid):null;
+  form(s?'Editar sección':'Nueva sección',[{n:'titulo',l:'Título (ej. Entrada de los novios)',req:1},{n:'tipo',l:'Tipo',t:'select',o:SEC_T},{n:'min',l:'Duración (minutos)',def:'5',ph:'5'},{n:'resp',l:'Responsable (ej. DJ, padrino, coordinadora)'},
+    {n:'guion',l:'Guion · lo que vas a decir',t:'area',rows:7,ph:'Escribí aquí tu texto. Usá {protocolo} para insertar la lista de autoridades.'},{n:'notas',l:'Notas para vos (no se leen en voz alta)',t:'area'}],s,v=>{
+      v.min=Math.max(0,parseFloat(String(v.min).replace(',','.'))||0);
+      if(s)Object.assign(s,v);else p.secciones.push({id:uid(),...v});});
+  if(s)delBtn(`secDel('${pid}','${sid}')`);
+}
+function secDel(pid,sid){if(!confirm('¿Eliminar esta sección?'))return;const p=mcGet(pid);p.secciones=p.secciones.filter(x=>x.id!==sid);DL.close();save();render();}
+function protForm(pid,xid){
+  const p=mcGet(pid),x=xid?p.protocolo.find(z=>z.id===xid):null;
+  form(x?'Editar persona':'Agregar al protocolo',[{n:'nombre',l:'Nombre (ej. Lic. María Pérez)',req:1},{n:'cargo',l:'Cargo o relación (ej. Alcaldesa municipal, madrina)'}],x,v=>{
+    p.protocolo=p.protocolo||[];if(x)Object.assign(x,v);else p.protocolo.push({id:uid(),...v});});
+  if(x)delBtn(`protDel('${pid}','${xid}')`);
+}
+function protDel(pid,xid){if(!confirm('¿Quitar a esta persona del protocolo?'))return;const p=mcGet(pid);p.protocolo=p.protocolo.filter(z=>z.id!==xid);DL.close();save();render();}
+function vMCDet(id){
+  const p=mcGet(id);if(!p){S.sel=null;return vMC();}
+  const ev=p.evId&&D.eventos.find(e=>e.id===p.evId),SS=p.secciones||[],PR=p.protocolo||[];
+  const info=[p.fecha&&esc(fDia(p.fecha)),p.hora&&fHora(p.hora),p.lugar&&esc(p.lugar)].filter(Boolean).join(' · ');
+  const mv=(f,pid,xid,i,n)=>`<div class="mcs-a noprint"><button class="btn sm ghost" onclick="event.stopPropagation();${f}('${pid}','${xid}',-1)" aria-label="Subir"${i?'':' style="visibility:hidden"'}>${ic('up',16)}</button><button class="btn sm ghost" onclick="event.stopPropagation();${f}('${pid}','${xid}',1)" aria-label="Bajar"${i<n-1?'':' style="visibility:hidden"'}>${ic('down',16)}</button></div>`;
+  let acc=0;
+  return`<button class="back noprint" onclick="go('mc')">← Programas</button>
+  <div class="row sp hd"><div><div class="evc-k">${esc(p.tipo)}</div><h2 class="serif" style="font-size:28px;margin:2px 0">${esc(p.nombre)}</h2><div class="note">${info}${ev?` · <span class="badge lk noprint" onclick="go('ev','${ev.id}')">${esc(evLabel(ev))}</span>`:''}</div></div>
+    <div class="row noprint"><button class="btn pri" onclick="mcLive('${id}')">${ic('play',16)} En vivo</button></div></div>
+  <div class="cards"><div class="card"><div class="k">Secciones</div><div class="v">${SS.length}</div></div><div class="card"><div class="k">Duración total</div><div class="v">${fDur(mcDur(p))}</div>${p.hora&&SS.length?`<div class="s">Termina cerca de las ${horaMas(p.hora,mcDur(p))}</div>`:''}</div><div class="card"><div class="k">Protocolo</div><div class="v">${PR.length}</div><div class="s">personas a mencionar</div></div></div>
+  <div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Programa</h3><button class="btn sm gold noprint" onclick="secForm('${id}')">+ Agregar sección</button></div>
+    ${SS.length?`<div class="mcs">${SS.map((s,i)=>{const ini=acc;acc+=(+s.min||0);return`<div class="mcs-r" onclick="secForm('${id}','${s.id}')"><span class="mcs-n serif">${roman(i+1)}</span><div class="mcs-b"><b>${esc(s.titulo)}</b><div class="note">${p.hora?horaMas(p.hora,ini)+' · ':''}${esc(s.tipo||'Guion')} · ${+s.min||0} min${s.resp?' · '+esc(s.resp):''}</div>${s.guion?`<div class="mcs-g">${esc(s.guion.slice(0,150))}${s.guion.length>150?'…':''}</div>`:''}</div>${mv('mcMove',id,s.id,i,SS.length)}</div>`;}).join('')}</div>`:'<p class="note">Todavía no hay secciones. Agregá la primera.</p>'}</div>
+  <div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Protocolo</h3><button class="btn sm gold noprint" onclick="protForm('${id}')">+ Agregar persona</button></div>
+    <p class="note noprint">Autoridades e invitados especiales en el orden en que se mencionan. Escribí <b>{protocolo}</b> en el guion de una sección y en vivo aparece la lista completa.</p>
+    ${PR.length?`<div class="mcs">${PR.map((x,i)=>`<div class="mcs-r" onclick="protForm('${id}','${x.id}')"><span class="mcs-n serif">${i+1}</span><div class="mcs-b"><b>${esc(x.nombre)}</b>${x.cargo?`<div class="note">${esc(x.cargo)}</div>`:''}</div>${mv('protMove',id,x.id,i,PR.length)}</div>`).join('')}</div>`:''}</div>
+  <div class="panel noprint"><h3>Notas generales</h3><textarea rows="3" placeholder="Contactos, señales con el DJ, cambios de último momento…" oninput="mcSet('${id}','notas',this.value)">${esc(p.notas||'')}</textarea></div>
+  <div class="panel noprint"><h3>Frases de respaldo</h3><p class="note">Para imprevistos. En vivo las ves con el botón de globo. Una por línea; sirven para todos tus programas.</p>
+    <textarea rows="6" oninput="cfgSet('mcFrases',this.value)">${esc(mcFrases().join('\n'))}</textarea></div>
+  <div class="panel noprint qacts"><h3>Acciones</h3><div class="qa-g"><button class="btn pri" onclick="mcLive('${id}')">${ic('play',16)} En vivo</button><button class="btn" onclick="mcForm('${id}')">${ic('edit',16)} Editar datos</button><button class="btn" onclick="print()">${ic('doc',16)} Imprimir programa</button><button class="btn" onclick="mcDup('${id}')">Duplicar</button><button class="btn bad" onclick="mcDel('${id}')">Eliminar</button></div></div>`;
+}
+
+/* --- Modo en vivo (teleprompter) --- */
+let ML=null,_wl=null;
+const mcFsDef=()=>{try{return +localStorage.getItem('mcFs')||32;}catch(e){return 32;}};
+async function wakeOn(){try{if(navigator.wakeLock)_wl=await navigator.wakeLock.request('screen');}catch(e){}}
+function wakeOff(){try{_wl&&_wl.release();}catch(e){}_wl=null;}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&$('mcLive'))wakeOn();});
+function mcLive(id){
+  const p=mcGet(id);if(!p)return;if(!(p.secciones||[]).length){toast('Agregá al menos una sección');return;}
+  closePop();if(DL.open)DL.close();
+  ML={pid:id,i:0,t0:Date.now(),acc:0,run:true,start:Date.now(),auto:false,fs:mcFsDef()};
+  let el=$('mcLive');if(!el){el=document.createElement('div');el.id='mcLive';el.className='mcl';document.body.appendChild(el);}
+  document.body.classList.add('mclive');mcLiveDraw();clearInterval(window._mcT);window._mcT=setInterval(mcTick,500);wakeOn();document.addEventListener('keydown',mcKey);
+}
+function mcTexto(p,txt){
+  const prot=(p.protocolo||[]).length?`</p><ol class="mcl-prot">${p.protocolo.map(x=>`<li><b>${esc(x.nombre)}</b>${x.cargo?`<span>${esc(x.cargo)}</span>`:''}</li>`).join('')}</ol><p>`:'</p><p class="mcl-empty">(Todavía no hay personas en el protocolo)</p><p>';
+  return String(txt||'').trim().split(/\n{2,}/).map(par=>'<p>'+esc(par).replace(/\n/g,'<br>').replace(/\{protocolo\}/gi,prot)+'</p>').join('').replace(/<p>(\s|<br>)*<\/p>/g,'');
+}
+function mcLiveDraw(){
+  const p=mcGet(ML.pid);if(!p){mcLiveClose();return;}
+  const SS=p.secciones,s=SS[ML.i],nx=SS[ML.i+1],body=mcTexto(p,s.guion);
+  $('mcLive').innerHTML=`<div class="mcl-top"><button class="mcl-x" onclick="mcLiveClose()" aria-label="Salir del modo en vivo">${ic('x',22)}</button>
+    <div class="mcl-h"><small>${roman(ML.i+1)} de ${roman(SS.length)} · ${esc(s.tipo||'Guion')}${s.resp?' · '+esc(s.resp):''}</small><b class="serif">${esc(s.titulo)}</b></div>
+    <div class="mcl-tm" id="mcTm"><b id="mcT">00:00</b><small>de ${+s.min||0} min</small></div></div>
+    <div class="mcl-bar" id="mcBarW"><i id="mcBar"></i></div>
+    <div class="mcl-body" id="mcBody" style="font-size:${ML.fs}px">${s.notas?`<div class="mcl-nt">${esc(s.notas)}</div>`:''}${body||'<p class="mcl-empty">Sin guion para esta sección.</p>'}<div style="height:35vh"></div></div>
+    <div class="mcl-next"><span>${nx?`Sigue: <b>${esc(nx.titulo)}</b> · ${+nx.min||0} min${nx.resp?' · '+esc(nx.resp):''}`:'<b>Última sección</b>'}</span><span id="mcTot"></span></div>
+    <div class="mcl-ctl"><button onclick="mcGo(-1)" aria-label="Sección anterior"${ML.i?'':' style="visibility:hidden"'}>${ic('left',26)}</button>
+      <button onclick="mcFs(-4)" aria-label="Letra más pequeña"><span style="font-size:15px">A−</span></button><button onclick="mcFs(4)" aria-label="Letra más grande"><span style="font-size:21px">A+</span></button>
+      <button id="mcAuto" class="${ML.auto?'on':''}" onclick="mcAuto()" aria-label="Desplazar el texto solo">${ic('scroll',22)}</button>
+      <button id="mcRun" onclick="mcRun()" aria-label="Pausar o seguir el cronómetro">${ic(ML.run?'pause':'play',22)}</button>
+      <button onclick="mcFrasesVer()" aria-label="Frases de respaldo">${ic('bubble',22)}</button>
+      <button class="pri" onclick="mcGo(1)" aria-label="Siguiente sección"${nx?'':' style="visibility:hidden"'}>${ic('right',26)}</button></div>`;
+  mcTick();
+}
+const mmss=ms=>{const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return(h?h+':'+pad(m):pad(m))+':'+pad(s);};
+function mcTick(){
+  if(!ML||!$('mcT'))return;const p=mcGet(ML.pid),s=p&&p.secciones[ML.i];if(!s)return;
+  const el=ML.acc+(ML.run?Date.now()-ML.t0:0),lim=(+s.min||0)*60000;
+  $('mcT').textContent=mmss(el);
+  const over=lim>0&&el>lim,warn=lim>0&&!over&&el>lim-60000;
+  $('mcTm').className='mcl-tm'+(over?' over':warn?' warn':'');$('mcBarW').className='mcl-bar'+(over?' over':'');
+  $('mcBar').style.width=(lim?Math.min(100,el/lim*100):0)+'%';
+  $('mcTot').textContent='Programa '+mmss(Date.now()-ML.start)+(over?' · +'+mmss(el-lim)+' extra':'');
+}
+function mcGo(d){const p=mcGet(ML.pid),j=ML.i+d;if(!p||j<0||j>=p.secciones.length)return;ML.i=j;ML.acc=0;ML.t0=Date.now();ML.run=true;mcLiveDraw();}
+function mcRun(){if(ML.run){ML.acc+=Date.now()-ML.t0;ML.run=false;}else{ML.t0=Date.now();ML.run=true;}const b=$('mcRun');if(b)b.innerHTML=ic(ML.run?'pause':'play',22);mcTick();}
+function mcFs(d){ML.fs=Math.max(18,Math.min(72,ML.fs+d));try{localStorage.setItem('mcFs',ML.fs);}catch(e){}const b=$('mcBody');if(b)b.style.fontSize=ML.fs+'px';}
+function mcAuto(){ML.auto=!ML.auto;const b=$('mcAuto');if(b)b.classList.toggle('on',ML.auto);if(ML.auto){let last=performance.now(),pos=null;
+  const step=t=>{if(!ML||!ML.auto)return;const bd=$('mcBody');if(bd){if(pos===null||Math.abs(bd.scrollTop-pos)>2)pos=bd.scrollTop;pos+=(t-last)*ML.fs*0.0011;bd.scrollTop=pos;}last=t;requestAnimationFrame(step);};requestAnimationFrame(step);}}
+function mcFrasesVer(){const el=$('mcLive');if(!el)return;const f=document.createElement('div');f.className='mcl-fr';f.onclick=()=>f.remove();
+  f.innerHTML=`<div><h3 class="serif">Frases de respaldo</h3>${mcFrases().map(x=>`<p>${esc(x)}</p>`).join('')||'<p>Agregá tus frases en el programa.</p>'}<small>Tocá en cualquier lugar para cerrar</small></div>`;el.appendChild(f);}
+function mcKey(e){if(!$('mcLive'))return;const k=e.key;
+  if(k==='ArrowRight'||k==='PageDown'){e.preventDefault();mcGo(1);}else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();mcGo(-1);}
+  else if(k===' '){e.preventDefault();mcAuto();}else if(k==='Escape'){const f=document.querySelector('.mcl-fr');if(f)f.remove();else mcLiveClose();}}
+function mcLiveClose(){clearInterval(window._mcT);if(ML)ML.auto=false;const el=$('mcLive');if(el)el.remove();document.body.classList.remove('mclive');wakeOff();document.removeEventListener('keydown',mcKey);}
+
 /* ===== Ayuda con buscador: explica y lleva al lugar ===== */
 const AYUDA=[
  ['Cotizaciones','Crear una cotización','cotizar presupuesto precio nueva',['Tocá Cotizar en la barra de abajo.','Tocá "+ Nueva cotización".','Llená cliente, tipo de evento, fecha, lugar e invitados.','Agregá servicios (o un paquete) con sus precios.'],"go('cot')",'.btn.pri'],
@@ -1384,6 +1732,10 @@ const AYUDA=[
  ['Mi negocio','Continuar la numeración de mis recibos de papel','numeracion talonario recibo numero',['Entrá a Ajustes.','En "Numeración de recibos" escribí el último número emitido.'],"go('aj')",''],
  ['Mi cuenta','Entrar desde otro teléfono o computadora','otro telefono computadora entrar pin whatsapp ingresar',['Abrí el mismo enlace en el otro equipo.','Tocá "Ya tengo cuenta · Ingresar".','Escribí tu WhatsApp y tu PIN.'],"go('aj')",''],
  ['Mi cuenta','Activar mi licencia de por vida','activar licencia prueba pagar contraseña',['Tocá "Activar" en el aviso de prueba.','Escribí la contraseña que te dieron al pagar.'],"go('aj')",'.panel'],
+ ['Maestro de ceremonia','Armar el programa del maestro de ceremonia','maestro ceremonia mc programa guion animador protocolo plus',['Entrá a Más → Maestro de ceremonia.','Tocá "+ Nuevo programa" y elegí el tipo de evento: se crean las secciones sugeridas.','Tocá cada sección para escribir su guion, duración y responsable.'],"go('mc')",''],
+ ['Maestro de ceremonia','Usar el teleprompter durante el evento','teleprompter en vivo leer guion cronometro tiempo mc',['Abrí el programa y tocá "En vivo".','Pasá de sección con las flechas; el cronómetro avisa si te pasás del tiempo.','Usá "Frases" si hay un imprevisto.'],"go('mc')",''],
+ ['Cotizaciones','Elegir el cliente de la cotización','cliente cotizacion lista elegir nuevo',['Abrí la cotización.','En "Cliente" elegí uno de tu lista o tocá "+ Cliente nuevo…".','El teléfono y el correo se llenan solos.'],"go('cot')",''],
+ ['Cotizaciones','Agregar fotos de referencia a una cotización','foto imagen referencia decoracion idea cotizacion',['Abrí la cotización.','En "Imágenes de referencia" tocá el recuadro con la cámara.','Podés agregar hasta 2 fotos y elegir si se muestran al cliente.'],"go('cot')",''],
  ['Mi cuenta','Descargar una copia de mis datos','copia respaldo descargar exportar datos',['Entrá a Ajustes.','Tocá "Exportar respaldo".'],"go('aj')",'']
 ];
 const sinAc=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
@@ -1410,12 +1762,16 @@ function vIG(){
   if(S.sel)S.sel=null;
   const ms=S.mes,L=igAll().filter(x=>!ms||x.fecha.startsWith(ms));
   const ing=sum(L.filter(x=>x.tipo==='I')),gas=sum(L.filter(x=>x.tipo==='G')),res=ing-gas;
-  const Lf=L.filter(x=>!S.igTipo||x.tipo===S.igTipo).sort(byFecha).reverse();
+  const iq=sinAc(S.buscar||'').trim(),icat=ff('ig').cat||'',iorg=ff('ig').org||'';
+  const Lf=L.filter(x=>(!S.igTipo||x.tipo===S.igTipo)&&(!icat||(x.categoria||'Sin categoría')===icat)&&(!iorg||(x.src||'man')===iorg)&&(!iq||sinAc([x.concepto,x.categoria,x.doc,ctaName(x.cid)].join(' ')).includes(iq))).sort(byFecha).reverse();
+  const icats=[...new Set(L.map(x=>x.categoria||'Sin categoría'))].sort();
   const cat={};L.forEach(x=>{const key=x.tipo+'|'+(x.categoria||'Sin categoría');cat[key]=(cat[key]||0)+x.monto;});
   const cr=Object.entries(cat).map(([key,v])=>{const[t,c]=key.split('|');return{t,c,v};}).sort((a,b)=>(a.t===b.t?b.v-a.v:a.t==='I'?-1:1));
   return`<div class="row sp hd"><h2 class="sec">Ingresos y gastos</h2><div class="row noprint"><button class="btn pri" onclick="igForm('I')">+ Ingreso</button><button class="btn pri" onclick="igForm('G')">+ Gasto</button></div></div>
   <div class="filt noprint"><label>Mes<input type="month" value="${ms}" onchange="S.mes=this.value;render()"></label>
     <label>Tipo<select onchange="S.igTipo=this.value;render()"><option value="">Todos</option><option value="I"${S.igTipo==='I'?' selected':''}>Ingresos</option><option value="G"${S.igTipo==='G'?' selected':''}>Gastos</option></select></label>
+    <label>Categoría<select onchange="fset('ig','cat',this.value);render()"><option value="">Todas</option>${icats.map(c=>`<option${icat===c?' selected':''}>${esc(c)}</option>`).join('')}</select></label>
+    <label>Origen<select onchange="fset('ig','org',this.value);render()">${[['','Todos'],['man','Manual'],['cli','Clientes'],['prov','Proveedores']].map(([v,l])=>`<option value="${v}"${iorg===v?' selected':''}>${l}</option>`).join('')}</select></label>
     ${ms?`<button class="btn sm" onclick="S.mes='';render()">Ver todos los meses</button>`:`<button class="btn sm" onclick="S.mes=mesActual();render()">Mes actual</button>`}
     <span style="flex:1"></span><button class="btn sm" onclick="csvIG()">Exportar CSV</button><button class="btn sm" onclick="print()">Imprimir</button></div>
   <p class="note">${ms?nomMes(ms):'Todos los meses'} · Incluye automáticamente ${D.base==='devengado'?'las ventas a crédito de clientes y las facturas de proveedores':'los abonos de clientes y los pagos a proveedores'} (se cambia en Ajustes).</p>
@@ -1426,7 +1782,9 @@ function vIG(){
   </div>
   ${cr.length?`<div class="panel"><h3>Por categoría</h3><div class="tw"><table><thead><tr><th>Categoría</th><th>Tipo</th><th class="n">Monto</th><th class="n">% del tipo</th></tr></thead><tbody>
     ${cr.map(r=>`<tr><td>${esc(r.c)}</td><td><span class="badge ${r.t==='G'?'g':''}">${r.t==='I'?'Ingreso':'Gasto'}</span></td><td class="n">${fmt(r.v)}</td><td class="n">${((r.v/(r.t==='I'?ing:gas))*100).toFixed(1)}%</td></tr>`).join('')}</tbody></table></div></div>`:''}
-  <div class="panel"><h3>Movimientos</h3><div class="tw"><table><thead><tr><th>Fecha</th><th>Tipo</th><th>Categoría</th><th>Concepto</th><th>Origen</th><th>Banco/caja</th><th>Doc.</th><th class="n">Monto</th><th class="noprint"></th></tr></thead><tbody>
+  <div class="panel"><h3>Movimientos</h3><div class="filt noprint"><label class="srch">${ic('search',18)}<input id="srch" placeholder="Buscar concepto, categoría o documento…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label></div>
+    ${iq||icat||iorg?`<p class="note">${Lf.length} movimientos · Ingresos ${fmt(sum(Lf.filter(x=>x.tipo==='I')))} · Gastos ${fmt(sum(Lf.filter(x=>x.tipo==='G')))}</p>`:''}
+    <div class="tw"><table><thead><tr><th>Fecha</th><th>Tipo</th><th>Categoría</th><th>Concepto</th><th>Origen</th><th>Banco/caja</th><th>Doc.</th><th class="n">Monto</th><th class="noprint"></th></tr></thead><tbody>
     ${Lf.map(x=>`<tr><td>${fFecha(x.fecha)}</td><td><span class="badge ${x.tipo==='G'?'g':''}">${x.tipo==='I'?'Ingreso':'Gasto'}</span></td><td>${esc(x.categoria)}</td><td class="w">${esc(x.concepto)}${evTag(x.evId)}</td><td>${x.src?(x.src==='cli'?'Cliente':'Proveedor'):'Manual'}</td><td>${esc(ctaName(x.cid))||'—'}</td><td>${esc(x.doc)}</td><td class="n ${x.tipo==='G'?'neg':''}">${x.tipo==='G'?'-':''}${fmt(x.monto)}</td><td class="n noprint">${x.src?`<button class="btn sm ghost" onclick="go('${x.src}','${x.eid}')" title="Se edita desde la cuenta del ${x.src==='cli'?'cliente':'proveedor'}">Ver cuenta</button>`:`<button class="btn sm ghost" onclick="igForm(null,'${x.id}')">Editar</button><button class="btn sm ghost bad" onclick="delMov('ig','${x.id}')">✕</button>`}</td></tr>`).join('')||`<tr><td colspan="9" class="empty">Sin movimientos en este período</td></tr>`}
   </tbody></table></div></div>`;
 }
@@ -1452,7 +1810,8 @@ function csvIG(){
 function vBco(){
   if(S.sel)return vBcoDet(S.sel);
   return`<div class="row sp hd"><div><h2 class="sec">Banco y caja</h2><div class="note">Incluye solos los ingresos, gastos, abonos y pagos registrados con banco o caja.</div></div><div class="row noprint"><button class="btn" onclick="ctaForm()">+ Nueva cuenta</button><button class="btn" onclick="trfForm()" ${D.cuentas.length>1?'':'disabled'}>Transferencia</button></div></div>
-  ${D.cuentas.length?`<div class="cards">${D.cuentas.map(c=>{const pend=bcoAll().filter(x=>x.cid===c.id&&!x.conc).length;
+  ${D.cuentas.length>1?chips('bco','tipo',[['','Todas'],['banco','Bancos'],['caja','Cajas']],'render()'):''}
+  ${D.cuentas.length?`<div class="cards">${D.cuentas.filter(c=>!ff('bco').tipo||c.tipo===ff('bco').tipo).map(c=>{const pend=bcoAll().filter(x=>x.cid===c.id&&!x.conc).length;
     return`<div class="card click" onclick="go('bco','${c.id}')"><div class="k">${c.tipo==='caja'?'Caja':'Banco'}${c.num?' · '+esc(c.num):''}</div><div style="font-weight:600;margin-top:2px">${esc(c.nombre)}</div><div class="v">${fmt(saldoCta(c.id))}</div>${c.tipo!=='caja'&&pend?`<div class="s">${pend} movimientos sin conciliar</div>`:''}</div>`;}).join('')}</div>
     <div class="panel"><b>Total disponible: ${fmt(D.cuentas.reduce((s,c)=>s+saldoCta(c.id),0))}</b></div>`
   :`<div class="panel empty">Agregá tus cuentas de banco y la caja del negocio para llevar sus saldos.<br><br><button class="btn pri" onclick="ctaForm()">+ Nueva cuenta</button></div>`}`;
@@ -1464,7 +1823,9 @@ function vBcoDet(id){
   const ent=sum(all.filter(x=>x.tipo==='E')),sal=sum(all.filter(x=>x.tipo==='S')),libros=c.ini+ent-sal;
   const conc=c.ini+all.filter(x=>x.conc).reduce((s,x)=>s+(x.tipo==='E'?x.monto:-x.monto),0);
   const sg=x=>x.tipo==='E'?x.monto:-x.monto;
-  const{ant,rows,fin}=estado(all,S.desde,S.hasta,sg,c.ini);
+  const{ant,rows:rows0,fin}=estado(all,S.desde,S.hasta,sg,c.ini);
+  const bq=sinAc(S.buscar||'').trim(),bt=ff('bmov').tipo||'',bnc=!!ff('bmov').nc;
+  const rows=rows0.filter(x=>(!bq||sinAc([x.concepto,x.doc].join(' ')).includes(bq))&&(!bt||x.tipo===bt)&&(!bnc||!x.conc));
   const ref=caja?libros:conc;
   return`<button class="back noprint" onclick="go('bco')">← Banco y caja</button>
   <div class="row sp hd"><div><h2>${esc(c.nombre)}</h2><div class="note">${caja?'Caja':'Cuenta bancaria'}${c.num?' · '+esc(c.num):''} · Saldo inicial ${fmt(c.ini)}</div></div>
@@ -1481,7 +1842,10 @@ function vBcoDet(id){
     <p class="note" style="margin-bottom:0">${caja?'Se compara contra el saldo en libros.':'Marcá con ✓ los movimientos que ya aparecen en el estado del banco; el saldo conciliado debe cuadrar con el saldo del banco.'}</p></div>
   <div class="panel">
     <div class="filt noprint"><label>Desde<input type="date" value="${S.desde}" onchange="S.desde=this.value;render()"></label><label>Hasta<input type="date" value="${S.hasta}" onchange="S.hasta=this.value;render()"></label>
+      <label>Tipo<select onchange="fset('bmov','tipo',this.value);render()">${[['',caja?'Entradas y salidas':'Depósitos y retiros'],['E',caja?'Entradas':'Depósitos'],['S',caja?'Salidas':'Retiros']].map(([v,l])=>`<option value="${v}"${bt===v?' selected':''}>${l}</option>`).join('')}</select></label>
+      ${caja?'':`<label style="flex-direction:row;align-items:center;gap:6px;padding-bottom:6px"><input type="checkbox" ${bnc?'checked':''} onchange="fset('bmov','nc',this.checked);render()"> Solo sin conciliar</label>`}
       ${S.desde||S.hasta?`<button class="btn sm" onclick="S.desde='';S.hasta='';render()">Quitar filtro</button>`:''}
+      <label class="srch" style="flex-basis:100%">${ic('search',18)}<input id="srch" placeholder="Buscar concepto o documento…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label>
       <span style="flex:1"></span><button class="btn sm" onclick="csvBco('${id}')">Exportar CSV</button><button class="btn sm" onclick="print()">Imprimir</button></div>
     <div class="tw"><table><thead><tr>${caja?'':'<th>✓</th>'}<th>Fecha</th><th>Documento</th><th>Concepto</th><th class="n">${caja?'Entrada':'Depósito'}</th><th class="n">${caja?'Salida':'Retiro'}</th><th class="n">Saldo</th><th class="noprint"></th></tr></thead><tbody>
     <tr class="ant">${caja?'':'<td></td>'}<td>${S.desde?fFecha(S.desde):''}</td><td></td><td>${S.desde?'Saldo anterior':'Saldo inicial'}</td><td></td><td></td><td class="n">${fmt(ant)}</td><td class="noprint"></td></tr>
@@ -1626,13 +1990,13 @@ async function licCall(accion,extra){
   const r=await fetch(LIC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({accion,id:LIC.id,codigo:licCod(),...(extra||{})})});
   if(!r.ok)throw new Error('http '+r.status);return r.json();
 }
-function licApply(r){if(!r||!r.ok||r.estado==='nuevo')return;LIC.estado=r.estado;if(r.vence)LIC.vence=r.vence;if(r.ahora)LIC.skew=r.ahora-Date.now();if(r.negocio)LIC.negocio=r.negocio;if(r.whatsapp)LIC.wa=r.whatsapp;LIC.check=Date.now();licSave();}
+function licApply(r){if(!r||!r.ok||r.estado==='nuevo')return;LIC.estado=r.estado;if(r.vence)LIC.vence=r.vence;if(r.ahora)LIC.skew=r.ahora-Date.now();if(r.negocio)LIC.negocio=r.negocio;if(r.whatsapp)LIC.wa=r.whatsapp;if('plus' in r)LIC.plus=!!r.plus;LIC.check=Date.now();licSave();}
 const licNow=()=>Date.now()+(LIC.skew||0);
 const licDias=()=>Math.ceil(((LIC.vence||0)-licNow())/864e5);
 
 /* --- sincronización con la nube --- */
 var SY={ver:0,dirty:false,rev:0},BASE='{}',cloudReady=false,CL='ok',_pushT=null,_pushing=false;
-const COLS=['clientes','movCli','proveedores','movProv','ig','cuentas','movBco','eventos','cotizaciones','catalogo','paquetes'];
+const COLS=['clientes','movCli','proveedores','movProv','ig','cuentas','movBco','eventos','cotizaciones','catalogo','paquetes','mc'];
 function merge3(base,loc,rem){
   base=base||{};const out=Object.assign({},rem);
   for(const c of COLS){
@@ -1800,9 +2164,23 @@ function licPanel(){
   if(!CLOUD)return'';
   const d=licDias(),st=LIC.estado==='activa'?'<b class="pos">Activa de por vida</b>':LIC.estado==='prueba'?(d>0?`<b>Versión de prueba</b> · vence en ${d} día${d===1?'':'s'}`:'<b class="neg">Prueba vencida</b>'):'<b class="neg">'+esc(LIC.estado||'Sin registrar')+'</b>';
   return`<div class="panel"><h3>Licencia</h3><p style="margin:0 0 6px">${st}</p><p class="note">Código de cuenta: <b>${licCod()}</b></p>
-    <div class="row"><button class="btn" onclick="licCheck()">Verificar estado</button>${LIC.estado!=='activa'?'<button class="btn gold" onclick="licActForm()">Activar</button>':''}</div></div>`;
+    <div class="row"><button class="btn" onclick="licCheck()">Verificar estado</button>${LIC.estado!=='activa'?'<button class="btn gold" onclick="licActForm()">Activar</button>':''}</div>
+    <p style="margin:16px 0 6px"><span class="badge au">Plus</span> Maestro de ceremonia: ${isPlus()?'<b class="pos">Activo</b>':'<b>No activado</b>'}</p>
+    ${isPlus()?'':`<div class="row"><button class="btn" onclick="plusCheck()">Verificar Plus</button><button class="btn gold" onclick="plusActForm()">Activar Plus</button></div>`}</div>`;
 }
 
+/* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
+const APP_VER='2026.10.10-2';
+let _verT=0;
+async function verCheck(){
+  if(Date.now()-_verT<60000)return;_verT=Date.now();
+  try{const r=await fetch('./index.html?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;
+    const m=(await r.text()).match(/const APP_VER='([^']+)'/);
+    if(m&&m[1]!==APP_VER)toastAct('✨ Hay una versión nueva de la app','Actualizar',()=>{if(CLOUD&&SY.dirty){cloudPush();setTimeout(()=>location.reload(),2500);}else location.reload();});
+  }catch(e){}
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')verCheck();});
+setInterval(verCheck,30*60000);setTimeout(verCheck,8000);
 S.mes=mesActual();
 if(CLOUD){render();if(LIC.estado)cloudLoad();else gate('bienvenida');setInterval(licInit,6*36e5);}
 else{numerar();save();render();}
