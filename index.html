@@ -262,6 +262,10 @@ dialog h3{font-size:18px}
 .q-sheet.d2 .q-notes p{font-size:10.5px}
 .q-sheet.d2 .q-name{font-size:26px}
 .q-sheet.d2 .q-ant{padding:8px}
+.q-box{display:inline-block;width:15px;height:15px;border:1.5px solid var(--qa);border-radius:3px;vertical-align:middle;text-align:center;line-height:13px;font-size:12px;color:var(--qa)}
+.q-th{display:inline-block;width:34px;height:34px;border-radius:5px;background:var(--qs) center/cover no-repeat;vertical-align:middle;margin-right:10px}
+.q-items.q-carga{table-layout:fixed}.q-items.q-carga td{vertical-align:middle}.q-items.q-carga th,.q-items.q-carga td{text-align:left}.q-items.q-carga .c{text-align:center;width:64px}.q-items.q-carga th:nth-child(3){width:64px}
+.q-sub{margin-top:18px}.q-sub h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin:0 0 6px;font-weight:600}
 .q-gcat{font-size:19px;color:var(--qa);text-align:center;margin:4px 0 10px;letter-spacing:.02em}
 .q-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 14px;margin-bottom:18px}
 .q-fig{margin:0;text-align:center;min-width:0;flex:0 0 calc((100% - (var(--gc,3) - 1)*14px)/var(--gc,3))}
@@ -475,6 +479,17 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 .ffld{display:flex;gap:14px;align-items:center}.ff-img{width:96px;height:96px;border-radius:18px;background:var(--pri2);color:var(--pri);display:grid;place-items:center;overflow:hidden;flex:none;border:1px dashed var(--line)}.ff-img img{width:100%;height:100%;object-fit:cover}.ff-b{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .thumb{border-radius:12px;object-fit:cover;flex:none;display:inline-grid;place-items:center;cursor:zoom-in;background:var(--pri2)}.thumb.ph{color:var(--mut);opacity:.6;cursor:default}
 .srow{display:flex;gap:12px;align-items:center}
+.cob-r{display:flex;gap:12px;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.cob-i{display:flex;flex-direction:column;gap:1px;min-width:0;cursor:pointer}.cob-i b{font-weight:600}.cob-d{font-size:12.5px;color:var(--mut)}.cob-d.neg{color:var(--bad);font-weight:600}.cob-d.au{color:var(--gold);font-weight:600}
+.cob-m{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}.cob-m b{font-size:15px}
+.gbars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:170px;margin:8px 0 4px}
+.gb{display:flex;gap:2px;align-items:flex-end;height:100%}.gb i{flex:1;border-radius:4px 4px 0 0;min-height:2px}.gb .v{background:var(--pri)}.gb .g{background:var(--gold)}
+.gbl{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;font-size:11px;color:var(--mut);text-align:center}
+.gleg{display:flex;gap:14px;font-size:12.5px;color:var(--mut)}.gleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.mg{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--pri2);color:var(--pri)}.mg.bajo{background:var(--gold2);color:var(--gold)}.mg.neg{background:rgba(177,70,62,.12);color:var(--bad)}
+.dchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.qfal{margin-top:12px;padding:12px 14px;border-radius:14px;background:#fff4e0;color:#6b4a12;border:1px solid #f0d9a8;font-size:13.5px;line-height:1.5}.qfal b{font-weight:600}
+.acok{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--pri2);color:var(--pri);margin-bottom:12px;font-size:14px}
 .fnt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.fnt:last-of-type{border-bottom:0}
 .fnt b{font-weight:500}.fnt select{width:auto;min-width:150px}.fnt .fs{grid-column:1/-1;color:var(--ink);line-height:1.15;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .cwarn{display:flex;gap:10px;margin-top:8px;padding:12px 14px;border-radius:14px;background:#fff4e0;color:#6b4a12;border:1px solid #f0d9a8;font-size:13.5px;line-height:1.45}.cwarn .ic{flex:none;margin-top:2px}
@@ -632,7 +647,7 @@ function render(){
   document.querySelectorAll('.tnav button').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tab));
   hdr();bnav();closePop();
   banner();
-  const v={resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,mc:vMC,con:()=>vCon(S.sel),inv:()=>vInv(S.sel),cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
+  const v={gan:vGan,resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,mc:vMC,con:()=>vCon(S.sel),inv:()=>vInv(S.sel),cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
   $('main').innerHTML=v();
   const qp=(S.tab==='cot'&&!!S.sel&&S.qMode==='prev')||S.tab==='doc';
   document.body.classList.toggle('qprint',qp);
@@ -642,7 +657,7 @@ function render(){
   if(S.tab==='ev'&&!S.sel&&$('eb'))listaEv();
   if(S.tab==='cot'&&!S.sel&&$('cb'))listaCot();
   loadImgsIn($('main'));
-  if(S.tab==='con'||S.tab==='inv')pubSync();
+  if(['con','inv','cot','resumen','ev'].includes(S.tab))pubSync();
   if(qp){fitQuotes();if(document.fonts)document.fonts.ready.then(fitQuotes);}
 }
 function hayDatos(){return D.cotizaciones.length||D.eventos.length||D.clientes.length||D.proveedores.length||D.ig.length||D.cuentas.length;}
@@ -737,7 +752,7 @@ filter:'<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>',pen:'<path d="M4 20h4l10.5-10.
 const ic=(n,sz=22)=>`<svg class="ic" width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICP[n]||''}</svg>`;
 
 /* ===== Encabezado y navegación ===== */
-const TITLES={con:'Contrato',inv:'Invitados y mesas',mc:'Maestro de ceremonia',help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
+const TITLES={gan:'Ganancias',con:'Contrato',inv:'Invitados y mesas',mc:'Maestro de ceremonia',help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
 function hdr(){
   const c=CF();
   if(S.tab==='resumen'){
@@ -766,7 +781,7 @@ function actSheet(title,items){
   DL.innerHTML=`<div class="sh"><h3>${esc(title)}</h3><div class="sh-g">${items.map(([i,l,f])=>`<button onclick="DL.close();${f}">${ic(i,26)}<span>${l}</span></button>`).join('')}</div></div>`;
   DL.showModal();
 }
-function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['box','Servicios y paquetes',"go('srv')"],['mic','Maestro de ceremonia'+(isPlus()?'':' <span class="badge au">Plus</span>'),"go('mc')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
+function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['box','Servicios y paquetes',"go('srv')"],['mic','Maestro de ceremonia'+(isPlus()?'':' <span class="badge au">Plus</span>'),"go('mc')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['trend','Ganancias',"go('gan')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
 function needEnt(k,fn){if(!D[MOD[k].ent].length){toast(k==='cli'?'Primero agregá un cliente':'Primero agregá un proveedor');go(k);return;}fn();}
 function menuNuevo(){actSheet('¿Qué querés registrar?',[['cal','Evento',`evForm(null,S.calDay||'')`],['doc','Cotización','newCot()'],['coin','Abono de cliente',"needEnt('cli',()=>movForm('cli',null,'C'))"],['receipt','Gasto',"igForm('G')"],['cash','Ingreso',"igForm('I')"],['truck','Pago a proveedor',"needEnt('prov',()=>movForm('prov',null,'C'))"]]);}
 DL.addEventListener('click',e=>{if(e.target===DL)DL.close();});
@@ -800,6 +815,7 @@ function vResumen(){
     ${tile('t-sage','trend','Resultado del mes',fmt(ing-gas),'Ingresos '+fmt(ing),`S.mes='${mes}';S.igTipo='';go('ig')`)}
   </div></div>`;
   const bh=bannerHtml();if(bh)out+=bh.replace('class="banner"','class="banner" style="width:100%;margin:0 0 16px"');
+  out+=cobrosHtml();
   out+=`<div class="sec-t"><h3>${dayEv?'Eventos del '+esc(fLarga(S.calDay)):'Próximos eventos'}</h3><a onclick="go('ev')">Ver todos</a></div>`;
   out=out.replace(`<div class="sec-t"><h3>`,`<button class="hask noprint" onclick="go('help');setTimeout(()=>{const i=$('hq');i&&i.focus();},150)">${ic('search',22)}<span><b>¿Cómo hago…?</b><small>Buscá en la ayuda y te llevamos al lugar</small></span></button><div class="sec-t"><h3>`);
   out+=lista.length?`<div class="evgrid">${lista.map(e=>evCard(e)).join('')}</div>`:`<div class="panel empty">${dayEv?'No hay eventos este día.':'No hay eventos próximos.'}<br><br><button class="btn pri" onclick="evForm(null,'${S.calDay||''}')">+ Agendar evento</button></div>`;
@@ -836,11 +852,14 @@ function waInfo(k,a,b){
   const tl=t=>{t=(t||'').replace(/\D/g,'');return t.length===8?'504'+t:t;};
   if(k==='cot'){const q=getQ(a);return{tel:tl(q.tel),text:`Hola ${q.cliente||''} 👋\nLe compartimos la cotización *${q.num}* para su ${(q.titulo||q.tipo).toLowerCase()}${q.fechaEv?' del '+fLarga(q.fechaEv):''}.\nTotal: *${fmt(cotTot(q).total)}*\n\nQuedamos atentos a sus comentarios. ✨\n${D.negocio}`};}
   if(k==='edcev'){const e=D.eventos.find(x=>x.id===a),c=D.clientes.find(x=>x.id===e.eid)||{},st=evStats(a);
+    if(b==='cobro'){const pc=planEstado(e,st).find(x=>x.falta>0);
+      return{tel:tl(c.tel),text:`Hola ${c.nombre||''} 👋\nLe saludamos de *${D.negocio}*. Le recordamos el pago de su evento *${e.nombre}*${e.fecha?' del '+fLarga(e.fecha):''}.\n\n${pc?`• ${pc.nota||'Cuota'}: *${fmt(pc.falta)}*${pc.fecha?' (vence el '+fLarga(pc.fecha)+')':''}\n`:''}• Saldo pendiente: *${fmt(st.saldo)}*\n${!pc&&e.fecha?`• Fecha límite de pago: ${fLarga(addDays(e.fecha,-diasCobro()))}\n`:''}\nLe compartimos su estado de cuenta. Si ya realizó su pago, por favor haga caso omiso. ¡Muchas gracias! ✨`};}
     return{tel:tl(c.tel),text:`Hola ${c.nombre||''} 👋\nLe compartimos el estado de cuenta de su evento *${e.nombre}*${e.fecha?' del '+fLarga(e.fecha):''}.\n\n• Valor del evento: ${fmt(st.valor)}\n• Abonado: ${fmt(st.abon)}\n• *Saldo pendiente: ${fmt(st.saldo)}*\n\n¡Gracias por confiar en ${D.negocio}! ✨`};}
   if(k==='edc'){const m=MOD[a],e=D[m.ent].find(x=>x.id===b);
     return{tel:tl(e.tel),text:`Hola ${e.nombre} 👋\nLe compartimos su estado de cuenta al ${fLarga(hoy())}.\nSaldo ${a==='cli'?'pendiente':'por pagar'}: *${fmt(saldoEnt(m,b))}*\n\n${D.negocio}`};}
   if(k==='rec'){const m=MOD[a],x=D[m.mov].find(z=>z.id===b),e=D[m.ent].find(z=>z.id===x.eid)||{};
     return{tel:tl(e.tel),text:a==='cli'?`Hola ${e.nombre||''} 👋\nLe compartimos su recibo *${x.recNo||''}* por *${fmt(x.monto)}*.\n¡Muchas gracias por su pago! ✨\n${D.negocio}`:`Hola ${e.nombre||''}, le compartimos el comprobante *${x.recNo||''}* por *${fmt(x.monto)}*.\n${D.negocio}`};}
+  if(k==='carga'){const e=D.eventos.find(x=>x.id===a);return{tel:'',text:`Hoja de carga · *${evLabel(e)}*${e.fecha?' · '+fLarga(e.fecha):''}${e.hora?' · '+fHora(e.hora):''}${e.lugar?'\n'+e.lugar:''}`};}
   if(k==='con'){const e=D.eventos.find(x=>x.id===a),c=e.contrato;return{tel:tl(c.campos.tel),text:`Hola ${c.campos.cliente||''} 👋\nLe compartimos el contrato *${c.num}*${c.estado==='firmado'?' firmado':''} de su evento.\n\n${D.negocio}`};}
   return{tel:'',text:''};
 }
@@ -948,6 +967,47 @@ const evLabel=e=>e.nombre+' – '+cliName(e.eid);
 function evTag(id){if(!id)return'';const e=D.eventos.find(x=>x.id===id);return e?`<span class="badge lk noprint" onclick="event.stopPropagation();go('ev','${e.id}')">${esc(evLabel(e))}</span>`:'';}
 function evOpts(eid){return[['','— Sin evento —'],...D.eventos.filter(e=>!eid||e.eid===eid).sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||'')).map(e=>[e.id,evLabel(e)+(e.fecha?' ('+fFecha(e.fecha)+')':'')])];}
 const estBadge=s=>`<span class="badge ${s==='Cancelado'?'g':s==='Realizado'?'r':''}">${esc(s||'Por realizar')}</span>`;
+/* ===== Plan de pagos y recordatorios de cobro ===== */
+const evQ=id=>D.cotizaciones.find(q=>q.eventoId===id);
+const diasCobro=()=>{const n=parseInt(CF().diasCobro);return isNaN(n)?3:n;};
+function planEstado(e,st){st=st||evStats(e.id);let resto=st.abon;const h=hoy();
+  return(e.plan||[]).slice().sort((a,b)=>(a.fecha||'9').localeCompare(b.fecha||'9')).map(c=>{const pag=Math.max(0,Math.min(c.monto,resto));resto-=pag;const falta=c.monto-pag;
+    return{...c,pag,falta,est:falta<=0?'pagada':pag>0?'parcial':'pendiente',venc:falta>0&&!!c.fecha&&c.fecha<h};});}
+function cobrosPend(){const h=hoy(),L=[];
+  D.eventos.forEach(e=>{if(e.estado==='Cancelado')return;const st=evStats(e.id);if(st.saldo<=0)return;
+    const c=planEstado(e,st).find(x=>x.falta>0);
+    if(c&&c.fecha)L.push({e,st,monto:c.falta,fecha:c.fecha,lbl:c.nota||'Cuota'});
+    else if(e.fecha)L.push({e,st,monto:st.saldo,fecha:addDays(e.fecha,-diasCobro()),lbl:'Saldo del evento'});});
+  return L.map(x=>({...x,dd:dias(h,x.fecha)})).filter(x=>x.dd<=15).sort((a,b)=>a.dd-b.dd);}
+function cobrosHtml(){const L=cobrosPend();if(!L.length)return'';const T=L.reduce((s,x)=>s+x.monto,0);
+  return`<div class="panel cobros"><div class="row sp" style="margin-bottom:2px"><h3 style="margin:0">Cobros por hacer</h3><b>${fmt(T)}</b></div>
+  <p class="note" style="margin:0 0 6px">Saldos y cuotas que vencen en los próximos 15 días o que ya vencieron.</p>
+  ${L.slice(0,S.cobAll?99:5).map(x=>{const t=x.dd<0?`Venció hace ${-x.dd} día${x.dd===-1?'':'s'}`:x.dd===0?'Vence hoy':`Vence en ${x.dd} día${x.dd===1?'':'s'}`;
+    return`<div class="cob-r"><div class="cob-i" onclick="go('ev','${x.e.id}')"><b>${esc(cliName(x.e.eid))}</b><span class="note">${esc(x.e.nombre)}${x.e.fecha?' · '+esc(fDia(x.e.fecha)):''} · ${esc(x.lbl)}</span>
+      <span class="cob-d ${x.dd<0?'neg':x.dd<=3?'au':''}">${t}${x.e.recordado?` · recordado ${x.e.recordado===hoy()?'hoy':esc(fDia(x.e.recordado))}`:''}</span></div>
+      <div class="cob-m"><b>${fmt(x.monto)}</b><button class="btn sm wa" onclick="cobrarWA('${x.e.id}')">${ic('send',15)} Cobrar</button></div></div>`;}).join('')}
+  ${L.length>5?`<button class="btn sm ghost" style="margin-top:6px" onclick="S.cobAll=!S.cobAll;render()">${S.cobAll?'Ver menos':'Ver los '+L.length}</button>`:''}</div>`;}
+function cobrarWA(id){const e=D.eventos.find(x=>x.id===id);if(!e)return;e.recordado=hoy();save();render();waShare('edcev',id,'cobro');}
+function planHtml(e){const st=evStats(e.id),P=planEstado(e,st),tot=P.reduce((s,c)=>s+c.monto,0);
+  return`<div class="panel" id="pPlan"><div class="row sp" style="margin-bottom:8px"><h3 style="margin:0">Plan de pagos</h3><div class="row" style="gap:6px">${P.length?'':`<button class="btn sm gold" onclick="planSug('${e.id}')">✦ Sugerir plan</button>`}<button class="btn sm" onclick="cuotaForm('${e.id}')">+ Cuota</button></div></div>
+  ${P.length?`${P.map(c=>`<div class="cob-r" style="cursor:pointer" onclick="cuotaForm('${e.id}','${c.id}')"><div class="cob-i"><b>${esc(c.nota||'Cuota')}</b><span class="cob-d ${c.venc?'neg':''}">${c.fecha?(c.venc?'Venció el ':'Vence el ')+esc(fFecha(c.fecha)):'Sin fecha'}</span>${c.pag>0&&c.falta>0?`<span class="note">Pagado ${fmt(c.pag)} · falta ${fmt(c.falta)}</span>`:''}</div>
+    <div class="cob-m"><b>${fmt(c.monto)}</b>${c.est==='pagada'?'<span class="badge">Pagada</span>':c.venc?'<span class="badge g">Vencida</span>':c.est==='parcial'?'<span class="badge au">Parcial</span>':'<span class="badge r">Pendiente</span>'}</div></div>`).join('')}
+  <div class="cob-r"><span class="note">Total del plan · pagado ${fmt(Math.min(st.abon,tot))}</span><b>${fmt(tot)}</b></div>
+  ${tot!==st.valor?`<p class="note neg" style="margin:8px 0 0">⚠ El plan suma ${fmt(tot)} y el valor del evento es ${fmt(st.valor)}.</p>`:''}
+  <p class="note" style="margin:8px 0 0">Los abonos se aplican solos a cada cuota, en orden. El Inicio te avisa cuándo toca cobrar.</p>`
+  :`<p class="note" style="margin:0">Definí las cuotas con su fecha, por ejemplo el anticipo al reservar y el saldo ${diasCobro()} días antes del evento. Los abonos se aplican solos y el Inicio te avisa cuándo toca cobrar cada una.</p>`}</div>`;}
+function planSug(id){const e=D.eventos.find(x=>x.id===id),st=evStats(id);if(st.valor<=0){toast('Primero poné el valor del evento');return;}
+  const q=evQ(id),ant=q&&q.anticipo?+q.anticipo:50,A=Math.round(st.valor*ant/100),ab=st.cm.find(x=>x.tipo==='C'),h=hoy();
+  const P=[{id:uid(),fecha:ab?ab.fecha:h,monto:A,nota:`Anticipo (${ant}%)`}];
+  const lim=e.fecha?addDays(e.fecha,-diasCobro()):'';
+  if(lim&&dias(h,lim)>45){const m=Math.round((st.valor-A)/2);P.push({id:uid(),fecha:addDays(lim,-30),monto:m,nota:'Segunda cuota'},{id:uid(),fecha:lim,monto:st.valor-A-m,nota:'Saldo'});}
+  else P.push({id:uid(),fecha:lim,monto:st.valor-A,nota:'Saldo'});
+  e.plan=P.filter(c=>c.monto>0);save();render();toast('✓ Plan sugerido: podés editar cada cuota');}
+function cuotaForm(eid,cid){const e=D.eventos.find(x=>x.id===eid),c=cid?(e.plan||[]).find(x=>x.id===cid):null;
+  form(c?'Editar cuota':'Nueva cuota',[{n:'nota',l:'Concepto (ej. Anticipo, Segunda cuota, Saldo)',def:(e.plan||[]).length?'Cuota':'Anticipo'},{n:'fecha',l:'Vence el',t:'date'},{n:'monto',l:'Monto (L)',t:'money',req:1}],c,v=>{
+    e.plan=e.plan||[];if(c)Object.assign(c,v);else e.plan.push({id:uid(),...v});});
+  if(c)delBtn(`cuotaDel('${eid}','${cid}')`);}
+function cuotaDel(eid,cid){const e=D.eventos.find(x=>x.id===eid);if(!confirm('¿Quitar esta cuota del plan?'))return;e.plan=(e.plan||[]).filter(x=>x.id!==cid);DL.close();save();render();}
 function evStats(id){
   const cm=D.movCli.filter(x=>x.evId===id).sort(byFecha);
   const valor=sum(cm.filter(x=>x.tipo==='D')),abon=sum(cm.filter(x=>x.tipo==='C'));
@@ -1000,6 +1060,7 @@ function vEvDet(id){
     <div class="tw"><table><thead><tr><th>Fecha</th><th>Documento</th><th>Concepto</th><th class="n">Cargo</th><th class="n">Abono</th><th class="n">Saldo</th><th class="noprint"></th></tr></thead><tbody>
     ${st.cm.map(x=>{run+=x.tipo==='D'?x.monto:-x.monto;return`<tr><td>${fFecha(x.fecha)}</td><td>${esc(x.doc)}</td><td class="w">${esc(x.concepto)}</td><td class="n">${x.tipo==='D'?fmt(x.monto):''}</td><td class="n">${x.tipo==='C'?fmt(x.monto):''}</td><td class="n"><b>${fmt(run)}</b></td><td class="n noprint">${x.tipo==='C'?`<button class="btn sm ghost" onclick="openDoc('rec','cli','${x.id}')">Recibo</button>`:''}<button class="btn sm ghost" onclick="movForm('cli','${e.eid}',null,'${x.id}')">Editar</button><button class="btn sm ghost bad" onclick="delMov('movCli','${x.id}')">✕</button></td></tr>`;}).join('')||`<tr><td colspan="7" class="empty">Todavía no hay valor ni abonos. Usá “+ Valor / cargo” para registrar lo que se cobra por el evento.</td></tr>`}
     </tbody><tfoot><tr><td colspan="3">Saldo pendiente</td><td class="n">${fmt(st.valor)}</td><td class="n">${fmt(st.abon)}</td><td class="n">${fmt(st.saldo)}</td><td class="noprint"></td></tr></tfoot></table></div></div>
+  ${planHtml(e)}
   ${llevaHtml(e)}
   <div class="panel"><h3>Gastos del evento</h3>
     <div class="tw"><table><thead><tr><th>Fecha</th><th>Categoría</th><th>Concepto</th><th>Origen</th><th class="n">Monto</th><th class="noprint"></th></tr></thead><tbody>
@@ -1008,6 +1069,35 @@ function vEvDet(id){
     <p class="note" style="margin-bottom:0">También podés ligar al evento un pago o factura de un proveedor eligiendo el evento al registrarlo.</p></div>
   ${st.ol.length?`<div class="panel"><h3>Otros ingresos del evento</h3><div class="tw"><table><tbody>${st.ol.map(x=>`<tr><td>${fFecha(x.fecha)}</td><td>${esc(x.categoria)}</td><td class="w">${esc(x.concepto)}</td><td class="n">${fmt(x.monto)}</td><td class="n noprint">${btnMov(x)}</td></tr>`).join('')}</tbody></table></div></div>`:''}
   <div class="row noprint">${(c=>c?`<button class="btn" onclick="go('cot','${c.id}')">Ver cotización ${esc(c.num)}</button>`:'')(D.cotizaciones.find(q=>q.eventoId===id))}<button class="btn wa" onclick="waEv('${id}')">${ic('send',16)} Enviar por WhatsApp</button><button class="btn" onclick="go('con','${id}')">${ic('pen',16)} Contrato${e.contrato?(e.contrato.estado==='firmado'?' ✓':' · borrador'):''}</button><button class="btn" onclick="go('inv','${id}')">${ic('users',16)} Invitados y mesas</button><button class="btn" onclick="mcDeEv('${id}')">${ic('mic',16)} Programa del MC</button><button class="btn" onclick="evForm('${id}')">Editar evento</button><button class="btn pri" onclick="openDoc('edcev','${id}')">Estado de cuenta</button><button class="btn bad" onclick="delEv('${id}')">Eliminar evento</button></div>`;
+}
+/* ===== Ganancias por evento, mes y tipo ===== */
+function evTipo(e){const q=evQ(e.id),t=(q&&q.tipo)||e.nombre||'';return TIPOS.find(x=>sinAc(t).includes(sinAc(x)))||(q&&q.tipo)||'Otro';}
+const mgn=(u,v)=>{if(!v)return'<span class="mg">—</span>';const p=u/v*100;return`<span class="mg${p<0?' neg':p<25?' bajo':''}">${p.toFixed(0)}%</span>`;};
+function vGan(){
+  const yrs=[...new Set([hoy().slice(0,4),...D.eventos.map(e=>(e.fecha||'').slice(0,4)).filter(Boolean)])].sort().reverse(),y=S.ganY||hoy().slice(0,4);
+  const E=D.eventos.filter(e=>e.estado!=='Cancelado'&&(e.fecha||'').startsWith(y)).map(e=>{const st=evStats(e.id);return{e,st,v:st.valor+st.otros,t:evTipo(e)};});
+  const ven=E.reduce((s,x)=>s+x.v,0),gas=E.reduce((s,x)=>s+x.st.gas,0),gan=ven-gas;
+  const gen=sum(igAll().filter(x=>x.tipo==='G'&&!x.evId&&(x.fecha||'').startsWith(y)));
+  const MS=['E','F','M','A','M','J','J','A','S','O','N','D'];
+  const M=MS.map((_,i)=>{const m=y+'-'+String(i+1).padStart(2,'0'),L=E.filter(x=>x.e.fecha.startsWith(m));return{v:L.reduce((s,x)=>s+x.v,0),g:L.reduce((s,x)=>s+x.st.gas,0)};});
+  const mx=Math.max(1,...M.map(x=>Math.max(x.v,x.g))),h=v=>Math.round(v/mx*100);
+  const T={};E.forEach(x=>{const o=T[x.t]=T[x.t]||{n:0,v:0,g:0};o.n++;o.v+=x.v;o.g+=x.st.gas;});
+  const TL=Object.entries(T).sort((a,b)=>(b[1].v-b[1].g)-(a[1].v-a[1].g));
+  const top=E.slice().sort((a,b)=>(b.v-b.st.gas)-(a.v-a.st.gas));
+  return`<div class="row sp hd"><h2 class="sec">Ganancias</h2><select onchange="S.ganY=this.value;render()" style="width:auto">${yrs.map(x=>`<option${x===y?' selected':''}>${x}</option>`).join('')}</select></div>
+  <div class="cards">
+    <div class="card"><div class="k">Vendido en eventos</div><div class="v">${fmt(ven)}</div><div class="s">${E.length} eventos en ${y}</div></div>
+    <div class="card"><div class="k">Gastos de los eventos</div><div class="v">${fmt(gas)}</div></div>
+    <div class="card"><div class="k">Ganancia de los eventos</div><div class="v ${gan<0?'neg':'pos'}">${fmt(gan)}</div><div class="s">Margen ${mgn(gan,ven)}</div></div>
+    <div class="card"><div class="k">Gastos generales</div><div class="v">${fmt(gen)}</div><div class="s">Alquiler, luz, sueldos… sin evento</div></div>
+    <div class="card"><div class="k">Ganancia neta</div><div class="v ${gan-gen<0?'neg':''}">${fmt(gan-gen)}</div><div class="s">Ganancia de eventos menos gastos generales</div></div>
+  </div>
+  <div class="panel"><div class="row sp"><h3 style="margin:0">Mes a mes</h3><div class="gleg"><span><i style="background:var(--pri)"></i>Vendido</span><span><i style="background:var(--gold)"></i>Gastos</span></div></div>
+    <div class="gbars">${M.map(x=>`<div class="gb" title="Vendido ${fmt(x.v)} · Gastos ${fmt(x.g)} · Ganancia ${fmt(x.v-x.g)}"><i class="v" style="height:${h(x.v)}%"></i><i class="g" style="height:${h(x.g)}%"></i></div>`).join('')}</div>
+    <div class="gbl">${MS.map(m=>`<span>${m}</span>`).join('')}</div></div>
+  <div class="panel"><h3>Por tipo de evento</h3>${TL.length?TL.map(([t,o])=>`<div class="cob-r"><div class="cob-i" style="cursor:default"><b>${esc(t)}</b><span class="note">${o.n} evento${o.n===1?'':'s'} · vendido ${fmt(o.v)}</span></div><div class="cob-m"><b>${fmt(o.v-o.g)}</b>${mgn(o.v-o.g,o.v)}</div></div>`).join(''):'<p class="note">Sin eventos en este año.</p>'}</div>
+  <div class="panel"><h3>Eventos del año</h3>${top.length?top.map(x=>`<div class="cob-r"><div class="cob-i" onclick="go('ev','${x.e.id}')"><b>${esc(x.e.nombre)}</b><span class="note">${esc(cliName(x.e.eid))} · ${esc(fDia(x.e.fecha))}</span><span class="note">Vendido ${fmt(x.v)} · gastos ${fmt(x.st.gas)}</span></div><div class="cob-m"><b class="${x.v-x.st.gas<0?'neg':''}">${fmt(x.v-x.st.gas)}</b>${mgn(x.v-x.st.gas,x.v)}</div></div>`).join(''):'<p class="note">Sin eventos en este año.</p>'}
+    <p class="note" style="margin:10px 0 0">Para que la ganancia sea real, al registrar un gasto (flores, transporte, personal) elegí el evento al que pertenece.</p></div>`;
 }
 function evForm(id,fdef){
   const ev=id?D.eventos.find(x=>x.id===id):null;
@@ -1110,12 +1200,12 @@ function vCotDet(id){
   const ev=q.eventoId&&D.eventos.find(e=>e.id===q.eventoId);
   const head=`<button class="back noprint" onclick="go('cot')">← Cotizaciones</button>
   <div class="row sp hd noprint"><div><h2>${esc(q.num)} · ${esc(q.titulo||q.tipo)}${q.cliente?' – '+esc(q.cliente):''}</h2></div>${qEst(q.estado)}</div>`;
-  const acts=`<div class="panel noprint qacts"><div class="row sp" style="margin-bottom:12px"><h3 style="margin:0">Acciones</h3>
+  const acts=`${q.acepto?`<div class="acok noprint">${ic('check',20)}<span><b>${esc(q.acepto.nombre)}</b> aceptó esta cotización por enlace el ${esc(fLarga(isoD(new Date(q.acepto.fecha))))}.</span></div>`:''}<div class="panel noprint qacts"><div class="row sp" style="margin-bottom:12px"><h3 style="margin:0">Acciones</h3>
       <label class="row" style="gap:6px;font-size:13px;color:var(--mut)">Estado<select onchange="qs('${id}','estado',this.value);render()" style="width:auto">${['Borrador','Enviada','Aceptada','Rechazada'].map(x=>`<option${q.estado===x?' selected':''}>${x}</option>`).join('')}</select></label></div>
     <div class="qa-g"><button class="btn pri" onclick="guardarCot('${id}')">${ic('check',16)} Guardar</button><button class="btn wa" onclick="waShare('cot','${id}')">${ic('send',16)} WhatsApp</button>
       ${prev?`<button class="btn" onclick="S.qMode='edit';render()">${ic('edit',16)} Editar</button>`:`<button class="btn" onclick="S.qMode='prev';render();scrollTo(0,0)">${ic('eye',16)} Vista previa</button>`}
       <button class="btn" onclick="savePDF('${id}')">${ic('save',16)} PDF</button><button class="btn" onclick="saveIMG('${id}')">${ic('save',16)} Imagen</button><button class="btn" onclick="saveHTML('${id}')">${ic('save',16)} HTML</button><button class="btn" onclick="printCot()">${ic('doc',16)} Imprimir</button></div>
-    <div class="qa-g" style="margin-top:8px">${ev?`<button class="btn gold" style="grid-column:1/-1" onclick="go('ev','${ev.id}')">Ver evento</button><button class="btn" onclick="go('con','${ev.id}')">${ic('pen',16)} Contrato</button>`:`<button class="btn gold" style="grid-column:1/-1" onclick="convCot('${id}')">✓ Cliente aceptó: convertir en evento</button>`}
+    <div class="qa-g" style="margin-top:8px">${ev?`<button class="btn gold" style="grid-column:1/-1" onclick="go('ev','${ev.id}')">Ver evento</button><button class="btn" onclick="go('con','${ev.id}')">${ic('pen',16)} Contrato</button>`:`<button class="btn gold" style="grid-column:1/-1" onclick="convCot('${id}')">✓ Cliente aceptó: convertir en evento</button><button class="btn" style="grid-column:1/-1" onclick="cotLink('${id}')">${ic('send',16)} ${q.token?'Reenviar enlace para aceptar':'Enviar enlace para que acepte'}</button>`}
       <button class="btn" onclick="dupCot('${id}')">Duplicar</button><button class="btn bad" onclick="delCot('${id}')">Eliminar</button></div></div>`;
   if(!S.qView)S.qView=innerWidth<700?'tel':'pag';
   if(prev){const tel=S.qView==='tel';
@@ -1134,6 +1224,7 @@ function vCotDet(id){
     <div class="qi qih"><span>Categoría</span><span>Descripción</span><span>Cant.</span><span>Precio unit.</span><span style="text-align:right">Importe</span><span></span></div>
     <div id="qitems">${q.items.map(it=>`<div class="qi"><input class="c" list="dlQCat" placeholder="Categoría" value="${esc(it.cat)}" oninput="qit('${id}','${it.id}','cat',this.value)"><input class="d" placeholder="Descripción del servicio" value="${esc(it.desc)}" oninput="qit('${id}','${it.id}','desc',this.value)"><label class="ql"><span>Cant.</span><input inputmode="decimal" placeholder="Cant." value="${esc(it.cant)}" oninput="qit('${id}','${it.id}','cant',this.value)"></label><label class="ql"><span>Precio unit.</span><input inputmode="decimal" placeholder="Precio" value="${it.precio?num(it.precio):''}" oninput="qit('${id}','${it.id}','precio',this.value)"></label><div class="qt" id="qt_${it.id}">${fmt(lineT(it))}</div><button class="btn sm ghost bad" onclick="qdel('${id}','${it.id}')" title="Quitar">✕</button></div>`).join('')||'<p class="note">Agregá los servicios uno por uno, o usá “Sugerir servicios” para empezar con una lista típica. Un servicio con precio en blanco aparece como “Incluido”.</p>'}</div>
     <button class="btn" onclick="qadd('${id}')" style="margin-top:6px">+ Agregar servicio</button>
+    ${faltasCot(q)}
     ${(()=>{const fi=fotoItems(q);return`<label class="qfchk${q.fotos?' on':''}" id="qfotos"><input type="checkbox" ${q.fotos?'checked':''} onchange="qs('${id}','fotos',this.checked);this.parentNode.classList.toggle('on',this.checked)"><span><b>Agregar página 2 con fotos de lo que incluye</b><br><span class="note">${fi.length?`${fi.length} de ${q.items.length} servicios tienen foto en el catálogo. Sale en la vista previa, PDF, imagen, HTML y WhatsApp.`:'Ningún servicio de esta cotización tiene foto todavía. Agregá fotos en Servicios › Catálogo.'}</span>${fi.length?`<span class="qfst">${fi.slice(0,8).map(x=>`<img src="${x.c.foto}" alt="">`).join('')}</span>`:''}</span></label>`;})()}</div>
   <div class="panel"><h3>Imágenes de referencia</h3><p class="note">Fotos de decoración, montajes o ideas para este evento. Máximo ${MAXIMG}.</p>${imgsHtml(q.imgs,'cot',id)}
     ${(q.imgs||[]).length?`<label class="row" style="gap:8px;margin-top:10px;font-size:14px"><input type="checkbox" style="width:18px" ${q.imgShow!==false?'checked':''} onchange="qs('${id}','imgShow',this.checked)"> Mostrarlas en la cotización que recibe el cliente</label>`:''}</div>
@@ -1166,8 +1257,8 @@ function qCli(qid,v){const q=getQ(qid);
 }
 function totEd(q){const t=cotTot(q);const r=(l,v,b)=>`<div class="row sp" style="padding:3px 0"><span class="${b?'':'mut'}">${l}</span>${b?'<b style="font-size:18px">'+fmt(v)+'</b>':'<span>'+fmt(v)+'</span>'}</div>`;
   return r('Subtotal',t.sub)+(t.desc?r(`Descuento (${q.descPct}%)`,-t.desc):'')+(q.isv?r('ISV (15%)',t.isv):'')+'<div style="border-top:1px solid var(--line);margin:4px 0"></div>'+r('Total',t.total,1)+(t.ant?r(`Anticipo (${q.anticipo}%)`,t.ant):'');}
-function qs(id,f,v){const q=getQ(id);if(!q)return;if(['descPct','anticipo','validez'].includes(f))v=parseFloat(v)||0;q[f]=v;saveLater();if($('qtot'))$('qtot').innerHTML=totEd(q);}
-function qit(id,itId,f,v){const q=getQ(id),it=q.items.find(x=>x.id===itId);if(f==='precio'){const c=toC(v);v=isNaN(c)?0:c;}it[f]=v;saveLater();if($('qt_'+itId))$('qt_'+itId).textContent=fmt(lineT(it));$('qtot').innerHTML=totEd(q);}
+function qs(id,f,v){const q=getQ(id);if(!q)return;if(['descPct','anticipo','validez'].includes(f))v=parseFloat(v)||0;q[f]=v;saveLater();if(q.token)cotPushLater(id);if($('qtot'))$('qtot').innerHTML=totEd(q);}
+function qit(id,itId,f,v){const q=getQ(id),it=q.items.find(x=>x.id===itId);if(f==='precio'){const c=toC(v);v=isNaN(c)?0:c;}it[f]=v;saveLater();if(q.token)cotPushLater(id);if($('qt_'+itId))$('qt_'+itId).textContent=fmt(lineT(it));$('qtot').innerHTML=totEd(q);}
 function qadd(id){const q=getQ(id);const last=q.items[q.items.length-1];q.items.push({id:uid(),cat:last?last.cat:'',desc:'',cant:1,precio:0});save();render();const ins=document.querySelectorAll('#qitems .d');ins.length&&ins[ins.length-1].focus();}
 function qdel(id,itId){const q=getQ(id);q.items=q.items.filter(x=>x.id!==itId);save();render();}
 function qtpl(id){const q=getQ(id),g=parseInt(q.invitados)||0;const P=PLANT[q.tipo]||PLANT['_'];
@@ -1177,17 +1268,35 @@ function dupCot(id){const q=getQ(id);D.cotSeq=(D.cotSeq||0)+1;
   const n={...JSON.parse(JSON.stringify(q)),id:uid(),num:'COT-'+String(D.cotSeq).padStart(4,'0'),fecha:hoy(),estado:'Borrador',eventoId:'',imgs:[]};n.items.forEach(i=>i.id=uid());
   D.cotizaciones.push(n);save();go('cot',n.id);}
 function delCot(id){const q=getQ(id);if(!confirm(`¿Eliminar la cotización ${q.num}?`))return;imgDelAll(q.imgs);D.cotizaciones=D.cotizaciones.filter(x=>x.id!==id);save();go('cot');}
-function convCot(id){
-  const q=getQ(id);if(!q.cliente.trim()){alert('Escribí el nombre del cliente antes de convertir la cotización.');return;}
+function convCot(id,auto){
+  const q=getQ(id);if(!q.cliente.trim()){if(!auto)alert('Escribí el nombre del cliente antes de convertir la cotización.');return;}
   const t=cotTot(q);
-  if(!confirm(`Se creará el evento "${q.titulo||q.tipo} – ${q.cliente}" con un valor de ${fmt(t.total)} en la cuenta del cliente. ¿Continuar?`))return;
+  if(!auto&&!confirm(`Se creará el evento "${q.titulo||q.tipo} – ${q.cliente}" con un valor de ${fmt(t.total)} en la cuenta del cliente. ¿Continuar?`))return;
   let c=(q.cid&&D.clientes.find(x=>x.id===q.cid))||D.clientes.find(x=>x.nombre.toLowerCase()===q.cliente.trim().toLowerCase());
   if(!c){c={id:uid(),nombre:q.cliente.trim(),rtn:'',tel:q.tel||'',correo:q.correo||'',nota:''};D.clientes.push(c);}
   q.cid=c.id;
   const ev={id:uid(),creado:Date.now(),nombre:q.titulo||q.tipo,eid:c.id,fecha:q.fechaEv,hora:q.hora,invitados:q.invitados,lugar:q.lugar,estado:'Por realizar',nota:q.tema||''};
   D.eventos.push(ev);
   if(t.total>0)D.movCli.push({id:uid(),creado:Date.now(),eid:c.id,evId:ev.id,tipo:'D',fecha:hoy(),doc:q.num,concepto:'Cotización '+q.num+' aceptada',monto:t.total,cid:''});
-  q.eventoId=ev.id;q.estado='Aceptada';save();go('ev',ev.id);
+  q.eventoId=ev.id;q.estado='Aceptada';save();if(!auto)go('ev',ev.id);
+}
+/* Enlace para que el cliente vea y acepte la cotización desde su teléfono */
+function cotSnap(q){const c=CF(),cfg={};['eslogan','tel','correo','dir','rtn','logo','estilo','gracias','fuentes','tema'].forEach(k=>cfg[k]=c[k]);
+  return{neg:D.negocio,cfg,tema:c.tema,q:{...JSON.parse(JSON.stringify(q)),imgs:[],fotos:false,token:'',acepto:null}};}
+let _cotT={};
+function cotPushLater(id){clearTimeout(_cotT[id]);_cotT[id]=setTimeout(()=>{const q=getQ(id);if(!CLOUD||!q||!q.token||q.acepto)return;
+  licCall('pubCrear',{items:[{token:q.token,tipo:'cot',ref:'cot:'+id,datos:cotSnap(q)}]}).catch(()=>{});},2500);}
+async function cotLink(id){
+  const q=getQ(id),send=tok=>{const link=pubURL('k',tok);
+    openWA(`https://wa.me/${telWA(q.tel)}?text=${encodeURIComponent(`Hola ${q.cliente||''} 👋\nLe compartimos la cotización *${q.num}* para su ${(q.titulo||q.tipo).toLowerCase()}${q.fechaEv?' del '+fLarga(q.fechaEv):''}.\nTotal: *${fmt(cotTot(q).total)}*\n\nPuede verla y aceptarla desde su teléfono aquí:\n${link}\n\n${D.negocio}`)}`);};
+  if(!CLOUD){toast('Para enviar la cotización por enlace se necesita la versión en la nube.',4000);return;}
+  if(!q.cliente.trim()){toast('Escribí el nombre del cliente primero');return;}
+  toast('Preparando enlace…',0);
+  try{const r=await licCall('pubCrear',{items:[{token:q.token||'',tipo:'cot',ref:'cot:'+id,datos:cotSnap(q)}]});hideToast();
+    if(!(r&&r.ok&&r.tokens&&r.tokens[0]))throw new Error((r&&r.msg)||'');
+    q.token=r.tokens[0];if(q.estado==='Borrador')q.estado='Enviada';save();render();
+    toastAct('✓ Enlace para aceptar listo','Abrir WhatsApp',()=>send(q.token));
+  }catch(err){hideToast();toast('No se pudo crear el enlace. Revisá tu conexión o que el Apps Script esté actualizado.',5000);}
 }
 function orn(){return'<div class="q-orn"><span></span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0L10 8L8 16L6 8Z" fill="currentColor"/><path d="M0 8L8 6L16 8L8 10Z" fill="currentColor" opacity=".5"/></svg><span></span></div>';}
 /* Condiciones: {anticipo} y {validez} se cambian solos. Si alguien escribió el número junto a la palabra
@@ -1339,6 +1448,7 @@ async function shareOrDl(blob,name){
 function spec(k,a,b,d1,d2){
   if(k==='cot'){const q=getQ(a);return q&&{fk:fuenteDe(q.tipo),inner:sheet(q),pages:q.fotos&&fotoItems(q).length?[sheet(q),fotosSheet(q)]:null,file:safeName(`Cotizacion ${q.num}${q.cliente?' - '+q.cliente:''}`),title:'Cotización '+q.num};}
   if(k==='edc'){const e=D[MOD[a].ent].find(x=>x.id===b);return e&&{inner:edcSheet(a,b,d1,d2),file:safeName('Estado de cuenta - '+e.nombre),title:'Estado de cuenta'};}
+  if(k==='carga'){const e=D.eventos.find(x=>x.id===a);return e&&{inner:cargaSheet(a),file:safeName('Hoja de carga - '+evLabel(e)),title:'Hoja de carga'};}
   if(k==='edcev'){const e=D.eventos.find(x=>x.id===a);return e&&{inner:edcEvSheet(a),file:safeName('Estado de cuenta - '+evLabel(e)),title:'Estado de cuenta del evento'};}
   if(k==='con'){const e=D.eventos.find(x=>x.id===a);return e&&e.contrato?{inner:conHtml(conSnap(e)),file:safeName('Contrato '+e.contrato.num+' - '+(e.contrato.campos.cliente||cliName(e.eid))),title:'Contrato '+e.contrato.num,multi:true}:null;}
   if(k==='rec'){const x=D[MOD[a].mov].find(z=>z.id===b);if(!x)return null;const inner=recSheet(a,b);return{inner,file:safeName((a==='cli'?'Recibo ':'Comprobante ')+x.recNo),title:(a==='cli'?'Recibo ':'Comprobante ')+x.recNo,h:816};}
@@ -1409,7 +1519,7 @@ function docShell(o){
   ${o.body||''}
   ${o.left||o.right?`<div class="q-bottom"><div class="q-notes">${o.left||''}</div><div class="q-totals">${o.right||''}</div></div>`:''}
   ${o.after||''}
-  <div class="q-end">${c.gracias?`<div class="q-thanks q-serif">${esc(c.gracias)}</div>`:''}${orn()}${foot?`<div class="q-foot">${foot}</div>`:''}</div>
+  <div class="q-end">${c.gracias&&!o.nothx?`<div class="q-thanks q-serif">${esc(c.gracias)}</div>`:''}${orn()}${foot?`<div class="q-foot">${foot}</div>`:''}</div>
 </div>`;
 }
 const trR=(l,v)=>`<div class="r"><span>${l}</span><span>${v}</span></div>`;
@@ -1443,7 +1553,7 @@ function edcEvSheet(id){
   return docShell({doc:'Estado de cuenta',meta:[['Emitido',fLarga(hoy())],['Cotización',cot?cot.num:'']],
     kicker:e.nombre,title:esc(c.nombre||''),sub:'Estado de cuenta de su evento',
     facts:[['Fecha',fLarga(e.fecha)],['Hora',fHora(e.hora)],['Lugar',e.lugar],['Invitados',e.invitados]].filter(x=>x[1]),
-    body:edcTable('cli',rows,0,''),
+    body:edcTable('cli',rows,0,'')+(()=>{const P=planEstado(e,st);return P.length?`<div class="q-sub"><h4>Plan de pagos</h4><table class="q-items"><thead><tr><th>Vence</th><th>Concepto</th><th class="n">Monto</th><th class="n">Pagado</th><th class="n">Pendiente</th></tr></thead><tbody>${P.map(c=>`<tr><td>${fFecha(c.fecha)||'—'}</td><td>${esc(c.nota||'Cuota')}</td><td class="n">${fmt(c.monto)}</td><td class="n">${fmt(c.pag)}</td><td class="n">${c.falta>0?fmt(c.falta):'<span class="q-inc q-serif">Pagada</span>'}</td></tr>`).join('')}</tbody></table></div>`:'';})(),
     left:`<h4>Nota</h4><p>${st.saldo>0?'Le recordamos que el saldo pendiente debe cancelarse antes de la fecha del evento. ':''}Si ya realizó su pago, por favor haga caso omiso. Para cualquier consulta sobre su evento estamos a sus órdenes.</p>`,
     right:trR('Valor del evento',fmt(st.valor))+trR('Abonado','-'+fmt(st.abon))+trT(st.saldo<0?'Saldo a favor':'Saldo pendiente',fmt(Math.abs(st.saldo)))
       +(st.saldo<=0&&st.valor>0?`<div class="q-ant">Estado<b class="q-serif">Pagado en su totalidad</b></div>`:'')});
@@ -1496,8 +1606,9 @@ function paqLineas(pk,inv){inv=inv||pk.inv||0;return(pk.items||[]).map(l=>{const
 function vSrv(){
   if(S.sel)return vPaqDet(S.sel);
   const tab=S.srvTab||'cat';
-  const seg=`<div class="row sp hd"><div class="seg"><button class="${tab==='cat'?'on':''}" onclick="S.srvTab='cat';render()">Catálogo (${D.catalogo.length})</button><button class="${tab==='paq'?'on':''}" onclick="S.srvTab='paq';render()">Paquetes (${D.paquetes.length})</button></div>
-    <button class="btn pri" onclick="${tab==='cat'?'srvForm()':'paqNuevo()'}">+ ${tab==='cat'?'Nuevo servicio':'Nuevo paquete'}</button></div>`;
+  const seg=`<div class="row sp hd"><div class="seg"><button class="${tab==='cat'?'on':''}" onclick="S.srvTab='cat';render()">Catálogo (${D.catalogo.length})</button><button class="${tab==='paq'?'on':''}" onclick="S.srvTab='paq';render()">Paquetes (${D.paquetes.length})</button><button class="${tab==='disp'?'on':''}" onclick="S.srvTab='disp';render()">Disponibilidad</button></div>
+    ${tab==='disp'?'':`<button class="btn pri" onclick="${tab==='cat'?'srvForm()':'paqNuevo()'}">+ ${tab==='cat'?'Nuevo servicio':'Nuevo paquete'}</button>`}</div>`;
+  if(tab==='disp')return seg+vDisp();
   if(tab==='paq'){
     const pq=sinAc(S.buscar||'').trim(),PL=D.paquetes.filter(pk=>!pq||sinAc(pk.nombre+' '+(pk.tipo||'')).includes(pq));
     if(!D.paquetes.length)return seg+`<div class="panel empty">Armá paquetes como <b>Cumpleaños clásico</b> o <b>Boda elegante</b> enlazando servicios del catálogo. Después los agregás a una cotización con un toque.${D.catalogo.length?'':'<br><br>Primero agregá servicios en el Catálogo.'}</div>`;
@@ -1596,23 +1707,51 @@ function cotDesdePaq(id){
   q.tipo=pk.tipo||q.tipo;q.invitados=pk.inv?String(pk.inv):'';addPaqACot(q,pk);save();render();toast('✓ Cotización creada con el paquete '+pk.nombre);
 }
 /* Lo que lleva el evento: lista para preparar + aviso si no alcanza el inventario ese día */
-function usoDelDia(fecha,cid){
-  let t=0;D.eventos.forEach(ev=>{if(ev.fecha!==fecha||ev.estado==='Cancelado')return;const q=D.cotizaciones.find(x=>x.eventoId===ev.id);if(q)q.items.forEach(it=>{if(it.cid===cid)t+=parseFloat(it.cant)||0;});});return t;
+function usoDelDia(fecha,cid,exEv){
+  let t=0;D.eventos.forEach(ev=>{if(ev.fecha!==fecha||ev.estado==='Cancelado'||ev.id===exEv)return;const q=D.cotizaciones.find(x=>x.eventoId===ev.id);if(q)q.items.forEach(it=>{if(it.cid===cid)t+=parseFloat(it.cant)||0;});});return t;
 }
+function cotizadoDelDia(fecha,cid,exQ){let t=0;D.cotizaciones.forEach(q=>{if(q.id===exQ||q.eventoId||q.fechaEv!==fecha||!['Borrador','Enviada'].includes(q.estado||'Borrador'))return;q.items.forEach(it=>{if(it.cid===cid)t+=parseFloat(it.cant)||0;});});return t;}
+function faltasDia(fecha){return D.catalogo.filter(c=>c.stock).map(c=>({c,uso:usoDelDia(fecha,c.id)})).filter(x=>x.uso>x.c.stock);}
+function vDisp(){
+  const h=hoy(),fut=[...new Set(D.eventos.filter(e=>e.estado!=='Cancelado'&&e.fecha&&e.fecha>=h&&dias(h,e.fecha)<=90).map(e=>e.fecha))].sort();
+  const F=S.dispF||fut[0]||h,malos=fut.filter(f=>faltasDia(f).length);
+  const evs=D.eventos.filter(e=>e.fecha===F&&e.estado!=='Cancelado'),cq=D.cotizaciones.filter(q=>!q.eventoId&&q.fechaEv===F&&['Borrador','Enviada'].includes(q.estado||'Borrador'));
+  const R=D.catalogo.map(c=>({c,u:usoDelDia(F,c.id),k:cotizadoDelDia(F,c.id)})).filter(x=>x.c.stock).sort((a,b)=>((b.u>b.c.stock)-(a.u>a.c.stock))||(a.c.cat||'').localeCompare(b.c.cat||'')||a.c.nombre.localeCompare(b.c.nombre));
+  return`<div class="panel"><div class="g2"><label class="fld"><span>Fecha a revisar</span><input type="date" value="${F}" onchange="S.dispF=this.value;render()"></label>
+    <div><div class="note" style="margin-bottom:4px">${malos.length?'⚠ Días con faltantes (próximos 90 días):':'✓ Sin faltantes en los próximos 90 días'}</div><div class="dchips">${malos.map(f=>`<button class="chip${f===F?' on':''}" onclick="S.dispF='${f}';render()">${esc(fDia(f))}</button>`).join('')}</div></div></div>
+    <p class="note" style="margin:8px 0 0">${evs.length?`Ese día: ${evs.map(e=>`<a onclick="go('ev','${e.id}')" style="cursor:pointer;text-decoration:underline">${esc(evLabel(e))}</a>`).join(', ')}`:'No hay eventos ese día.'}${cq.length?` · Cotizaciones sin confirmar: ${cq.map(q=>esc(q.num)).join(', ')}`:''}</p></div>
+  <div class="panel"><h3>Disponibilidad del ${esc(fLarga(F))}</h3>${R.length?R.map(x=>{const d=x.c.stock-x.u,ok=d>=0,warnK=ok&&x.k&&d-x.k<0;return`<div class="cob-r"><div class="srow" style="min-width:0">${thumb(x.c,40)}<div class="cob-i" style="cursor:default"><b>${esc(x.c.nombre)}</b><span class="note">Tenés ${fCant(x.c.stock)} · en eventos ${fCant(x.u)}${x.k?' · cotizado '+fCant(x.k):''}</span>${warnK?`<span class="cob-d au">Si confirman la cotización: faltan ${fCant(x.k-d)}</span>`:''}</div></div>
+      <div class="cob-m"><b class="${ok?'pos':'neg'}">${ok?fCant(d):'Faltan '+fCant(-d)}</b><span class="note">${ok?'disponibles':'no alcanza'}</span></div></div>`;}).join(''):'<p class="note">Poné en el catálogo cuántos tenés de cada artículo (sillas, mesas, manteles…) para ver la disponibilidad.</p>'}
+    <p class="note" style="margin:10px 0 0">"En eventos" cuenta lo de los eventos confirmados ese día. "Cotizado" es lo que está en cotizaciones todavía sin aceptar.</p></div>`;}
+function faltasCot(q){if(!q.fechaEv)return'';const need={};q.items.forEach(it=>{if(it.cid)need[it.cid]=(need[it.cid]||0)+(parseFloat(it.cant)||0);});
+  const L=Object.entries(need).map(([cid,n])=>{const c=catById(cid);if(!c||!c.stock)return null;const otros=usoDelDia(q.fechaEv,cid,q.eventoId);return otros+n>c.stock?{c,n,otros}:null;}).filter(Boolean);
+  if(!L.length)return'';
+  return`<div class="qfal">⚠ <b>Inventario para el ${esc(fLarga(q.fechaEv))}</b>${L.map(x=>`<br>• ${esc(x.c.nombre)}: pedís ${fCant(x.n)}, tenés ${fCant(x.c.stock)}${x.otros?` y ya hay ${fCant(x.otros)} en otros eventos`:''} → <b>faltan ${fCant(x.otros+x.n-x.c.stock)}</b>`).join('')}<br><a style="cursor:pointer;text-decoration:underline" onclick="S.srvTab='disp';S.dispF='${q.fechaEv}';go('srv')">Ver disponibilidad de ese día</a></div>`;}
 function llevaHtml(e){
   const q=D.cotizaciones.find(x=>x.eventoId===e.id);
   if(!q)return`<div class="panel"><h3>Lo que lleva el evento</h3><p class="note">Este evento no tiene cotización. Creá una para armar la lista de lo que lleva (podés usar un paquete).</p><button class="btn" onclick="cotFromEv('${e.id}')">${ic('doc',16)} Crear cotización</button></div>`;
   if(!q.items.length)return'';
-  const li=e.listo||{},hechos=q.items.filter(it=>li[it.id]).length,cats=[...new Set(q.items.map(it=>it.cat||'Otros'))];
-  return`<div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Lo que lleva el evento</h3><span class="badge ${hechos===q.items.length?'':'au'}">${hechos} de ${q.items.length} listos</span></div>
+  const rg=S.llevaM==='r',li=(rg?e.vuelta:e.listo)||{},hechos=q.items.filter(it=>li[it.id]).length,cats=[...new Set(q.items.map(it=>it.cat||'Otros'))];
+  return`<div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Lo que lleva el evento</h3><span class="badge ${hechos===q.items.length?'':'au'}">${hechos} de ${q.items.length} ${rg?'de regreso':'listos'}</span></div>
+    <div class="row sp noprint" style="margin:6px 0 2px;gap:8px"><div class="seg"><button class="${rg?'':'on'}" onclick="S.llevaM='c';render()">Carga</button><button class="${rg?'on':''}" onclick="S.llevaM='r';render()">Regreso</button></div><button class="btn sm" onclick="openDoc('carga','${e.id}')">${ic('doc',15)} Hoja de carga</button></div>
     ${cats.map(ct=>`<div class="note" style="margin:12px 0 4px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:12px">${esc(ct)}</div>
       ${q.items.filter(it=>(it.cat||'Otros')===ct).map(it=>{const c=it.cid&&catById(it.cid);let warn='';
         if(c&&c.stock&&e.fecha){const uso=usoDelDia(e.fecha,c.id);if(uso>c.stock)warn=`<div class="note neg">⚠ Faltan ${fCant(uso-c.stock)}: tenés ${fCant(c.stock)} y ese día se usan ${fCant(uso)}</div>`;}
         return`<label style="display:flex;gap:12px;align-items:flex-start;padding:9px 2px;border-bottom:1px solid var(--line);cursor:pointer"><input type="checkbox" ${li[it.id]?'checked':''} onchange="toggleListo('${e.id}','${it.id}',this.checked)" style="margin-top:2px">
           ${c&&c.foto?thumb(c,40):''}<span style="flex:1;${li[it.id]?'text-decoration:line-through;color:var(--mut)':''}"><b style="font-weight:600">${fCant(it.cant)}</b> ${esc(it.desc)}${warn}</span></label>`;}).join('')}`).join('')}
-    <p class="note" style="margin:10px 0 0">Sale de la cotización ${esc(q.num)}. Marcá cada cosa cuando esté lista o cargada.</p></div>`;
+    <p class="note" style="margin:10px 0 0">Sale de la cotización ${esc(q.num)}. ${rg?'Marcá cada cosa cuando vuelva a la bodega.':'Marcá cada cosa cuando esté lista o cargada.'}</p></div>`;
 }
-function toggleListo(eid,iid,on){const e=D.eventos.find(x=>x.id===eid);e.listo=e.listo||{};if(on)e.listo[iid]=true;else delete e.listo[iid];save();render();}
+function toggleListo(eid,iid,on){const e=D.eventos.find(x=>x.id===eid),k=S.llevaM==='r'?'vuelta':'listo';e[k]=e[k]||{};if(on)e[k][iid]=true;else delete e[k][iid];save();render();}
+function cargaSheet(id){const e=D.eventos.find(x=>x.id===id),q=evQ(id),c=D.clientes.find(x=>x.id===e.eid)||{};
+  const it=q?q.items.filter(i=>(parseFloat(i.cant)||0)!==0||!String(i.cant).trim()):[],cats=[...new Set(it.map(i=>i.cat||'Otros'))],li=e.listo||{},vu=e.vuelta||{};
+  const bx=on=>`<span class="q-box">${on?'✓':''}</span>`;
+  return docShell({nothx:1,doc:'Hoja de carga',meta:[['Evento',fFecha(e.fecha)],['Cotización',q?q.num:'']],kicker:e.nombre,title:esc(c.nombre||e.nombre),sub:'Lo que se lleva al evento',
+    facts:[['Fecha',fLarga(e.fecha)],['Hora',fHora(e.hora)],['Lugar',e.lugar],['Invitados',e.invitados],['Teléfono',c.tel]].filter(x=>x[1]),
+    body:it.length?`<table class="q-items q-carga"><thead><tr><th class="c">Salida</th><th class="c">Regreso</th><th class="n" style="text-align:left">Cant.</th><th>Artículo</th></tr></thead>
+      ${cats.map(ct=>`<tbody><tr class="q-cat"><td colspan="4" class="q-serif">${esc(ct)}</td></tr>${it.filter(i=>(i.cat||'Otros')===ct).map(i=>{const cc=i.cid&&catById(i.cid);
+        return`<tr><td class="c">${bx(li[i.id])}</td><td class="c">${bx(vu[i.id])}</td><td><b>${fCant(i.cant)}</b></td><td>${cc&&cc.foto?`<span class="q-th" style="background-image:url('${cc.foto}')"></span>`:''}${esc(i.desc)}${cc&&cc.nota?` <span class="q-sm">· ${esc(cc.nota)}</span>`:''}</td></tr>`;}).join('')}</tbody>`).join('')}</table>`:'<p class="note">Este evento no tiene cotización con artículos.</p>',
+    left:`<h4>Notas</h4><p>${esc(e.nota||'')}</p>`,
+    right:trR('Artículos',it.length)+trR('Piezas',fCant(it.reduce((s,i)=>s+(parseFloat(i.cant)||0),0)))+`<div class="q-sign" style="margin-top:34px;display:grid;gap:30px"><div style="border-top:1px solid #8a8077;padding-top:4px;font-size:11px;color:#8a8077">Entregó</div><div style="border-top:1px solid #8a8077;padding-top:4px;font-size:11px;color:#8a8077">Recibió</div></div>`});}
 
 /* ===== Selector de fecha y hora propio: funciona igual en cualquier navegador ===== */
 const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -2224,10 +2363,12 @@ function mGen(eid){
 let _pubT=0;
 async function pubSync(force){
   if(!CLOUD||!cloudReady||PUBT)return;if(!force&&Date.now()-_pubT<20000)return;_pubT=Date.now();
-  const toks=[];D.eventos.forEach(e=>{if(e.contrato&&e.contrato.token&&e.contrato.estado!=='firmado')toks.push(e.contrato.token);((e.inv&&e.inv.g)||[]).forEach(g=>{if(g.token)toks.push(g.token);});});
+  const toks=[];D.cotizaciones.forEach(q=>{if(q.token&&!q.acepto)toks.push(q.token);});D.eventos.forEach(e=>{if(e.contrato&&e.contrato.token&&e.contrato.estado!=='firmado')toks.push(e.contrato.token);((e.inv&&e.inv.g)||[]).forEach(g=>{if(g.token)toks.push(g.token);});});
   if(!toks.length)return;
   try{const r=await licCall('pubEstado',{tokens:toks});if(!r||!r.ok)return;let ch=0;const msgs=[];
     (r.items||[]).forEach(it=>{const R=it.respuesta;if(!R)return;
+      const cq=D.cotizaciones.find(x=>x.token===it.token);
+      if(cq&&R.acepta&&!cq.acepto){cq.acepto={nombre:R.nombre||cq.cliente,fecha:R.fecha||Date.now()};cq.estado='Aceptada';if(!cq.eventoId)convCot(cq.id,true);ch++;msgs.push(`✓ ${cq.acepto.nombre} aceptó la cotización ${cq.num}${cq.eventoId?': se creó el evento':''}`);}
       D.eventos.forEach(e=>{const c=e.contrato;
         if(c&&c.token===it.token&&c.estado!=='firmado'&&R.img){c.estado='firmado';c.firma={img:R.img,nombre:R.nombre||c.campos.cliente,fecha:R.fecha||Date.now(),via:'enlace'};c.firmaNeg=c.firmaNeg||CF().firmaNeg||'';ch++;msgs.push(`✓ ${c.firma.nombre} firmó el contrato ${c.num}`);}
         const g=((e.inv&&e.inv.g)||[]).find(x=>x.token===it.token);
@@ -2239,15 +2380,32 @@ async function pubSync(force){
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')pubSync();});
 
 /* ===== Páginas públicas: firma del contrato y confirmación de asistencia ===== */
-const PUBQ=new URLSearchParams(location.search),PUBT=PUBQ.get('c')?'con':PUBQ.get('r')?'rsvp':'';
+const PUBQ=new URLSearchParams(location.search),PUBT=PUBQ.get('c')?'con':PUBQ.get('r')?'rsvp':PUBQ.get('k')?'cot':'';
 let PUBD=null;
 const pubCall=(accion,extra)=>fetch(LIC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({accion,...extra})}).then(r=>r.json());
 async function pubInit(){
   document.body.classList.add('pubm');$('main').innerHTML='<div class="pubbox"><div class="mono serif spin" style="margin:40px auto 10px">✦</div><p class="note" style="text-align:center">Cargando…</p></div>';
   if(!CLOUD){$('main').innerHTML='<div class="panel empty">Este enlace no está disponible.</div>';return;}
-  try{const r=await pubCall('pubVer',{token:PUBQ.get('c')||PUBQ.get('r')});if(!r.ok)throw new Error(r.msg||'');PUBD=r;applyTema((r.datos&&r.datos.tema)||'ciruela');document.title=(r.datos&&r.datos.neg)||'Eventos';
-    r.tipo==='con'?pubCon():pubRsvp();}
+  try{const r=await pubCall('pubVer',{token:PUBQ.get('c')||PUBQ.get('r')||PUBQ.get('k')});if(!r.ok)throw new Error(r.msg||'');PUBD=r;applyTema((r.datos&&r.datos.tema)||'ciruela');document.title=(r.datos&&r.datos.neg)||'Eventos';
+    r.tipo==='con'?pubCon():r.tipo==='cot'?pubCot():pubRsvp();}
   catch(e){$('main').innerHTML=`<div class="pubbox"><div class="panel empty"><b>No pudimos abrir este enlace.</b><br>${esc(e.message&&!/fetch|json|token/i.test(e.message)?e.message:'Revisá tu conexión a internet e intentá de nuevo.')}</div></div>`;}
+}
+function pubCot(msg){
+  const s=PUBD.datos,q=s.q,R=PUBD.estado==='respondido'&&PUBD.respuesta,cerrado=PUBD.estado==='cerrado';D.negocio=s.neg||'';D.cfg=s.cfg||{};
+  const t=cotTot(q),tel=telWA((s.cfg||{}).tel);
+  const doc=`<div class="q-wrap" style="max-width:816px;margin:0 auto 16px">${pageOf(sheet(q),false,innerWidth<700)}</div>`;
+  const head=`<div class="pubh"><div class="evc-k">${esc(s.neg)}</div><h2 class="serif">Cotización ${esc(q.num)}</h2><p class="note">${R?'¡Gracias! Esta cotización ya fue aceptada.':cerrado?'Esta cotización ya no está disponible.':'Revisá los detalles y, si estás de acuerdo, aceptala al final de la página.'}</p></div>`;
+  $('main').innerHTML=`<div class="pubbox">${msg?`<div class="panel pubok">${msg}</div>`:''}${head}${doc}${R?`<div class="panel pubok">✓ Aceptada por <b>${esc(R.nombre||'')}</b>${R.fecha?' el '+esc(fLarga(isoD(new Date(R.fecha)))):''}.</div>`:cerrado?'':`<div class="panel" id="pubAcep"><h3>Aceptar cotización</h3>
+    <label class="fld"><span>Tu nombre</span><input id="acNom" value="${esc(q.cliente||'')}" autocomplete="name"></label>
+    <label style="display:flex;flex-wrap:nowrap;gap:10px;align-items:flex-start;font-size:14px;margin:6px 0 12px;cursor:pointer"><input type="checkbox" id="acOk" style="width:20px;height:20px;flex:none;margin-top:1px"><span style="flex:1;min-width:0">Acepto los servicios, el total de <b>${fmt(t.total)}</b>${t.ant?` (anticipo para reservar de <b>${fmt(t.ant)}</b>)`:''} y las condiciones de esta cotización.</span></label>
+    <div class="ferr" id="acErr"></div>
+    <div class="row end">${tel?`<button class="btn ghost" type="button" onclick="openWA('https://wa.me/${tel}?text='+encodeURIComponent('Hola, tengo una consulta sobre la cotización ${esc(q.num)}'))">Tengo una consulta</button>`:''}<button class="btn pri" id="acGo" type="button">Aceptar cotización</button></div></div>`}<p class="lk-id" style="text-align:center">Documento generado con Eventos VM</p></div>`;
+  if(document.fonts)document.fonts.ready.then(()=>{});
+  if(!R&&!cerrado)$('acGo').onclick=async()=>{const nom=$('acNom').value.trim();if(!nom){$('acErr').textContent='Escribí tu nombre';return;}if(!$('acOk').checked){$('acErr').textContent='Marcá la casilla para aceptar';return;}
+    const b=$('acGo');b.disabled=true;b.textContent='Enviando…';
+    try{const resp={acepta:true,nombre:nom,fecha:Date.now()};const r=await pubCall('pubResponder',{token:PUBQ.get('k'),respuesta:resp});if(!r.ok)throw new Error(r.msg||'No se pudo enviar');
+      PUBD.estado='respondido';PUBD.respuesta=resp;pubCot('✓ <b>¡Cotización aceptada!</b> Gracias. Le avisamos a '+esc(s.neg)+' para reservar su fecha.');scrollTo(0,0);}
+    catch(e){b.disabled=false;b.textContent='Aceptar cotización';$('acErr').textContent=e.message&&!/fetch/i.test(e.message)?e.message:'Sin conexión. Intentá de nuevo.';}};
 }
 function pubCon(msg){
   const s=PUBD.datos,firmado=PUBD.estado==='respondido'&&PUBD.respuesta,cerrado=PUBD.estado==='cerrado';
@@ -2298,6 +2456,14 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.22-2',fecha:'2026-10-22',items:[
+  {i:'coin',tag:'n',t:'Cobros por hacer',d:'El Inicio te muestra los saldos y cuotas que vencen pronto o ya vencieron. Con "Cobrar" mandás el recordatorio por WhatsApp con el estado de cuenta.',donde:'Inicio › Cobros por hacer',ir:"go('resumen')"},
+  {i:'cal',tag:'n',t:'Plan de pagos',d:'Definí las cuotas de cada evento con su fecha. Los abonos se aplican solos y el plan sale en el estado de cuenta del cliente.',donde:'Evento › Plan de pagos',ir:"go('ev')"},
+  {i:'trend',tag:'n',t:'Ganancias',d:'Cuánto ganás por mes, por tipo de evento y en cada evento, con su margen.',donde:'Menú › Ganancias',ir:"go('gan')"},
+  {i:'check',tag:'n',t:'El cliente acepta por enlace',d:'Mandá la cotización por WhatsApp para que el cliente la acepte desde su teléfono. Al aceptar, se crea el evento solo.',donde:'Cotización › Acciones',ir:"go('cot')"},
+  {i:'truck',tag:'n',t:'Hoja de carga',d:'Imprimí lo que se lleva al evento con casillas de salida y regreso, y marcá en la app lo que volvió a la bodega.',donde:'Evento › Lo que lleva el evento',ir:"go('ev')"},
+  {i:'box',tag:'n',t:'Disponibilidad por fecha',d:'Mirá cuántas sillas, mesas y manteles tenés libres cada día. La app avisa si una cotización pide más de lo que hay.',donde:'Servicios › Disponibilidad',ir:"S.srvTab='disp';go('srv')"}
+ ]},
  {ver:'2026.10.22-1',fecha:'2026-10-22',items:[
   {i:'edit',tag:'n',t:'Una letra para cada tipo de evento',d:'Elegí la letra de las cotizaciones de bodas, XV años, cumpleaños y más: Romántica, Realeza, Moderna, Alegre o Delicada.',donde:'Ajustes › Letra de las cotizaciones',ir:"go('aj');setTimeout(()=>{const e=document.getElementById('pFuentes');e&&e.scrollIntoView({behavior:'smooth'})},200)"},
   {i:'camera',tag:'c',t:'Fotos de referencia sin deformarse',d:'En el PDF y la imagen las fotos salen con su forma real: una sola foto sale completa y varias salen en recuadros parejos.',donde:'Cotización › Imágenes de referencia',ir:"go('cot')"},
@@ -2342,6 +2508,12 @@ function novVer(L,todas){
 function novIr(k){const x=(window._novI||[])[k];if(!x)return;DL.close();new Function(x.ir)();setTimeout(()=>toast('👉 '+x.donde,4500),150);}
 /* ===== Ayuda con buscador: explica y lleva al lugar ===== */
 const AYUDA=[
+ ['Cobros','Ver a quién hay que cobrar y mandarle el recordatorio','cobrar recordatorio saldo pendiente cuota vencida whatsapp',['En el Inicio, mirá "Cobros por hacer".','Tocá "Cobrar": se abre WhatsApp con el mensaje y el estado de cuenta.'],"go('resumen')",'.cobros'],
+ ['Cobros','Crear un plan de pagos (cuotas) para un evento','plan pagos cuotas anticipo saldo fechas',['Abrí el evento.','En "Plan de pagos" tocá "✦ Sugerir plan" o "+ Cuota".','Los abonos se aplican solos a cada cuota.'],"go('ev')",'#pPlan'],
+ ['Ganancias','Ver cuánto gano por evento, por mes y por tipo','ganancia utilidad margen reporte mes tipo evento',['Abrí Menú › Ganancias.','Elegí el año.','Para que sea exacto, ligá cada gasto a su evento.'],"go('gan')",''],
+ ['Cotizaciones','Enviar una cotización para que el cliente la acepte','aceptar enlace link cliente acepta cotizacion',['Abrí la cotización.','En Acciones tocá "Enviar enlace para que acepte".','Cuando el cliente acepta, la app crea el evento sola.'],"go('cot')",''],
+ ['Eventos','Imprimir la hoja de carga del montaje','hoja carga montaje bodega llevar regreso checklist',['Abrí el evento.','En "Lo que lleva el evento" tocá "Hoja de carga".','Usá "Regreso" para marcar lo que volvió a la bodega.'],"go('ev')",''],
+ ['Servicios','Ver si me alcanzan las sillas o mesas para una fecha','disponibilidad inventario faltan sillas mesas fecha ocupado',['Abrí Menú › Servicios y paquetes › Disponibilidad.','Elegí la fecha: te muestra lo que tenés, lo comprometido y lo que falta.'],"S.srvTab='disp';go('srv')",''],
  ['Cotizaciones','Crear una cotización','cotizar presupuesto precio nueva',['Tocá Cotizar en la barra de abajo.','Tocá "+ Nueva cotización".','Llená cliente, tipo de evento, fecha, lugar e invitados.','Agregá servicios (o un paquete) con sus precios.'],"go('cot')",'.btn.pri'],
  ['Cotizaciones','Agregar un paquete o servicios del catálogo a una cotización','paquete catalogo agregar servicios sillas mesas',['Abrí la cotización.','En "Servicios" tocá "Agregar paquete" o "+ Del catálogo".','Las cantidades se calculan solas según los invitados.'],"go('cot')",'.evgrid,.panel'],
  ['Cotizaciones','Enviar una cotización por WhatsApp','whatsapp enviar compartir cliente imagen',['Abrí la cotización y tocá "Vista previa".','Tocá el botón verde "WhatsApp".','Elegí WhatsApp y el contacto: la imagen ya va adjunta.'],"go('cot')",''],
@@ -2537,6 +2709,7 @@ function vAjustes(){
   <div class="panel"><h3>Datos del negocio</h3><div class="row"><input id="inNeg" value="${esc(D.negocio)}" style="flex:1;min-width:200px"><button class="btn pri" onclick="D.negocio=$('inNeg').value.trim()||'Mi Negocio';save();render()">Guardar</button></div></div>
   ${cfgPanel()}
   ${fuentesPanel()}
+  <div class="panel"><h3>Cobros</h3><label class="fld" style="max-width:420px"><span>El saldo de un evento se cobra cuántos días antes</span><input inputmode="numeric" value="${diasCobro()}" onchange="cfgSet('diasCobro',parseInt(this.value)||0);render()"></label><p class="note" style="margin:0">Se usa para los recordatorios del Inicio y para el plan de pagos sugerido.</p></div>
   <div class="panel"><h3>Numeración de recibos</h3><p class="note">Cada abono de cliente y cada pago a proveedor recibe un número consecutivo automáticamente. Si ya usaban un talonario, escribí aquí el último número emitido para continuar desde ahí.</p>
     <div class="g2"><label class="fld"><span>Último recibo de cliente emitido (REC)</span><input inputmode="numeric" value="${D.recSeq||0}" onchange="setSeq('cli',this.value)"></label>
     <label class="fld"><span>Último comprobante de pago emitido (CP)</span><input inputmode="numeric" value="${D.cpSeq||0}" onchange="setSeq('prov',this.value)"></label></div>
@@ -2809,7 +2982,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.22-1';
+const APP_VER='2026.10.22-2';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
