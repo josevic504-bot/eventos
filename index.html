@@ -209,9 +209,10 @@ dialog h3{font-size:18px}
 /*Q*/
 .q-page{background:#fffdf9;margin:0 auto;max-width:816px;box-shadow:0 10px 36px rgba(0,0,0,.14);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .q-page.fx{width:816px;height:1056px;max-width:none;overflow:hidden;transform-origin:0 0;margin:0}
-.q-sheet{--qa:#a8864f;--qs:#f6f1e7;--qi:#2b2622;color:var(--qi);padding:48px 56px 34px;font-family:'Jost',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:13px;line-height:1.5;display:flex;flex-direction:column;box-sizing:border-box;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.q-sheet{--qa:#a8864f;--qs:#f6f1e7;--qi:#2b2622;color:var(--qi);padding:48px 56px 34px;font-family:var(--qb,'Jost'),system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:13px;line-height:1.5;display:flex;flex-direction:column;box-sizing:border-box;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .q-sheet *{box-sizing:border-box}
-.q-serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+.q-serif{font-family:var(--qsf,'Cormorant Garamond'),Georgia,'Times New Roman',serif}
+.q-title,.q-thanks,.q-for{font-family:var(--qt,var(--qsf,'Cormorant Garamond')),Georgia,serif}
 .q-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
 .q-brand{display:flex;gap:14px;align-items:center}.q-brand img{max-height:70px;max-width:150px;object-fit:contain}
 .q-name{font-size:30px;font-weight:600;line-height:1.05}
@@ -222,8 +223,8 @@ dialog h3{font-size:18px}
 .q-orn span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--qa))}.q-orn span:last-child{background:linear-gradient(90deg,var(--qa),transparent)}
 .q-hero{text-align:center;margin:4px 0 22px}
 .q-kicker{font-size:10.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--qa)}
-.q-title{font-size:44px;font-weight:500;line-height:1.08;margin:8px 0 6px}
-.q-for{font-size:18px;color:#6b625a}.q-for em{color:var(--qi)}
+.q-title{font-size:calc(44px * var(--qtz,1));font-weight:500;line-height:1.08;margin:8px 0 6px}
+.q-for{font-size:calc(18px * var(--qtz2,1));color:#6b625a}.q-for em{color:var(--qi)}
 .q-facts{display:flex;justify-content:center;background:var(--qs);margin-bottom:26px}
 .q-facts div{flex:1 1 0;min-width:0;padding:12px 14px;text-align:center;border-right:1px solid rgba(0,0,0,.07)}.q-facts div:last-child{border-right:0}
 .q-facts small{display:block;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin-bottom:2px}
@@ -243,19 +244,19 @@ dialog h3{font-size:18px}
 .q-ant{margin-top:14px;background:var(--qs);padding:12px 14px;text-align:center;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b625a}
 .q-ant b{display:block;font-size:22px;color:var(--qi);letter-spacing:0;text-transform:none;font-weight:600}
 .q-end{margin-top:auto;padding-top:6px}
-.q-thanks{text-align:center;font-style:italic;font-size:20px;margin-top:28px;color:var(--qi)}
+.q-thanks{text-align:center;font-style:var(--qfs,italic);font-size:calc(20px * var(--qtz2,1));margin-top:28px;color:var(--qi)}
 .q-foot{text-align:center;font-size:10.5px;letter-spacing:.05em;color:#8a8077}
 .q-sheet.d1{padding:34px 48px 24px}
 .q-sheet.d1 .q-orn{margin:12px 0}
 .q-sheet.d1 .q-hero{margin:0 0 12px}
-.q-sheet.d1 .q-title{font-size:36px;margin:4px 0 2px}
+.q-sheet.d1 .q-title{font-size:calc(36px * var(--qtz,1));margin:4px 0 2px}
 .q-sheet.d1 .q-facts{margin-bottom:14px}
 .q-sheet.d1 .q-facts div{padding:7px 10px}
 .q-sheet.d1 .q-items td{padding:5px 0}
 .q-sheet.d1 .q-items tr.q-cat td{padding:9px 0 0;font-size:15px}
 .q-sheet.d1 .q-bottom{margin-top:14px;gap:28px}
 .q-sheet.d1 .q-notes p{margin-bottom:8px}
-.q-sheet.d1 .q-thanks{margin-top:12px;font-size:17px}
+.q-sheet.d1 .q-thanks{margin-top:12px;font-size:calc(17px * var(--qtz2,1))}
 .q-sheet.d2{font-size:12px;line-height:1.35}
 .q-sheet.d2 .q-items td{padding:3px 0}
 .q-sheet.d2 .q-notes p{font-size:10.5px}
@@ -276,7 +277,7 @@ dialog h3{font-size:18px}
 .q-page.q-mob:not(.fx) .q-sheet{padding:28px 18px 22px;font-size:14px}
 .q-page.q-mob:not(.fx) .q-top{flex-direction:column;gap:14px}
 .q-page.q-mob:not(.fx) .q-meta{text-align:left}
-.q-page.q-mob:not(.fx) .q-title{font-size:34px}
+.q-page.q-mob:not(.fx) .q-title{font-size:calc(34px * var(--qtz,1))}
 .q-page.q-mob:not(.fx) .q-bottom{grid-template-columns:1fr;gap:16px}
 .q-page.q-mob:not(.fx) .q-totals{order:-1}
 .q-page.q-mob:not(.fx) .q-facts{flex-wrap:wrap}
@@ -303,8 +304,12 @@ dialog h3{font-size:18px}
 .q-page.q-mob:not(.fx) .q-amt{font-size:42px!important}.q-page.q-mob:not(.fx) .q-sum b{font-size:17px}.q-page.q-mob:not(.fx) .q-sum div{padding:10px 6px}
 .q-page.q-mob:not(.fx) .q-sign{gap:24px;margin-top:48px}
 .q-refs{margin-top:22px}.q-refs h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin:0 0 8px;font-weight:600}
-.q-refs div{display:flex;gap:10px}.q-refs img{flex:1 1 0;min-width:0;height:130px;object-fit:cover;border-radius:6px;display:block;background:var(--qs)}
-.q-mob .q-refs div{flex-wrap:wrap}.q-mob .q-refs img{flex:1 1 calc(50% - 5px);height:120px}
+.q-refs .q-rg{display:flex;gap:10px}
+.q-ref{flex:1 1 0;min-width:0;height:150px;border-radius:6px;overflow:hidden;background:var(--qs);display:flex;align-items:center;justify-content:center}
+.q-ref img{width:100%;height:auto;display:block;flex:none}
+.q-refs.uno .q-ref{height:auto;background:none}.q-refs.uno .q-ref img{width:auto;max-width:100%;max-height:300px;border-radius:6px}
+.q-sheet.d1 .q-refs.uno .q-ref img{max-height:230px}.q-sheet.d2 .q-refs.uno .q-ref img{max-height:180px}
+.q-mob .q-refs .q-rg{flex-wrap:wrap}.q-mob .q-ref{flex:1 1 calc(50% - 5px);height:130px}.q-mob .q-refs.uno .q-ref{height:auto}
 .q-con .q-hero{margin-bottom:18px}
 .q-blk{margin:0 0 14px}.q-blk h4,.q-anx h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--qa);margin:0 0 6px;font-weight:600}
 .q-dat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;background:var(--qs);padding:8px 14px}
@@ -470,6 +475,9 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 .ffld{display:flex;gap:14px;align-items:center}.ff-img{width:96px;height:96px;border-radius:18px;background:var(--pri2);color:var(--pri);display:grid;place-items:center;overflow:hidden;flex:none;border:1px dashed var(--line)}.ff-img img{width:100%;height:100%;object-fit:cover}.ff-b{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .thumb{border-radius:12px;object-fit:cover;flex:none;display:inline-grid;place-items:center;cursor:zoom-in;background:var(--pri2)}.thumb.ph{color:var(--mut);opacity:.6;cursor:default}
 .srow{display:flex;gap:12px;align-items:center}
+.fnt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.fnt:last-of-type{border-bottom:0}
+.fnt b{font-weight:500}.fnt select{width:auto;min-width:150px}.fnt .fs{grid-column:1/-1;color:var(--ink);line-height:1.15;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cwarn{display:flex;gap:10px;margin-top:8px;padding:12px 14px;border-radius:14px;background:#fff4e0;color:#6b4a12;border:1px solid #f0d9a8;font-size:13.5px;line-height:1.45}.cwarn .ic{flex:none;margin-top:2px}
 .qfchk{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:14px;cursor:pointer}.qfchk input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--pri)}.qfchk.on{border-style:solid;border-color:var(--pri);background:var(--pri2)}.qfst{display:flex;gap:4px;margin-top:8px}.qfst img{width:30px;height:30px;border-radius:8px;object-fit:cover}
 .pl-n .note{white-space:nowrap}
 .pstrip{display:flex;gap:6px;margin-top:12px}.pstrip img{width:46px;height:46px;border-radius:12px;object-fit:cover;border:2px solid var(--card);box-shadow:0 2px 6px rgba(0,0,0,.08)}
@@ -1136,7 +1144,7 @@ function vCotDet(id){
     <div id="qtot" style="max-width:360px;margin-left:auto">${totEd(q)}</div></div>
   <div class="panel"><h3>Mensaje y condiciones</h3>
     <label class="fld"><span>Nota para el cliente (opcional)</span><textarea rows="3" oninput="qs('${id}','notas',this.value)">${esc(q.notas)}</textarea></label>
-    <label class="fld"><span>Condiciones · {anticipo} y {validez} se reemplazan solos</span><textarea rows="6" oninput="qs('${id}','cond',this.value)">${esc(q.cond)}</textarea></label></div>
+    <label class="fld"><span>Condiciones · las palabras {anticipo} y {validez} se cambian solas por los números de arriba. No escribás el número junto a ellas.</span><textarea rows="6" oninput="qs('${id}','cond',this.value);condUpd('${id}')">${esc(q.cond)}</textarea></label><div id="qcondw">${condWarn(q)}</div><p class="note" style="margin:6px 0 0">Así sale: anticipo del <b>${esc(q.anticipo)}%</b> · válida por <b>${esc(q.validez)} días</b>. Para cambiarlos, usá los campos de "Totales y condiciones de pago".</p></div>
   ${acts}`;
 }
 function cliSel(q){
@@ -1182,15 +1190,55 @@ function convCot(id){
   q.eventoId=ev.id;q.estado='Aceptada';save();go('ev',ev.id);
 }
 function orn(){return'<div class="q-orn"><span></span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0L10 8L8 16L6 8Z" fill="currentColor"/><path d="M0 8L8 6L16 8L8 10Z" fill="currentColor" opacity=".5"/></svg><span></span></div>';}
+/* Condiciones: {anticipo} y {validez} se cambian solos. Si alguien escribió el número junto a la palabra
+   (ej. "{anticipo}50%"), se quita ese número para que no salga repetido ("5050%"). */
+const condFix=t=>String(t||'').replace(/\{anticipo\}\s*\d+(?:[.,]\d+)?\s*%/g,'{anticipo}%').replace(/\d+(?:[.,]\d+)?\s*%?\s*\{anticipo\}/g,'{anticipo}')
+  .replace(/\{validez\}\s*\d+/g,'{validez}').replace(/\d+\s*\{validez\}/g,'{validez}');
+const condTxt=q=>condFix(q.cond).replace(/\{anticipo\}/g,q.anticipo).replace(/\{validez\}/g,q.validez);
+function condWarn(q){if(condFix(q.cond)===String(q.cond||''))return'';
+  return`<div class="cwarn">${ic('info',18)}<div><b>Hay un número escrito junto a {anticipo} o {validez}</b><br>Esas palabras ya se cambian solas por el anticipo (${esc(q.anticipo)}%) y los días de validez (${esc(q.validez)}) que pusiste en "Totales y condiciones de pago". Por eso el número salía repetido. En la cotización ya sale bien; tocá Corregir para limpiar el texto.<div style="margin-top:8px"><button class="btn sm pri" onclick="condCorregir('${q.id}')">Corregir texto</button></div></div></div>`;}
+function condUpd(id){const q=getQ(id),w=$('qcondw');if(q&&w)w.innerHTML=condWarn(q);}
+function condCorregir(id){const q=getQ(id);q.cond=condFix(q.cond);save();render();toast('✓ Condiciones corregidas');}
+/* Letras de las cotizaciones según el tipo de evento (Ajustes › Letra de las cotizaciones) */
+const FUENTES={
+  clasica:{n:'Clásica',t:"'Cormorant Garamond'",s:"'Cormorant Garamond'",b:"'Jost'",g:''},
+  romantica:{n:'Romántica',t:"'Great Vibes'",s:"'Cormorant Garamond'",b:"'Jost'",z:1.3,z2:1.4,fs:'normal',g:'Great+Vibes'},
+  realeza:{n:'Realeza',t:"'Cinzel'",s:"'Cinzel'",b:"'Montserrat'",z:.8,z2:.85,fs:'normal',g:'Cinzel:wght@400;500;600&family=Montserrat:wght@400;500;600'},
+  moderna:{n:'Moderna',t:"'Playfair Display'",s:"'Playfair Display'",b:"'Montserrat'",z:.92,z2:.95,g:'Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600'},
+  alegre:{n:'Alegre',t:"'Fredoka'",s:"'Fredoka'",b:"'Nunito'",z:.95,z2:.95,fs:'normal',g:'Fredoka:wght@400;500;600&family=Nunito:wght@400;500;600'},
+  delicada:{n:'Delicada',t:"'Allura'",s:"'Lora'",b:"'Quicksand'",z:1.35,z2:1.45,fs:'normal',g:'Allura&family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600'}
+};
+const FUENTE_SUG={'Boda':'romantica','XV años':'realeza','Cumpleaños':'alegre','Graduación':'moderna','Bautizo':'delicada','Primera comunión':'delicada','Baby shower':'alegre','Aniversario':'romantica','Evento corporativo':'moderna','Otro':'clasica'};
+function fuenteDe(tipo){const m=CF().fuentes||{};const k=m[tipo]||m['Otro'];return FUENTES[k]?k:'clasica';}
+const FLOAD={};
+function useFont(k){const F=FUENTES[k];if(!F||!F.g)return Promise.resolve();if(FLOAD[k])return FLOAD[k];
+  FLOAD[k]=new Promise(r=>{const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+F.g+'&display=swap';l.onload=l.onerror=()=>r();document.head.appendChild(l);setTimeout(r,5000);});
+  return FLOAD[k];}
+function fvars(k){const F=FUENTES[k];if(!F||k==='clasica')return'';useFont(k);
+  return`;--qt:${F.t};--qsf:${F.s};--qb:${F.b};--qtz:${F.z||1};--qtz2:${F.z2||1};--qfs:${F.fs||'italic'}`;}
+/* Antes de convertir a imagen/PDF, carga las letras para que no salgan pegadas ni con otra letra */
+async function fontsFor(sp){
+  const F=FUENTES[(sp&&sp.fk)||'clasica']||FUENTES.clasica;await useFont(sp&&sp.fk);
+  const fam=[...new Set([F.t,F.s,F.b,"'Cormorant Garamond'","'Jost'"])],L=[];
+  fam.forEach(f=>['400 16px ','500 16px ','600 16px ','italic 500 16px '].forEach(w=>L.push(w+f)));
+  try{await Promise.race([Promise.all(L.map(x=>document.fonts.load(x,'Áa Bb 0123'))),new Promise(r=>setTimeout(r,5000))]);await document.fonts.ready;}catch(e){}
+}
+function fuenteSet(tipo,k){D.cfg=CF();D.cfg.fuentes={...(D.cfg.fuentes||{}),[tipo]:k};save();render();}
+function fuentesSug(){D.cfg=CF();D.cfg.fuentes={...FUENTE_SUG};save();render();toast('✓ Letras sugeridas aplicadas');}
+function fuentesPanel(){const m=CF().fuentes||{};Object.keys(FUENTES).forEach(useFont);
+  return`<div class="panel" id="pFuentes"><div class="row sp"><h3 style="margin:0">Letra de las cotizaciones</h3><button class="btn sm" onclick="fuentesSug()">✦ Usar las sugeridas</button></div>
+  <p class="note">Elegí un estilo de letra para cada tipo de evento. Se usa en la cotización, su página de fotos, el PDF, la imagen y el HTML.</p>
+  ${TIPOS.map(t=>{const k=FUENTES[m[t]]?m[t]:'clasica',F=FUENTES[k];return`<div class="fnt"><b>${esc(t)}</b><select onchange="fuenteSet('${esc(t)}',this.value)">${Object.entries(FUENTES).map(([kk,x])=>`<option value="${kk}"${kk===k?' selected':''}>${x.n}</option>`).join('')}</select>
+    <div class="fs" style="font-family:${F.t},serif;font-size:${Math.round(26*(F.z||1))}px">${t==='Otro'?'Mi evento':esc(t)} · Preparado para Ana</div></div>`;}).join('')}</div>`;}
 function sheet(q){
   const c=CF(),P=PAL[c.estilo]||PAL.champagne,t=cotTot(q);
   const groups=[];q.items.filter(it=>(parseFloat(it.cant)||0)!==0||!String(it.cant).trim()).forEach(it=>{const k=(it.cat||'').trim();let g=groups.find(x=>x.k===k);if(!g)groups.push(g={k,it:[]});g.it.push(it);});
   const anyCat=groups.some(g=>g.k);
   const facts=[['Fecha',fLarga(q.fechaEv)],['Hora',fHora(q.hora)],['Lugar',q.lugar],['Invitados',q.invitados],['Temática',q.tema]].filter(x=>x[1]);
-  const cond=(q.cond||'').replace(/\{anticipo\}/g,q.anticipo).replace(/\{validez\}/g,q.validez);
+  const cond=condTxt(q);
   const foot=[c.dir,c.tel,c.correo,c.rtn&&'RTN '+c.rtn].filter(Boolean).map(esc).join('  ·  ');
   const row=it=>`<tr><td>${esc(it.desc)||'—'}</td><td class="n">${fCant(it.cant)}</td><td class="n">${it.precio?fmt(it.precio):'—'}</td><td class="n">${it.precio?fmt(lineT(it)):'<span class="q-inc q-serif">Incluido</span>'}</td></tr>`;
-  return`<div class="q-sheet" style="--qa:${P.a};--qs:${P.s};--qi:${P.i}">
+  return`<div class="q-sheet" style="--qa:${P.a};--qs:${P.s};--qi:${P.i}${fvars(fuenteDe(q.tipo))}">
   <div class="q-top">
     <div class="q-brand">${c.logo?`<img src="${c.logo}" alt="">`:''}<div><div class="q-name q-serif">${esc(D.negocio)}</div>${c.eslogan?`<div class="q-tag">${esc(c.eslogan)}</div>`:''}</div></div>
     <div class="q-meta"><div class="q-doc q-serif">Cotización</div>No. <b>${esc(q.num)}</b><br>Fecha: ${fLarga(q.fecha)}<br>Válida hasta: ${fLarga(addDays(q.fecha,q.validez))}</div>
@@ -1201,7 +1249,7 @@ function sheet(q){
   <table class="q-items"><thead><tr><th>Descripción</th><th class="n">Cant.</th><th class="n">Precio unitario</th><th class="n">Importe</th></tr></thead>
   ${groups.map(g=>`<tbody>${anyCat?`<tr class="q-cat"><td colspan="4" class="q-serif">${esc(g.k||'Otros')}</td></tr>`:''}${g.it.map(row).join('')}</tbody>`).join('')||'<tbody><tr><td colspan="4" style="text-align:center;color:#8a8077">Sin servicios todavía</td></tr></tbody>'}
   </table>
-  ${q.imgShow!==false&&(q.imgs||[]).length?`<div class="q-refs"><h4>Referencias</h4><div>${q.imgs.map(r=>imgTag(r)).join('')}</div></div>`:''}
+  ${q.imgShow!==false&&(q.imgs||[]).length?`<div class="q-refs${q.imgs.length===1?' uno':''}"><h4>Referencias</h4><div class="q-rg">${q.imgs.map(r=>`<div class="q-ref">${imgTag(r)}</div>`).join('')}</div></div>`:''}
   <div class="q-bottom">
     <div class="q-notes">${q.notas?`<h4>Notas</h4><p>${esc(q.notas)}</p>`:''}${cond?`<h4>Condiciones</h4><p>${esc(cond)}</p>`:''}</div>
     <div class="q-totals">
@@ -1225,7 +1273,7 @@ function fotosSheet(q){
   const anyCat=groups.length>1&&groups.some(g=>g.k);
   const body=`<div style="--gc:${cols};--gh:${gh}px">${groups.map(g=>`${anyCat?`<div class="q-gcat q-serif">${esc(g.k||'Otros')}</div>`:''}<div class="q-grid">${g.it.map(x=>`<figure class="q-fig"><div class="q-ph" style="background-image:url('${x.c.foto}')"></div><b>${esc(x.it.desc||x.c.nombre)}</b><span>Cantidad ${fCant(x.it.cant)}</span></figure>`).join('')}</div>`).join('')}</div>
   <p class="q-gnote">Fotografías de referencia de nuestro inventario.</p>`;
-  return docShell({doc:'Cotización',meta:[['No.',q.num],['Página','2 de 2']],kicker:q.titulo||q.tipo,title:'Lo que incluye',sub:q.cliente?`Así lucirán los detalles para <em>${esc(q.cliente)}</em>`:'Así lucirán los detalles de su evento',body});
+  return docShell({fk:fuenteDe(q.tipo),doc:'Cotización',meta:[['No.',q.num],['Página','2 de 2']],kicker:q.titulo||q.tipo,title:'Lo que incluye',sub:q.cliente?`Así lucirán los detalles para <em>${esc(q.cliente)}</em>`:'Así lucirán los detalles de su evento',body});
 }
 const pagesOf=sp=>sp.pages||[sp.inner];
 const pageOf=(inner,fx,mob,h)=>`<div class="q-page${fx?' fx':''}${mob?' q-mob':''}" data-h="${h||1056}"${fx&&h?` style="height:${h}px"`:''}>${inner}</div>`;
@@ -1264,8 +1312,8 @@ async function foCanvas(page,H){
 }
 async function docCanvas(sp,k,i){k=k||2;window._docK=k;
   const H=sp.h||1056,host=document.createElement('div');host.style.cssText='position:fixed;left:-10000px;top:0;width:816px;pointer-events:none';
-  host.innerHTML=pageOf(pagesOf(sp)[i||0],!sp.multi,false,H);document.body.appendChild(host);
-  try{try{await document.fonts.ready;}catch(e){}
+  await fontsFor(sp);host.innerHTML=pageOf(pagesOf(sp)[i||0],!sp.multi,false,H);document.body.appendChild(host);
+  try{try{await document.fonts.ready;}catch(e){}await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
     const page=host.firstElementChild;let HH=H;
     if(sp.multi){page.style.width='816px';page.style.maxWidth='none';page.style.boxShadow='none';HH=Math.ceil(page.offsetHeight);const t0=page.getBoundingClientRect().top;sp._brk=[...page.querySelectorAll('.q-blk,.q-cl,.q-anx tr,.q-sig,.q-end')].map(el=>Math.round(el.getBoundingClientRect().top-t0));}
     else fitSheet(page.querySelector('.q-sheet'),H);
@@ -1289,7 +1337,7 @@ async function shareOrDl(blob,name){
 }
 /* Documentos: cot = cotización, edc = estado de cuenta (cliente/proveedor), edcev = estado de cuenta de evento, rec = recibo / comprobante */
 function spec(k,a,b,d1,d2){
-  if(k==='cot'){const q=getQ(a);return q&&{inner:sheet(q),pages:q.fotos&&fotoItems(q).length?[sheet(q),fotosSheet(q)]:null,file:safeName(`Cotizacion ${q.num}${q.cliente?' - '+q.cliente:''}`),title:'Cotización '+q.num};}
+  if(k==='cot'){const q=getQ(a);return q&&{fk:fuenteDe(q.tipo),inner:sheet(q),pages:q.fotos&&fotoItems(q).length?[sheet(q),fotosSheet(q)]:null,file:safeName(`Cotizacion ${q.num}${q.cliente?' - '+q.cliente:''}`),title:'Cotización '+q.num};}
   if(k==='edc'){const e=D[MOD[a].ent].find(x=>x.id===b);return e&&{inner:edcSheet(a,b,d1,d2),file:safeName('Estado de cuenta - '+e.nombre),title:'Estado de cuenta'};}
   if(k==='edcev'){const e=D.eventos.find(x=>x.id===a);return e&&{inner:edcEvSheet(a),file:safeName('Estado de cuenta - '+evLabel(e)),title:'Estado de cuenta del evento'};}
   if(k==='con'){const e=D.eventos.find(x=>x.id===a);return e&&e.contrato?{inner:conHtml(conSnap(e)),file:safeName('Contrato '+e.contrato.num+' - '+(e.contrato.campos.cliente||cliName(e.eid))),title:'Contrato '+e.contrato.num,multi:true}:null;}
@@ -1330,7 +1378,7 @@ async function dIMG(...args){
 function docHtml(sp){
   return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#efebe4">
 <title>${esc(sp.title+' · '+D.negocio)}</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">${sp.fk&&FUENTES[sp.fk]&&FUENTES[sp.fk].g?`<link href="https://fonts.googleapis.com/css2?family=${FUENTES[sp.fk].g}&display=swap" rel="stylesheet">`:''}
 <style>html,body{margin:0;background:#efebe4}body{padding:28px 12px 96px}${qcss()}
 .qa{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:14px 12px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(rgba(239,235,228,0),#efebe4 45%)}
 .qa button{border:0;background:#2b2622;color:#fff;font:600 15px system-ui,-apple-system,sans-serif;padding:13px 24px;border-radius:999px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18)}
@@ -1352,7 +1400,7 @@ const savePDF=id=>dPDF('cot',id),saveIMG=id=>dIMG('cot',id),saveHTML=id=>dHTML('
 function docShell(o){
   const c=CF(),P=PAL[c.estilo]||PAL.champagne;
   const foot=[c.dir,c.tel,c.correo,c.rtn&&'RTN '+c.rtn].filter(Boolean).map(esc).join('  ·  ');
-  return`<div class="q-sheet" style="--qa:${P.a};--qs:${P.s};--qi:${P.i}">
+  return`<div class="q-sheet" style="--qa:${P.a};--qs:${P.s};--qi:${P.i}${o.fk?fvars(o.fk):''}">
   <div class="q-top"><div class="q-brand">${c.logo?`<img src="${c.logo}" alt="">`:''}<div><div class="q-name q-serif">${esc(D.negocio)}</div>${c.eslogan?`<div class="q-tag">${esc(c.eslogan)}</div>`:''}</div></div>
     <div class="q-meta"><div class="q-doc q-serif">${esc(o.doc)}</div>${o.meta.filter(m=>m[1]).map(([l,v])=>`${l}: <b>${esc(v)}</b>`).join('<br>')}</div></div>
   ${orn()}
@@ -2250,6 +2298,11 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.22-1',fecha:'2026-10-22',items:[
+  {i:'edit',tag:'n',t:'Una letra para cada tipo de evento',d:'Elegí la letra de las cotizaciones de bodas, XV años, cumpleaños y más: Romántica, Realeza, Moderna, Alegre o Delicada.',donde:'Ajustes › Letra de las cotizaciones',ir:"go('aj');setTimeout(()=>{const e=document.getElementById('pFuentes');e&&e.scrollIntoView({behavior:'smooth'})},200)"},
+  {i:'camera',tag:'c',t:'Fotos de referencia sin deformarse',d:'En el PDF y la imagen las fotos salen con su forma real: una sola foto sale completa y varias salen en recuadros parejos.',donde:'Cotización › Imágenes de referencia',ir:"go('cot')"},
+  {i:'info',tag:'c',t:'Textos más nítidos y condiciones sin números repetidos',d:'La imagen y el PDF esperan a que cargue la letra, para que las palabras no salgan pegadas. Y si escribís un número junto a {anticipo} o {validez}, igual sale bien.',donde:'Cotizaciones',ir:"go('cot')"}
+ ]},
  {ver:'2026.10.12-1',fecha:'2026-10-12',items:[
   {i:'camera',tag:'n',t:'Foto en cada artículo del catálogo',d:'Ponele foto a tus sillas, manteles, pasteles y todo lo que alquilás. Se ve en el catálogo, en los paquetes y en lo que lleva cada evento.',donde:'Servicios › Catálogo',ir:"S.srvTab='cat';go('srv')"},
   {i:'camera',tag:'n',t:'Página 2 con fotos en la cotización',d:'Marcá la casilla y la cotización lleva una segunda página con las fotos de lo que incluye. Sale en el PDF, la imagen, el HTML y por WhatsApp.',donde:'Cotización › Servicios',ir:"go('cot')"}
@@ -2483,6 +2536,7 @@ function vAjustes(){
   ${licPanel()}
   <div class="panel"><h3>Datos del negocio</h3><div class="row"><input id="inNeg" value="${esc(D.negocio)}" style="flex:1;min-width:200px"><button class="btn pri" onclick="D.negocio=$('inNeg').value.trim()||'Mi Negocio';save();render()">Guardar</button></div></div>
   ${cfgPanel()}
+  ${fuentesPanel()}
   <div class="panel"><h3>Numeración de recibos</h3><p class="note">Cada abono de cliente y cada pago a proveedor recibe un número consecutivo automáticamente. Si ya usaban un talonario, escribí aquí el último número emitido para continuar desde ahí.</p>
     <div class="g2"><label class="fld"><span>Último recibo de cliente emitido (REC)</span><input inputmode="numeric" value="${D.recSeq||0}" onchange="setSeq('cli',this.value)"></label>
     <label class="fld"><span>Último comprobante de pago emitido (CP)</span><input inputmode="numeric" value="${D.cpSeq||0}" onchange="setSeq('prov',this.value)"></label></div>
@@ -2755,7 +2809,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.12-1';
+const APP_VER='2026.10.22-1';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
