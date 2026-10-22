@@ -2188,6 +2188,7 @@ async function conLink(id){
 function vCon(id){
   const e=conEv(id);if(!e){S.tab='ev';S.sel=null;return vEv();}
   const c=e.contrato,back=`<button class="back noprint" onclick="go('ev','${id}')">← ${esc(evLabel(e))}</button>`;
+  if(c&&c.estado!=='firmado'){const cf=CF();let ch=0;[['rep','conRep'],['repId','conRepId'],['ciudad','conCiudad']].forEach(([k,g])=>{if(!c.campos[k]&&cf[g]){c.campos[k]=cf[g];ch++;}});if(ch){saveLater();conPushLater(id);}}
   if(!c){const sug=conSugerido(e);
     return back+`<div class="hd"><h2 class="sec">Contrato del evento</h2><p class="note" style="margin:4px 0 0">Elegí el tipo de contrato. Los datos se llenan solos con el evento y la cotización, y podés editar cada dato y cada cláusula hasta que el cliente firme.</p></div>
     <div class="evgrid">${Object.entries(CON_TIPOS).sort((a,b)=>(b[0]===sug)-(a[0]===sug)).map(([k,t])=>`<div class="evc${k===sug?' sug':''}" onclick="conNuevo('${id}','${k}')"><div class="evc-h"><div style="flex:1"><div class="evc-k">${k===sug?'Sugerido para este evento':'Modelo'}</div><div class="evc-t">${esc(t.n)}</div></div><span class="kebab">${ic('pen',20)}</span></div>
@@ -2209,7 +2210,7 @@ function vCon(id){
       <div class="note"><span class="badge au">Sin firmar</span> Podés editarlo hasta que el cliente lo firme.${c.token?' Ya se envió el enlace: los cambios se actualizan solos.':''}</div></div></div>
     <div class="panel"><h3>Tipo de contrato</h3><select onchange="conTipo('${id}',this.value)">${Object.entries(CON_TIPOS).map(([k,t])=>`<option value="${k}"${c.tipo===k?' selected':''}>${esc(t.n)}</option>`).join('')}</select>
       <p class="note" style="margin:8px 0 0">Al cambiar el tipo se reemplazan las cláusulas por las de ese modelo.</p></div>
-    ${grupos.map(g=>`<div class="panel"><h3>${g}</h3><div class="g2">${CON_CAMPOS.filter(x=>x[2]===g).map(inp).join('')}</div></div>`).join('')}
+    ${grupos.map(g=>`<div class="panel"><h3>${g}</h3>${g==='Tu negocio'?`<p class="note" style="margin:-4px 0 10px">Se llenan solos con lo que tenés en Ajustes › Datos para los contratos. Si los cambiás aquí, también quedan guardados para los próximos contratos.</p>`:''}<div class="g2">${CON_CAMPOS.filter(x=>x[2]===g).map(inp).join('')}</div></div>`).join('')}
     <p class="note" style="margin:-6px 0 16px">${ic('eye',14)} Los datos que dejés vacíos no aparecen en el contrato.</p>
     <div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Cláusulas</h3><button class="btn sm gold" onclick="conClAdd('${id}')">+ Agregar cláusula</button></div>
       <p class="note">Cada cláusula se edita en su propio campo. Si dejás el texto vacío, no aparece. Podés usar estas palabras y se reemplazan solas: <span class="tags">{cliente} {fecha} {lugar} {tipo} {invitados} {horaIni} {horaFin} {total} {anticipo} {fAnticipo} {saldo} {fSaldo} {garantia} {negocio}</span></p>
@@ -2456,6 +2457,9 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.22-3',fecha:'2026-10-22',items:[
+  {i:'pen',tag:'c',t:'Los contratos se llenan solos con tus datos',d:'Escribí una vez el representante del negocio, su identidad y la ciudad, y salen en cada contrato.',donde:'Ajustes › Datos para los contratos',ir:"go('aj');setTimeout(()=>{const e=document.getElementById('pConDatos');e&&e.scrollIntoView({behavior:'smooth'})},200)"}
+ ]},
  {ver:'2026.10.22-2',fecha:'2026-10-22',items:[
   {i:'coin',tag:'n',t:'Cobros por hacer',d:'El Inicio te muestra los saldos y cuotas que vencen pronto o ya vencieron. Con "Cobrar" mandás el recordatorio por WhatsApp con el estado de cuenta.',donde:'Inicio › Cobros por hacer',ir:"go('resumen')"},
   {i:'cal',tag:'n',t:'Plan de pagos',d:'Definí las cuotas de cada evento con su fecha. Los abonos se aplican solos y el plan sale en el estado de cuenta del cliente.',donde:'Evento › Plan de pagos',ir:"go('ev')"},
@@ -2508,6 +2512,7 @@ function novVer(L,todas){
 function novIr(k){const x=(window._novI||[])[k];if(!x)return;DL.close();new Function(x.ir)();setTimeout(()=>toast('👉 '+x.donde,4500),150);}
 /* ===== Ayuda con buscador: explica y lleva al lugar ===== */
 const AYUDA=[
+ ['Contratos','Guardar el representante, la identidad y la ciudad para todos los contratos','representante identidad ciudad contrato negocio datos llenar solos',['Abrí Ajustes.','En "Datos para los contratos" escribí el representante, su identidad y la ciudad.','Se llenan solos en cada contrato.'],"go('aj')",'#pConDatos'],
  ['Cobros','Ver a quién hay que cobrar y mandarle el recordatorio','cobrar recordatorio saldo pendiente cuota vencida whatsapp',['En el Inicio, mirá "Cobros por hacer".','Tocá "Cobrar": se abre WhatsApp con el mensaje y el estado de cuenta.'],"go('resumen')",'.cobros'],
  ['Cobros','Crear un plan de pagos (cuotas) para un evento','plan pagos cuotas anticipo saldo fechas',['Abrí el evento.','En "Plan de pagos" tocá "✦ Sugerir plan" o "+ Cuota".','Los abonos se aplican solos a cada cuota.'],"go('ev')",'#pPlan'],
  ['Ganancias','Ver cuánto gano por evento, por mes y por tipo','ganancia utilidad margen reporte mes tipo evento',['Abrí Menú › Ganancias.','Elegí el año.','Para que sea exacto, ligá cada gasto a su evento.'],"go('gan')",''],
@@ -2709,6 +2714,7 @@ function vAjustes(){
   <div class="panel"><h3>Datos del negocio</h3><div class="row"><input id="inNeg" value="${esc(D.negocio)}" style="flex:1;min-width:200px"><button class="btn pri" onclick="D.negocio=$('inNeg').value.trim()||'Mi Negocio';save();render()">Guardar</button></div></div>
   ${cfgPanel()}
   ${fuentesPanel()}
+  <div class="panel" id="pConDatos"><h3>Datos para los contratos</h3><p class="note">Se llenan solos en cada contrato nuevo.</p><div class="g2">${[['conRep','Nombre del representante del negocio'],['conRepId','Identidad del representante'],['conCiudad','Ciudad donde se firman los contratos']].map(([k,l])=>`<label class="fld"><span>${l}</span><input value="${esc(CF()[k]||'')}" oninput="cfgSet('${k}',this.value)"></label>`).join('')}</div></div>
   <div class="panel"><h3>Cobros</h3><label class="fld" style="max-width:420px"><span>El saldo de un evento se cobra cuántos días antes</span><input inputmode="numeric" value="${diasCobro()}" onchange="cfgSet('diasCobro',parseInt(this.value)||0);render()"></label><p class="note" style="margin:0">Se usa para los recordatorios del Inicio y para el plan de pagos sugerido.</p></div>
   <div class="panel"><h3>Numeración de recibos</h3><p class="note">Cada abono de cliente y cada pago a proveedor recibe un número consecutivo automáticamente. Si ya usaban un talonario, escribí aquí el último número emitido para continuar desde ahí.</p>
     <div class="g2"><label class="fld"><span>Último recibo de cliente emitido (REC)</span><input inputmode="numeric" value="${D.recSeq||0}" onchange="setSeq('cli',this.value)"></label>
@@ -2982,7 +2988,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.22-2';
+const APP_VER='2026.10.22-3';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
