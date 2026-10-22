@@ -49,6 +49,7 @@ function atrasApp(){
     if(document.getElementById('mcLive')){mcLiveClose();return 'ok';}
     if(typeof S==='undefined'||!document.querySelector('.hbtn')) return 'salir';
     if(S.tab==='doc'){docBack();return 'ok';}
+    if(S.tab==='cons'&&S.consTab==='mod'&&S.conMod){S.conMod=null;render();return 'ok';}
     if((S.tab==='con'||S.tab==='inv')&&S.sel){go('ev',S.sel);return 'ok';}
     if(S.sel){go(S.tab);return 'ok';}
     if(S.tab!=='resumen'){go('resumen');return 'ok';}
@@ -647,7 +648,7 @@ function render(){
   document.querySelectorAll('.tnav button').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tab));
   hdr();bnav();closePop();
   banner();
-  const v={gan:vGan,resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,mc:vMC,con:()=>vCon(S.sel),inv:()=>vInv(S.sel),cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
+  const v={cons:vCons,gan:vGan,resumen:vResumen,help:vHelp,srv:vSrv,doc:vDoc,ev:vEv,cot:vCot,mc:vMC,con:()=>vCon(S.sel),inv:()=>vInv(S.sel),cli:()=>vEnt('cli'),prov:()=>vEnt('prov'),ig:vIG,bco:vBco,aj:vAjustes}[S.tab];
   $('main').innerHTML=v();
   const qp=(S.tab==='cot'&&!!S.sel&&S.qMode==='prev')||S.tab==='doc';
   document.body.classList.toggle('qprint',qp);
@@ -752,7 +753,7 @@ filter:'<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>',pen:'<path d="M4 20h4l10.5-10.
 const ic=(n,sz=22)=>`<svg class="ic" width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICP[n]||''}</svg>`;
 
 /* ===== Encabezado y navegación ===== */
-const TITLES={gan:'Ganancias',con:'Contrato',inv:'Invitados y mesas',mc:'Maestro de ceremonia',help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
+const TITLES={cons:'Contratos',gan:'Ganancias',con:'Contrato',inv:'Invitados y mesas',mc:'Maestro de ceremonia',help:'Ayuda',srv:'Servicios',doc:'Documento',resumen:'Inicio',ev:'Eventos',cot:'Cotizaciones',cli:'Clientes',prov:'Proveedores',ig:'Ingresos y gastos',bco:'Banco y caja',aj:'Ajustes'};
 function hdr(){
   const c=CF();
   if(S.tab==='resumen'){
@@ -769,7 +770,7 @@ function hdr(){
       else if(S.tab==='srv'){const e=D.paquetes.find(x=>x.id===S.sel);if(e)t=e.nombre;}
       else if(S.tab==='mc'){const e=D.mc.find(x=>x.id===S.sel);if(e)t=e.nombre;}}
     if(S.tab==='doc'){const sp=S.docK&&spec(...S.docK);if(sp)t=sp.title;}
-    $('hbox').innerHTML=`<div class="bar"><div class="bar-in"><button class="hbtn" onclick="${S.tab==='doc'?'docBack()':(S.tab==='con'||S.tab==='inv')&&S.sel?`go('ev','${S.sel}')`:S.sel?`go('${S.tab}')`:`go('resumen')`}" aria-label="Volver">${ic('left',22)}</button><div class="bar-t">${esc(t)}</div>${cloudBtn()}<button class="hbtn" onclick="menuMas()" aria-label="Menú">${ic('grid',20)}</button></div></div>`;
+    $('hbox').innerHTML=`<div class="bar"><div class="bar-in"><button class="hbtn" onclick="${S.tab==='cons'&&S.consTab==='mod'&&S.conMod?'S.conMod=null;render()':S.tab==='doc'?'docBack()':(S.tab==='con'||S.tab==='inv')&&S.sel?`go('ev','${S.sel}')`:S.sel?`go('${S.tab}')`:`go('resumen')`}" aria-label="Volver">${ic('left',22)}</button><div class="bar-t">${esc(t)}</div>${cloudBtn()}<button class="hbtn" onclick="menuMas()" aria-label="Menú">${ic('grid',20)}</button></div></div>`;
   }
 }
 function bnav(){
@@ -781,7 +782,7 @@ function actSheet(title,items){
   DL.innerHTML=`<div class="sh"><h3>${esc(title)}</h3><div class="sh-g">${items.map(([i,l,f])=>`<button onclick="DL.close();${f}">${ic(i,26)}<span>${l}</span></button>`).join('')}</div></div>`;
   DL.showModal();
 }
-function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['box','Servicios y paquetes',"go('srv')"],['mic','Maestro de ceremonia'+(isPlus()?'':' <span class="badge au">Plus</span>'),"go('mc')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['trend','Ganancias',"go('gan')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
+function menuMas(){actSheet('Menú',[['home','Inicio',"go('resumen')"],['cal','Eventos',"go('ev')"],['doc','Cotizaciones',"go('cot')"],['pen','Contratos',"go('cons')"],['box','Servicios y paquetes',"go('srv')"],['mic','Maestro de ceremonia'+(isPlus()?'':' <span class="badge au">Plus</span>'),"go('mc')"],['users','Clientes',"go('cli')"],['truck','Proveedores',"go('prov')"],['trend','Ganancias',"go('gan')"],['cash','Ingresos y gastos',"go('ig')"],['bank','Banco y caja',"go('bco')"],['help','Ayuda',"go('help')"],['gear','Ajustes',"go('aj')"]]);}
 function needEnt(k,fn){if(!D[MOD[k].ent].length){toast(k==='cli'?'Primero agregá un cliente':'Primero agregá un proveedor');go(k);return;}fn();}
 function menuNuevo(){actSheet('¿Qué querés registrar?',[['cal','Evento',`evForm(null,S.calDay||'')`],['doc','Cotización','newCot()'],['coin','Abono de cliente',"needEnt('cli',()=>movForm('cli',null,'C'))"],['receipt','Gasto',"igForm('G')"],['cash','Ingreso',"igForm('I')"],['truck','Pago a proveedor',"needEnt('prov',()=>movForm('prov',null,'C'))"]]);}
 DL.addEventListener('click',e=>{if(e.target===DL)DL.close();});
@@ -2097,6 +2098,44 @@ const CON_TIPOS={
 const ORD=['PRIMERA','SEGUNDA','TERCERA','CUARTA','QUINTA','SEXTA','SÉPTIMA','OCTAVA','NOVENA','DÉCIMA','DÉCIMA PRIMERA','DÉCIMA SEGUNDA','DÉCIMA TERCERA','DÉCIMA CUARTA','DÉCIMA QUINTA','DÉCIMA SEXTA','DÉCIMA SÉPTIMA','DÉCIMA OCTAVA','DÉCIMA NOVENA','VIGÉSIMA','VIGÉSIMA PRIMERA','VIGÉSIMA SEGUNDA','VIGÉSIMA TERCERA','VIGÉSIMA CUARTA','VIGÉSIMA QUINTA'];
 const ordN=i=>ORD[i]||('CLÁUSULA '+(i+1));
 function conCls(tipo){const m=((D.cfg||{}).conModelos||{})[tipo];if(m&&m.length)return m.map(x=>[x.t,x.x]);return(CON_TIPOS[tipo]||CON_TIPOS.general).k.map(k=>CLS[k]);}
+/* ===== Módulo de contratos: todos los contratos + modelos ===== */
+function conAll(){return D.eventos.filter(e=>e.contrato).map(e=>({e,c:e.contrato,est:e.contrato.estado==='firmado'?'firmado':e.contrato.token?'enviado':'borrador'}));}
+const CONEST={borrador:['r','Borrador'],enviado:['au','Esperando firma'],firmado:['','Firmado']};
+function consSeg(){const t=S.consTab||'lista';return`<div class="row sp hd"><div class="seg"><button class="${t==='lista'?'on':''}" onclick="S.consTab='lista';S.conMod=null;render()">Contratos (${conAll().length})</button><button class="${t==='mod'?'on':''}" onclick="S.consTab='mod';render()">Modelos</button></div></div>`;}
+function vCons(){
+  if(S.consTab==='mod')return consSeg()+vConMods();
+  const L=conAll(),q=sinAc(S.buscar||'').trim(),fe=S.consEst||'',n=k=>L.filter(x=>x.est===k).length,rk={borrador:0,enviado:1,firmado:2};
+  const R=L.filter(x=>(!fe||x.est===fe)&&(!q||sinAc(x.c.num+' '+evLabel(x.e)+' '+(x.c.campos.cliente||'')).includes(q)))
+    .sort((a,b)=>(rk[a.est]-rk[b.est])||(a.e.fecha||'9').localeCompare(b.e.fecha||'9'));
+  const sin=D.eventos.filter(e=>!e.contrato&&e.estado!=='Cancelado'&&(!e.fecha||e.fecha>=hoy())).sort((a,b)=>(a.fecha||'9').localeCompare(b.fecha||'9'));
+  const card=(k,l,v)=>`<button class="card" style="text-align:left;cursor:pointer;font:inherit;${fe===k?'outline:2px solid var(--pri)':''}" onclick="S.consEst='${k}';render()"><div class="k">${l}</div><div class="v">${v}</div></button>`;
+  return consSeg()+`<div class="cards">${card('','Todos',L.length)}${card('borrador','Borradores',n('borrador'))}${card('enviado','Esperando firma',n('enviado'))}${card('firmado','Firmados',n('firmado'))}</div>
+  ${L.length?`<div class="filt noprint" style="margin-bottom:12px"><label class="srch">${ic('search',18)}<input id="srch" placeholder="Buscar contrato, cliente o evento…" value="${esc(S.buscar||'')}" oninput="S.buscar=this.value;srchRender()"></label></div>`:''}
+  ${R.length?`<div class="evgrid">${R.map(({e,c,est})=>{const[bc,bl]=CONEST[est],t=CON_TIPOS[c.tipo]||CON_TIPOS.general;
+    return`<div class="evc" onclick="go('con','${e.id}')"><div class="evc-h"><div style="min-width:0"><div class="evc-k">${esc(c.num)} · ${esc(t.n)}</div><div class="evc-t">${esc(c.campos.cliente||cliName(e.eid))}</div></div><span class="badge ${bc}">${bl}</span></div>
+      <div class="note" style="margin:6px 0 12px">${esc(e.nombre)} · ${esc(fDia(e.fecha))}${est==='firmado'&&c.firma&&c.firma.fecha?` · firmado el ${esc(fFecha(isoD(new Date(c.firma.fecha))))}`:''}</div>
+      <div class="row" style="gap:6px" onclick="event.stopPropagation()">${est!=='firmado'?`<button class="btn sm wa" onclick="conLink('${e.id}')">${ic('send',15)} ${c.token?'Reenviar para firmar':'Enviar para firmar'}</button>`:''}<button class="btn sm" onclick="openDoc('con','${e.id}')">${ic('eye',15)} Ver · PDF</button></div></div>`;}).join('')}</div>`
+    :`<div class="panel empty">${L.length?'Sin resultados':'Todavía no hay contratos. Creá uno desde un evento o desde la lista de abajo.'}</div>`}
+  ${sin.length?`<div class="panel" style="margin-top:16px"><h3 style="margin:0 0 4px">Eventos próximos sin contrato</h3>${sin.slice(0,S.consAll?99:6).map(e=>`<div class="cob-r"><div class="cob-i" onclick="go('ev','${e.id}')"><b>${esc(cliName(e.eid))}</b><span class="note">${esc(e.nombre)} · ${esc(fDia(e.fecha))}</span></div><button class="btn sm gold" onclick="go('con','${e.id}')">${ic('pen',15)} Crear contrato</button></div>`).join('')}
+    ${sin.length>6?`<button class="btn sm ghost" style="margin-top:6px" onclick="S.consAll=!S.consAll;render()">${S.consAll?'Ver menos':'Ver los '+sin.length}</button>`:''}</div>`:''}`;
+}
+function vConMods(){if(S.conMod&&CON_TIPOS[S.conMod])return conModEd(S.conMod);const m=CF().conModelos||{};
+  return`<p class="note" style="margin-top:0">Cada tipo de contrato tiene sus cláusulas. Lo que cambiés aquí se usa en los contratos <b>nuevos</b> de ese tipo; los contratos ya creados no cambian.</p>
+  <div class="evgrid">${Object.entries(CON_TIPOS).map(([k,t])=>`<div class="evc" onclick="S.conMod='${k}';render();scrollTo(0,0)"><div class="evc-h"><div><div class="evc-k">${m[k]&&m[k].length?'Personalizado':'Modelo original'}</div><div class="evc-t">${esc(t.n)}</div></div><span class="kebab">${ic('edit',20)}</span></div>
+    <div class="note" style="margin:8px 0 12px">${esc(t.d)}</div><div class="evc-f"><span>${conCls(k).length} cláusulas</span><span>Editar</span></div></div>`).join('')}</div>`;}
+function cmEnsure(k){D.cfg=CF();D.cfg.conModelos=Object.assign({},D.cfg.conModelos||{});if(!(D.cfg.conModelos[k]&&D.cfg.conModelos[k].length))D.cfg.conModelos[k]=conCls(k).map(([t,x])=>({t,x}));return D.cfg.conModelos[k];}
+function cmSet(k,i,f,v){const L=cmEnsure(k);if(L[i]){L[i][f]=v;saveLater();}}
+function cmAdd(k){cmEnsure(k).push({t:'Nueva cláusula',x:''});save();render();setTimeout(()=>{const t=document.querySelectorAll('#cmL textarea');t.length&&t[t.length-1].focus();},60);}
+function cmDel(k,i){if(!confirm('¿Quitar esta cláusula del modelo?'))return;cmEnsure(k).splice(i,1);save();render();}
+function cmMove(k,i,d){const L=cmEnsure(k),j=i+d;if(j<0||j>=L.length)return;[L[i],L[j]]=[L[j],L[i]];save();render();}
+function cmOrig(k){if(!confirm('¿Volver a las cláusulas originales de este modelo? Se pierden tus cambios en el modelo.'))return;D.cfg=CF();if(D.cfg.conModelos)delete D.cfg.conModelos[k];save();render();toast('✓ Modelo original restaurado');}
+function conModEd(k){const L=conCls(k),t=CON_TIPOS[k];
+  return`<button class="back" onclick="S.conMod=null;render()">← Modelos</button>
+  <div class="row sp hd"><div><h2>${esc(t.n)}</h2><div class="note">${esc(t.d)}</div></div><div class="row" style="gap:6px"><button class="btn sm ghost" onclick="cmOrig('${k}')">Volver al original</button><button class="btn sm gold" onclick="cmAdd('${k}')">+ Agregar cláusula</button></div></div>
+  <p class="note">Los cambios se guardan solos. Podés usar estas palabras y se reemplazan solas en cada contrato: <span class="tags">{cliente} {fecha} {lugar} {tipo} {invitados} {horaIni} {horaFin} {total} {anticipo} {fAnticipo} {saldo} {fSaldo} {garantia} {negocio}</span></p>
+  <div id="cmL">${L.map(([ti,x],i)=>`<div class="panel"><div class="row sp" style="margin-bottom:8px"><span class="evc-k">Cláusula ${i+1}</span><div class="row" style="gap:4px"><button class="btn sm ghost" onclick="cmMove('${k}',${i},-1)" aria-label="Subir">↑</button><button class="btn sm ghost" onclick="cmMove('${k}',${i},1)" aria-label="Bajar">↓</button><button class="btn sm ghost bad" onclick="cmDel('${k}',${i})" aria-label="Quitar">✕</button></div></div>
+    <input value="${esc(ti)}" oninput="cmSet('${k}',${i},'t',this.value)" style="font-weight:600;margin-bottom:8px"><textarea rows="5" oninput="cmSet('${k}',${i},'x',this.value)">${esc(x)}</textarea></div>`).join('')}</div>
+  <button class="btn gold" onclick="cmAdd('${k}')">+ Agregar cláusula</button>`;}
 function conSugerido(e){const t=sinAc(e.nombre+' '+(((D.cotizaciones.find(q=>q.eventoId===e.id))||{}).tipo||''));
   return /boda|matrimonio/.test(t)?'boda':/xv|quince/.test(t)?'xv':/cumple|infantil|baby|bautizo|comunion/.test(t)?'infantil':/corporativ|graduaci|empresa|convenci/.test(t)?'corporativo':/alquiler/.test(t)?'alquiler':'general';}
 const conEv=id=>D.eventos.find(x=>x.id===id);
@@ -2457,6 +2496,10 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.22-4',fecha:'2026-10-22',items:[
+  {i:'pen',tag:'n',t:'Módulo de contratos',d:'Todos tus contratos en un solo lugar: borradores, esperando firma y firmados. También ves los eventos que todavía no tienen contrato.',donde:'Menú › Contratos',ir:"go('cons')"},
+  {i:'edit',tag:'n',t:'Editá tus modelos de contrato',d:'Cambiá, agregá u ordená las cláusulas de cada tipo de contrato sin necesidad de un evento.',donde:'Menú › Contratos › Modelos',ir:"S.consTab='mod';go('cons')"}
+ ]},
  {ver:'2026.10.22-3',fecha:'2026-10-22',items:[
   {i:'pen',tag:'c',t:'Los contratos se llenan solos con tus datos',d:'Escribí una vez el representante del negocio, su identidad y la ciudad, y salen en cada contrato.',donde:'Ajustes › Datos para los contratos',ir:"go('aj');setTimeout(()=>{const e=document.getElementById('pConDatos');e&&e.scrollIntoView({behavior:'smooth'})},200)"}
  ]},
@@ -2512,6 +2555,8 @@ function novVer(L,todas){
 function novIr(k){const x=(window._novI||[])[k];if(!x)return;DL.close();new Function(x.ir)();setTimeout(()=>toast('👉 '+x.donde,4500),150);}
 /* ===== Ayuda con buscador: explica y lleva al lugar ===== */
 const AYUDA=[
+ ['Contratos','Ver todos los contratos y cuáles faltan por firmar','contratos lista firmados borrador pendientes firmar enviar',['Abrí Menú › Contratos.','Tocá Borradores, Esperando firma o Firmados para filtrar.','Desde ahí podés enviarlo para firmar o ver el PDF.'],"go('cons')",''],
+ ['Contratos','Editar los modelos de contrato (cláusulas)','modelo plantilla clausulas contrato editar boda xv',['Abrí Menú › Contratos › Modelos.','Elegí el tipo de contrato y editá, agregá, quitá u ordená las cláusulas.','Se usan en los contratos nuevos de ese tipo.'],"S.consTab='mod';go('cons')",''],
  ['Contratos','Guardar el representante, la identidad y la ciudad para todos los contratos','representante identidad ciudad contrato negocio datos llenar solos',['Abrí Ajustes.','En "Datos para los contratos" escribí el representante, su identidad y la ciudad.','Se llenan solos en cada contrato.'],"go('aj')",'#pConDatos'],
  ['Cobros','Ver a quién hay que cobrar y mandarle el recordatorio','cobrar recordatorio saldo pendiente cuota vencida whatsapp',['En el Inicio, mirá "Cobros por hacer".','Tocá "Cobrar": se abre WhatsApp con el mensaje y el estado de cuenta.'],"go('resumen')",'.cobros'],
  ['Cobros','Crear un plan de pagos (cuotas) para un evento','plan pagos cuotas anticipo saldo fechas',['Abrí el evento.','En "Plan de pagos" tocá "✦ Sugerir plan" o "+ Cuota".','Los abonos se aplican solos a cada cuota.'],"go('ev')",'#pPlan'],
@@ -2988,7 +3033,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.22-3';
+const APP_VER='2026.10.22-4';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
