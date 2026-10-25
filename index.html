@@ -503,6 +503,7 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 @media print{body.qprint .ponly{display:none!important}body.qprint main{padding:0}.q-stage{height:auto!important;overflow:visible;margin:0}.q-stage+.q-stage{break-before:page;page-break-before:always}.q-pglbl{display:none}.q-page.fx{transform:none!important;margin:0!important;box-shadow:none!important;height:1050px}}
 @media print{header,.noprint,.banner,.bnav{display:none!important}body{background:#fff;color:#000}.card,.panel{box-shadow:none;border-color:#bbb}.ponly{display:block;margin-bottom:8px;font-size:13px}main{padding:0}}
 </style>
+<script src="https://josevic504-bot.github.io/negocio/visitas.js?v=1" defer></script>
 </head>
 <body>
 <header class="noprint"><div id="hbox"></div>
@@ -3033,7 +3034,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.22-4';
+const APP_VER='2026.10.25-1';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
@@ -3046,7 +3047,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 setInterval(verCheck,30*60000);setTimeout(verCheck,8000);
 S.mes=mesActual();
 if(PUBT)pubInit();
-else if(CLOUD){render();if(LIC.estado)cloudLoad();else gate('bienvenida');setInterval(licInit,6*36e5);}
+else if(CLOUD){render();if(LIC.estado){cloudLoad();try{localStorage.setItem('mv_cliente','1')}catch(e){}}else{gate('bienvenida');(window.mvq=window.mvq||[]).push('eventos');}setInterval(licInit,6*36e5);}
 else{numerar();save();render();setTimeout(novCheck,1200);}
 setTimeout(()=>{if(navigator.onLine)loadLib('h2c');},1500);
 </script>
