@@ -421,6 +421,9 @@ body.mclive{overflow:hidden}
 .mcl-fr h3{color:var(--gold);font-size:22px;margin:0 0 12px}
 .mcl-fr p{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;line-height:1.35;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid #2a3631}
 .mcl-fr small{color:#a9b3ad}
+.mcl-body,.mcl-fr p{font-variant-numeric:lining-nums}
+.mcl-frh{position:sticky;top:-22px;margin:-22px -22px 12px;padding:16px 16px 10px 22px;background:#18211d;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:1}.mcl-frh h3{margin:0}
+@media (max-height:500px){.mcl-top{padding:6px 14px 4px}.mcl-x{width:36px;height:36px}.mcl-h small{font-size:10.5px}.mcl-h b{font-size:19px}.mcl-tm b{font-size:24px}.mcl-tm small{font-size:11px}.mcl-body{padding-top:12px}.mcl-next{padding:4px 16px;font-size:12.5px}.mcl-ctl{padding:4px 10px 8px}.mcl-ctl button{height:42px;border-radius:12px}.mcl-fr>div{max-height:92vh}}
 @media print{.mcs-a{display:none!important}}
 
 .q-wrap{padding:4px 0 16px}
@@ -2019,7 +2022,7 @@ function mcFs(d){ML.fs=Math.max(18,Math.min(72,ML.fs+d));try{localStorage.setIte
 function mcAuto(){ML.auto=!ML.auto;const b=$('mcAuto');if(b)b.classList.toggle('on',ML.auto);if(ML.auto){let last=performance.now(),pos=null;
   const step=t=>{if(!ML||!ML.auto)return;const bd=$('mcBody');if(bd){if(pos===null||Math.abs(bd.scrollTop-pos)>2)pos=bd.scrollTop;pos+=(t-last)*ML.fs*0.0011;bd.scrollTop=pos;}last=t;requestAnimationFrame(step);};requestAnimationFrame(step);}}
 function mcFrasesVer(){const el=$('mcLive');if(!el)return;const f=document.createElement('div');f.className='mcl-fr';f.onclick=()=>f.remove();
-  f.innerHTML=`<div><h3 class="serif">Frases de respaldo</h3>${mcFrases().map(x=>`<p>${esc(x)}</p>`).join('')||'<p>Agregá tus frases en el programa.</p>'}<small>Tocá en cualquier lugar para cerrar</small></div>`;el.appendChild(f);}
+  f.innerHTML=`<div><div class="mcl-frh"><h3 class="serif">Frases de respaldo</h3><button class="mcl-x" aria-label="Cerrar">${ic('x',20)}</button></div>${mcFrases().map(x=>`<p>${esc(x)}</p>`).join('')||'<p>Agregá tus frases en el programa.</p>'}<small>Tocá en cualquier lugar para cerrar</small></div>`;el.appendChild(f);}
 function mcKey(e){if(!$('mcLive'))return;const k=e.key;
   if(k==='ArrowRight'||k==='PageDown'){e.preventDefault();mcGo(1);}else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();mcGo(-1);}
   else if(k===' '){e.preventDefault();mcAuto();}else if(k==='Escape'){const f=document.querySelector('.mcl-fr');if(f)f.remove();else mcLiveClose();}}
@@ -2497,6 +2500,9 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.30-2',fecha:'2026-10-30',items:[
+  {i:'mic',tag:'c',t:'Modo En vivo más cómodo',d:'Los números del guion se leen claros, las frases de respaldo tienen botón para cerrar y con el teléfono acostado se ve más texto.',donde:'Maestro de ceremonia › En vivo',ir:"go('mc')"}
+ ]},
  {ver:'2026.10.30-1',fecha:'2026-10-30',items:[
   {i:'mic',tag:'c',t:'El guion se ve completo',d:'En el programa del Maestro de ceremonia, el texto de cada sección ya no se corta: sale completo y respeta los saltos de línea, también al imprimir o guardar en PDF.',donde:'Maestro de ceremonia › Programa',ir:"go('mc')"}
  ]},
@@ -3043,7 +3049,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.30-1';
+const APP_VER='2026.10.30-2';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
