@@ -394,7 +394,7 @@ body.pubm header,body.pubm .bnav,body.pubm #banner,body.pubm .licbar,body.pubm .
 .mcs-r:hover{background:var(--bg)}
 .mcs-n{width:36px;flex:none;color:var(--gold);font-size:20px;font-weight:600;text-align:center;line-height:1.3}
 .mcs-b{flex:1;min-width:0}.mcs-b b{font-weight:600}
-.mcs-g{font-size:13px;color:var(--mut);margin-top:4px;font-style:italic}
+.mcs-g{font-size:13px;color:var(--mut);margin-top:4px;font-style:italic;white-space:pre-wrap;overflow-wrap:anywhere}
 .mcs-a{display:flex;gap:0;flex:none}.mcs-a .btn{padding:6px 7px}.mcs-a .btn .ic{margin:0}
 body.mclive{overflow:hidden}
 .mcl{position:fixed;inset:0;z-index:90;background:#0b100e;color:#f3efe6;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:'Jost',system-ui,sans-serif}
@@ -501,7 +501,7 @@ input[type=date],input[type=time]{cursor:pointer;caret-color:transparent}
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1d2421;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:60;box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:90vw;text-align:center}
 @media(max-width:600px){td{white-space:normal}td.n,th.n{white-space:nowrap}.ql span{display:block!important;font-size:11px;color:var(--mut);margin-bottom:2px}input,select,textarea{font-size:16px}.btn{padding:9px 12px}h2{font-size:18px}}
 @media print{body.qprint .ponly{display:none!important}body.qprint main{padding:0}.q-stage{height:auto!important;overflow:visible;margin:0}.q-stage+.q-stage{break-before:page;page-break-before:always}.q-pglbl{display:none}.q-page.fx{transform:none!important;margin:0!important;box-shadow:none!important;height:1050px}}
-@media print{header,.noprint,.banner,.bnav{display:none!important}body{background:#fff;color:#000}.card,.panel{box-shadow:none;border-color:#bbb}.ponly{display:block;margin-bottom:8px;font-size:13px}main{padding:0}}
+@media print{header,.noprint,.banner,.bnav,.toast{display:none!important}body{background:#fff;color:#000}.card,.panel{box-shadow:none;border-color:#bbb}.ponly{display:block;margin-bottom:8px;font-size:13px}main{padding:0}}
 </style>
 <script src="https://josevic504-bot.github.io/negocio/visitas.js?v=1" defer></script>
 </head>
@@ -1959,7 +1959,7 @@ function vMCDet(id){
     <div class="row noprint"><button class="btn pri" onclick="mcLive('${id}')">${ic('play',16)} En vivo</button></div></div>
   <div class="cards"><div class="card"><div class="k">Secciones</div><div class="v">${SS.length}</div></div><div class="card"><div class="k">Duración total</div><div class="v">${fDur(mcDur(p))}</div>${p.hora&&SS.length?`<div class="s">Termina cerca de las ${horaMas(p.hora,mcDur(p))}</div>`:''}</div><div class="card"><div class="k">Protocolo</div><div class="v">${PR.length}</div><div class="s">personas a mencionar</div></div></div>
   <div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Programa</h3><button class="btn sm gold noprint" onclick="secForm('${id}')">+ Agregar sección</button></div>
-    ${SS.length?`<div class="mcs">${SS.map((s,i)=>{const ini=acc;acc+=(+s.min||0);return`<div class="mcs-r" onclick="secForm('${id}','${s.id}')"><span class="mcs-n serif">${roman(i+1)}</span><div class="mcs-b"><b>${esc(s.titulo)}</b><div class="note">${p.hora?horaMas(p.hora,ini)+' · ':''}${esc(s.tipo||'Guion')} · ${+s.min||0} min${s.resp?' · '+esc(s.resp):''}</div>${s.guion?`<div class="mcs-g">${esc(s.guion.slice(0,150))}${s.guion.length>150?'…':''}</div>`:''}</div>${mv('mcMove',id,s.id,i,SS.length)}</div>`;}).join('')}</div>`:'<p class="note">Todavía no hay secciones. Agregá la primera.</p>'}</div>
+    ${SS.length?`<div class="mcs">${SS.map((s,i)=>{const ini=acc;acc+=(+s.min||0);return`<div class="mcs-r" onclick="secForm('${id}','${s.id}')"><span class="mcs-n serif">${roman(i+1)}</span><div class="mcs-b"><b>${esc(s.titulo)}</b><div class="note">${p.hora?horaMas(p.hora,ini)+' · ':''}${esc(s.tipo||'Guion')} · ${+s.min||0} min${s.resp?' · '+esc(s.resp):''}</div>${s.guion?`<div class="mcs-g">${esc(s.guion)}</div>`:''}</div>${mv('mcMove',id,s.id,i,SS.length)}</div>`;}).join('')}</div>`:'<p class="note">Todavía no hay secciones. Agregá la primera.</p>'}</div>
   <div class="panel"><div class="row sp" style="margin-bottom:6px"><h3 style="margin:0">Protocolo</h3><button class="btn sm gold noprint" onclick="protForm('${id}')">+ Agregar persona</button></div>
     <p class="note noprint">Autoridades e invitados especiales en el orden en que se mencionan. Escribí <b>{protocolo}</b> en el guion de una sección y en vivo aparece la lista completa.</p>
     ${PR.length?`<div class="mcs">${PR.map((x,i)=>`<div class="mcs-r" onclick="protForm('${id}','${x.id}')"><span class="mcs-n serif">${i+1}</span><div class="mcs-b"><b>${esc(x.nombre)}</b>${x.cargo?`<div class="note">${esc(x.cargo)}</div>`:''}</div>${mv('protMove',id,x.id,i,PR.length)}</div>`).join('')}</div>`:''}</div>
@@ -2497,6 +2497,9 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.30-1',fecha:'2026-10-30',items:[
+  {i:'mic',tag:'c',t:'El guion se ve completo',d:'En el programa del Maestro de ceremonia, el texto de cada sección ya no se corta: sale completo y respeta los saltos de línea, también al imprimir o guardar en PDF.',donde:'Maestro de ceremonia › Programa',ir:"go('mc')"}
+ ]},
  {ver:'2026.10.22-4',fecha:'2026-10-22',items:[
   {i:'pen',tag:'n',t:'Módulo de contratos',d:'Todos tus contratos en un solo lugar: borradores, esperando firma y firmados. También ves los eventos que todavía no tienen contrato.',donde:'Menú › Contratos',ir:"go('cons')"},
   {i:'edit',tag:'n',t:'Editá tus modelos de contrato',d:'Cambiá, agregá u ordená las cláusulas de cada tipo de contrato sin necesidad de un evento.',donde:'Menú › Contratos › Modelos',ir:"S.consTab='mod';go('cons')"}
@@ -3040,7 +3043,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.29-1';
+const APP_VER='2026.10.30-1';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
