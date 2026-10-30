@@ -2963,6 +2963,12 @@ async function licEmpezar(){
   if(!n)return gErr('Escribí el nombre de tu negocio');
   if(w.replace(/\D/g,'').length<8)return gErr('Escribí tu número de WhatsApp');
   if(!/^\d{4,6}$/.test(p))return gErr('El PIN debe tener de 4 a 6 números');
+  gBusy('Revisando…');
+  /* Evita crear una segunda cuenta con el mismo WhatsApp (pasaba al abrir la app en otro teléfono y llenar el registro) */
+  try{const ex=await licCall('ingresar',{whatsapp:w,pin:p});
+    if(ex&&ex.ok&&ex.id){LIC={id:ex.id,wa:w};licSave();cargarCuenta(ex);toast('Ya tenías una cuenta con este WhatsApp: entraste a tus datos ✨',5000);return;}
+    if(ex&&!ex.ok&&!/no encontramos/i.test(ex.msg||'')){gBusy('');return gErr('Ya existe una cuenta con este WhatsApp. Tocá "Ya tengo cuenta · Ingresar" y escribí tu PIN.');}
+  }catch(e){gBusy('');return gErr('Necesitás internet para crear tu cuenta.');}
   gBusy('Creando tu cuenta…');
   try{
     const ini=blank();ini.negocio=n;
@@ -3034,7 +3040,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.25-1';
+const APP_VER='2026.10.29-1';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
