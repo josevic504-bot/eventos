@@ -397,32 +397,40 @@ body.pubm header,body.pubm .bnav,body.pubm #banner,body.pubm .licbar,body.pubm .
 .mcs-g{font-size:13px;color:var(--mut);margin-top:4px;font-style:italic;white-space:pre-wrap;overflow-wrap:anywhere}
 .mcs-a{display:flex;gap:0;flex:none}.mcs-a .btn{padding:6px 7px}.mcs-a .btn .ic{margin:0}
 body.mclive{overflow:hidden}
-.mcl{position:fixed;inset:0;z-index:90;background:#0b100e;color:#f3efe6;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:'Jost',system-ui,sans-serif}
+.mcl{--mb:#0b100e;--mt:#f3efe6;--mc:#18211d;--ml:#1f2a25;--mm:#a9b3ad;--mn:#c9d1cc;--mw:#fff;--mg:#f2c46b}
+.mcl[data-f=azul]{--mb:#0b1324;--mt:#eef2fa;--mc:#18233d;--ml:#243252;--mm:#a3b0c9;--mn:#c5d0e4;--mw:#fff}
+.mcl[data-f=vino]{--mb:#1c0a13;--mt:#f8ecf0;--mc:#2d1521;--ml:#3e2030;--mm:#c6abb7;--mn:#dfc8d1;--mw:#fff}
+.mcl[data-f=esmeralda]{--mb:#062019;--mt:#eef7f2;--mc:#0f3028;--ml:#184237;--mm:#9fc1b5;--mn:#c3dbd2;--mw:#fff}
+.mcl[data-f=crema]{--mb:#f6efe2;--mt:#2b2622;--mc:#e9dfcd;--ml:#d9ccb6;--mm:#7a6f64;--mn:#5c534b;--mw:#1d1a17;--mg:#8f5f0c}
+.mcl[data-f=blanco]{--mb:#fff;--mt:#141414;--mc:#eef0f2;--ml:#dfe3e8;--mm:#646c78;--mn:#454c57;--mw:#000;--mg:#8f5f0c}
+.mcl-fs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}.mcl-fs button{border:2px solid var(--ml);border-radius:16px;padding:12px 6px 10px;background:var(--mb);color:var(--mt);font:500 14px 'Jost',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px}
+.mcl-fs button.on{border-color:var(--gold)}.mcl-h small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mcl-top .mcl-x+.mcl-x{margin-left:-4px}.mcl-fs i{width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(128,128,128,.35)}
+.mcl{position:fixed;inset:0;z-index:90;background:var(--mb);color:var(--mt);display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-family:'Jost',system-ui,sans-serif}
 .mcl-top{display:flex;align-items:center;gap:12px;padding:12px 16px 10px}
-.mcl-x{width:44px;height:44px;border-radius:50%;border:0;background:#18211d;color:#f3efe6;display:grid;place-items:center;cursor:pointer;flex:none}
+.mcl-x{width:44px;height:44px;border-radius:50%;border:0;background:var(--mc);color:var(--mt);display:grid;place-items:center;cursor:pointer;flex:none}
 .mcl-h{flex:1;min-width:0}.mcl-h small{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 .mcl-h b{display:block;font-size:25px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mcl-tm{text-align:right;flex:none}.mcl-tm b{display:block;font-size:32px;font-variant-numeric:tabular-nums;font-weight:600;line-height:1.1}.mcl-tm small{color:#a9b3ad;font-size:12px}
+.mcl-tm{text-align:right;flex:none}.mcl-tm b{display:block;font-size:32px;font-variant-numeric:tabular-nums;font-weight:600;line-height:1.1}.mcl-tm small{color:var(--mm);font-size:12px}
 .mcl-tm.warn b{color:#f2c46b}.mcl-tm.over b{color:#ff7b6b;animation:mcblink 1s steps(2) infinite}
 @keyframes mcblink{50%{opacity:.35}}
-.mcl-bar{height:4px;background:#1f2a25;margin:0 16px;border-radius:4px;overflow:hidden;flex:none}.mcl-bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s linear}.mcl-bar.over i{background:#ff7b6b}
+.mcl-bar{height:4px;background:var(--ml);margin:0 16px;border-radius:4px;overflow:hidden;flex:none}.mcl-bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s linear}.mcl-bar.over i{background:#ff7b6b}
 .mcl-body{flex:1;overflow-y:auto;padding:24px 22px 0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.42;max-width:920px;width:100%;margin:0 auto;box-sizing:border-box;-webkit-overflow-scrolling:touch}
 .mcl-body p{margin:0 0 .8em}
-.mcl-nt{font-family:'Jost',sans-serif;font-size:15px;line-height:1.5;color:#f2c46b;border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin-bottom:20px}
+.mcl-nt{font-family:'Jost',sans-serif;font-size:15px;line-height:1.5;color:var(--mg);border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin-bottom:20px}
 .mcl-prot{margin:0 0 .8em;padding-left:1.3em}.mcl-prot li{margin-bottom:.35em}.mcl-prot li::marker{color:var(--gold)}
-.mcl-prot span{display:block;font-size:.58em;color:#a9b3ad;font-family:'Jost',sans-serif;line-height:1.3}
-.mcl-empty{color:#7d8984;font-style:italic}
-.mcl-next{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;border-top:1px solid #1f2a25;font-size:14px;color:#c9d1cc;flex:none}.mcl-next b{color:#fff;font-weight:600}#mcTot{color:#8d9a94;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mcl-prot span{display:block;font-size:.58em;color:var(--mm);font-family:'Jost',sans-serif;line-height:1.3}
+.mcl-empty{color:var(--mm);font-style:italic}
+.mcl-next{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;border-top:1px solid var(--ml);font-size:14px;color:var(--mn);flex:none}.mcl-next b{color:var(--mw);font-weight:600}#mcTot{color:var(--mm);white-space:nowrap;font-variant-numeric:tabular-nums}
 .mcl-ctl{display:flex;gap:6px;padding:6px 12px 14px;flex:none;max-width:920px;width:100%;margin:0 auto;box-sizing:border-box}
-.mcl-ctl button{flex:1;height:56px;border:0;border-radius:16px;background:#18211d;color:#f3efe6;display:grid;place-items:center;font:600 16px 'Jost',sans-serif;cursor:pointer;padding:0}
+.mcl-ctl button{flex:1;height:56px;border:0;border-radius:16px;background:var(--mc);color:var(--mt);display:grid;place-items:center;font:600 16px 'Jost',sans-serif;cursor:pointer;padding:0}
 .mcl-ctl button.on,.mcl-ctl button.pri{background:var(--gold);color:#1a1408}
 .mcl-fr{position:absolute;inset:0;background:rgba(0,0,0,.84);display:flex;align-items:center;justify-content:center;padding:20px;z-index:2}
-.mcl-fr>div{background:#18211d;border-radius:22px;padding:22px;max-width:660px;width:100%;max-height:82vh;overflow:auto}
+.mcl-fr>div{background:var(--mc);color:var(--mt);border-radius:22px;padding:22px;max-width:660px;width:100%;max-height:82vh;overflow:auto}
 .mcl-fr h3{color:var(--gold);font-size:22px;margin:0 0 12px}
-.mcl-fr p{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;line-height:1.35;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid #2a3631}
-.mcl-fr small{color:#a9b3ad}
+.mcl-fr p{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;line-height:1.35;margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid var(--ml)}
+.mcl-fr small{color:var(--mm)}
 .mcl-body,.mcl-fr p{font-variant-numeric:lining-nums}
-.mcl-frh{position:sticky;top:-22px;margin:-22px -22px 12px;padding:16px 16px 10px 22px;background:#18211d;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:1}.mcl-frh h3{margin:0}
+.mcl-frh{position:sticky;top:-22px;margin:-22px -22px 12px;padding:16px 16px 10px 22px;background:var(--mc);display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:1}.mcl-frh h3{margin:0}
 @media (max-height:500px){.mcl-top{padding:6px 14px 4px}.mcl-x{width:36px;height:36px}.mcl-h small{font-size:10.5px}.mcl-h b{font-size:19px}.mcl-tm b{font-size:24px}.mcl-tm small{font-size:11px}.mcl-body{padding-top:12px}.mcl-next{padding:4px 16px;font-size:12.5px}.mcl-ctl{padding:4px 10px 8px}.mcl-ctl button{height:42px;border-radius:12px}.mcl-fr>div{max-height:92vh}}
 @media print{.mcs-a{display:none!important}}
 
@@ -728,7 +736,7 @@ function vResumenOld(){
 }
 
 /* ===== Íconos ===== */
-const ICP={camera:'<path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.9.7c0 1.7-2.5 2.2-2.5 3.7"/><circle cx="12" cy="17" r=".9" fill="currentColor"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>',box:'<path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/>',check:'<path d="M5 12.5l4.5 4.5L19 7"/>',home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+const ICP={palette:'<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7H16a5 5 0 0 0 5-5C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7.2" r="1.2"/><circle cx="14.5" cy="7.2" r="1.2"/><circle cx="17" cy="11" r="1.2"/>',camera:'<path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.9.7c0 1.7-2.5 2.2-2.5 3.7"/><circle cx="12" cy="17" r=".9" fill="currentColor"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>',box:'<path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/>',check:'<path d="M5 12.5l4.5 4.5L19 7"/>',home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
 cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 13.2l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3z" fill="currentColor" stroke="none"/>',
 doc:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5M8.5 13h7M8.5 17h5"/>',
 wallet:'<path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3.5" y="8" width="17" height="12" rx="2.5"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor"/>',
@@ -1974,6 +1982,13 @@ function vMCDet(id){
 
 /* --- Modo en vivo (teleprompter) --- */
 let ML=null,_wl=null;
+const MC_FONDOS=[['negro','Negro','#0b100e'],['azul','Azul noche','#0b1324'],['vino','Vino','#1c0a13'],['esmeralda','Esmeralda','#062019'],['crema','Crema','#f6efe2'],['blanco','Blanco','#ffffff']];
+const mcFondo=()=>{try{return localStorage.getItem('mcFondo')||'negro';}catch(e){return'negro';}};
+function mcFondoVer(){const el=$('mcLive');if(!el)return;const cur=mcFondo(),f=document.createElement('div');f.className='mcl-fr';f.onclick=e=>{if(e.target===f)f.remove();};
+  f.innerHTML=`<div><div class="mcl-frh"><h3 class="serif">Color de fondo</h3><button class="mcl-x" aria-label="Cerrar" onclick="this.closest('.mcl-fr').remove()">${ic('x',20)}</button></div>
+    <div class="mcl-fs">${MC_FONDOS.map(([k,n,c])=>`<button class="${k===cur?'on':''}" onclick="mcFondoSet('${k}')"><i style="background:${c}"></i>${n}</button>`).join('')}</div>
+    <small style="display:block;margin-top:14px">Los fondos claros sirven en lugares con mucha luz o al aire libre. Se guarda en este equipo.</small></div>`;el.appendChild(f);}
+function mcFondoSet(k){try{localStorage.setItem('mcFondo',k);}catch(e){}const el=$('mcLive');if(el){el.dataset.f=k;const f=el.querySelector('.mcl-fr');if(f)f.remove();}}
 const mcFsDef=()=>{try{return +localStorage.getItem('mcFs')||32;}catch(e){return 32;}};
 async function wakeOn(){try{if(navigator.wakeLock)_wl=await navigator.wakeLock.request('screen');}catch(e){}}
 function wakeOff(){try{_wl&&_wl.release();}catch(e){}_wl=null;}
@@ -1983,7 +1998,7 @@ function mcLive(id){
   closePop();if(DL.open)DL.close();
   ML={pid:id,i:0,t0:Date.now(),acc:0,run:true,start:Date.now(),auto:false,fs:mcFsDef()};
   let el=$('mcLive');if(!el){el=document.createElement('div');el.id='mcLive';el.className='mcl';document.body.appendChild(el);}
-  document.body.classList.add('mclive');mcLiveDraw();clearInterval(window._mcT);window._mcT=setInterval(mcTick,500);wakeOn();document.addEventListener('keydown',mcKey);
+  el.dataset.f=mcFondo();document.body.classList.add('mclive');mcLiveDraw();clearInterval(window._mcT);window._mcT=setInterval(mcTick,500);wakeOn();document.addEventListener('keydown',mcKey);
 }
 function mcTexto(p,txt){
   const prot=(p.protocolo||[]).length?`</p><ol class="mcl-prot">${p.protocolo.map(x=>`<li><b>${esc(x.nombre)}</b>${x.cargo?`<span>${esc(x.cargo)}</span>`:''}</li>`).join('')}</ol><p>`:'</p><p class="mcl-empty">(Todavía no hay personas en el protocolo)</p><p>';
@@ -1992,7 +2007,7 @@ function mcTexto(p,txt){
 function mcLiveDraw(){
   const p=mcGet(ML.pid);if(!p){mcLiveClose();return;}
   const SS=p.secciones,s=SS[ML.i],nx=SS[ML.i+1],body=mcTexto(p,s.guion);
-  $('mcLive').innerHTML=`<div class="mcl-top"><button class="mcl-x" onclick="mcLiveClose()" aria-label="Salir del modo en vivo">${ic('x',22)}</button>
+  $('mcLive').innerHTML=`<div class="mcl-top"><button class="mcl-x" onclick="mcLiveClose()" aria-label="Salir del modo en vivo">${ic('x',22)}</button><button class="mcl-x" onclick="mcFondoVer()" aria-label="Color de fondo">${ic('palette',21)}</button>
     <div class="mcl-h"><small>${roman(ML.i+1)} de ${roman(SS.length)} · ${esc(s.tipo||'Guion')}${s.resp?' · '+esc(s.resp):''}</small><b class="serif">${esc(s.titulo)}</b></div>
     <div class="mcl-tm" id="mcTm"><b id="mcT">00:00</b><small>de ${+s.min||0} min</small></div></div>
     <div class="mcl-bar" id="mcBarW"><i id="mcBar"></i></div>
@@ -2500,6 +2515,9 @@ async function pdfMulti(sp){
 /* ===== Novedades: se muestran una vez después de cada actualización con cambios visibles ===== */
 /* Para cada versión nueva con cambios que el usuario deba conocer, agregá una entrada al inicio. Los arreglos sin cambios visibles no llevan entrada. */
 const NOVEDADES=[
+ {ver:'2026.10.30-3',fecha:'2026-10-30',items:[
+  {i:'mic',tag:'n',t:'Elegí el color de fondo en vivo',d:'En el modo En vivo tocá el botón de paleta: negro, azul noche, vino, esmeralda, crema o blanco. Los claros sirven al aire libre.',donde:'Maestro de ceremonia › En vivo',ir:"go('mc')"}
+ ]},
  {ver:'2026.10.30-2',fecha:'2026-10-30',items:[
   {i:'mic',tag:'c',t:'Modo En vivo más cómodo',d:'Los números del guion se leen claros, las frases de respaldo tienen botón para cerrar y con el teléfono acostado se ve más texto.',donde:'Maestro de ceremonia › En vivo',ir:"go('mc')"}
  ]},
@@ -3049,7 +3067,7 @@ function licPanel(){
 }
 
 /* ===== Aviso de versión nueva (para la app instalada y la web) ===== */
-const APP_VER='2026.10.30-2';
+const APP_VER='2026.10.30-3';
 let _verT=0;
 async function verCheck(){
   if(PUBT)return;if(Date.now()-_verT<60000)return;_verT=Date.now();
